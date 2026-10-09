@@ -224,12 +224,22 @@ section.band{padding-block:112px}
 .life-grid li:hover img{transform:translateY(-4px)}
 .life-grid figcaption{font:400 18px/1.2 var(--f-display);color:var(--plum)}
 .reviews{background:var(--blush-tint)}
-.rev-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;margin-top:48px}
-.rev{background:var(--cream);border:1px solid rgba(192,137,119,.35);border-radius:20px;padding:28px;display:flex;flex-direction:column;gap:14px;min-width:0}
+.rev-wrap{margin-top:48px}
+.rev-grid{display:flex;gap:24px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;padding:4px 2px 16px;scrollbar-width:none}
+.rev-grid::-webkit-scrollbar{display:none}
+.rev-controls{display:flex;gap:10px;justify-content:flex-end;margin-top:8px}
+.rev-btn{width:48px;height:48px;border-radius:50%;border:1px solid rgba(58,33,64,.3);font-size:18px;color:var(--plum);transition:background-color .2s,opacity .2s}
+.rev-btn:hover{background:rgba(105,63,106,.08)}
+.rev-btn:disabled{opacity:.35;cursor:default}
+.rev{flex:0 0 calc((100% - 48px) / 3);scroll-snap-align:start;background:var(--cream);border:1px solid rgba(192,137,119,.35);border-radius:20px;padding:28px;display:flex;flex-direction:column;gap:14px;min-width:0}
 .rev .stars-row{color:var(--mauve);letter-spacing:3px;font-size:15px}
-.rev .bar{height:10px;border-radius:5px;background:rgba(105,63,106,.1)}
-.rev .who{display:flex;align-items:center;gap:10px;margin-top:6px;font-size:13px;color:var(--ink-soft)}
-.rev .who i{width:32px;height:32px;border-radius:50%;background:rgba(105,63,106,.15)}
+.rev blockquote{margin:0;font-size:16px;line-height:1.6;color:var(--plum);display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:6;overflow:hidden}
+.rev.open blockquote{-webkit-line-clamp:unset;display:block}
+.rev .more{align-self:flex-start;font:600 13px/1 var(--f-body);color:var(--mauve)}
+.rev .more[hidden]{display:none}
+.rev .who{display:flex;align-items:center;gap:12px;margin-top:auto;padding-top:8px;font-size:13px;color:var(--ink-soft)}
+.rev .who b{display:block;font:700 16px/1.2 var(--f-display);color:var(--plum)}
+.rev .who i{flex:none;width:40px;height:40px;border-radius:50%;display:grid;place-items:center;font:600 14px/1 var(--f-body);font-style:normal;color:#fff;background:linear-gradient(135deg,#CA93B3,#693F6A)}
 .rev-note{text-align:center;margin:20px 0 0;font-size:13px;color:var(--ink-soft)}
 .g-chip{display:inline-flex;gap:8px;align-items:center;padding:8px 14px;border-radius:999px;background:var(--cream);border:1px solid rgba(192,137,119,.35);font:600 13px/1 var(--f-body);color:var(--plum)}
 .g-chip b{color:var(--mauve);letter-spacing:2px}
@@ -351,7 +361,8 @@ dialog[open]{animation:pop .35s cubic-bezier(.2,1.1,.3,1)}
   .life-grid{order:2;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px 16px;margin-top:32px}
   .life-grid figcaption{font-size:16px}
   .life-ctas{order:3;margin-top:32px;flex-direction:column;align-items:flex-start;gap:14px}
-  .rev-grid{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;margin-inline:-20px;padding:4px 20px 12px;scrollbar-width:none}
+  .rev-grid{margin-inline:-20px;padding:4px 20px 12px;scroll-padding-inline:20px}
+  .rev-controls{display:none}
   .rev{flex:0 0 82%;scroll-snap-align:center}
   .foot-grid{grid-template-columns:minmax(0,1fr);gap:48px}
 }
@@ -509,13 +520,12 @@ dialog[open]{animation:pop .35s cubic-bezier(.2,1.1,.3,1)}
 
 <section class="band reviews" id="reviews">
   <div class="wrap">
-    <div class="sec-head" data-reveal><p class="eyebrow"><svg><use href="#sp"/></svg>Kind words</p><h2>What clients say</h2><span class="g-chip"><b>★★★★★</b> Google reviews</span></div>
-    <div class="rev-grid" aria-label="Review placeholders">
-      <article class="rev" data-reveal data-stagger><div class="stars-row">★★★★★</div><div class="bar" style="width:96%"></div><div class="bar" style="width:88%"></div><div class="bar" style="width:92%"></div><div class="bar" style="width:54%"></div><div class="who"><i></i>Google reviewer</div></article>
-      <article class="rev" data-reveal data-stagger><div class="stars-row">★★★★★</div><div class="bar" style="width:90%"></div><div class="bar" style="width:97%"></div><div class="bar" style="width:70%"></div><div class="who"><i></i>Google reviewer</div></article>
-      <article class="rev" data-reveal data-stagger><div class="stars-row">★★★★★</div><div class="bar" style="width:94%"></div><div class="bar" style="width:82%"></div><div class="bar" style="width:95%"></div><div class="bar" style="width:40%"></div><div class="who"><i></i>Google reviewer</div></article>
+    <div class="sec-head" data-reveal><p class="eyebrow"><svg><use href="#sp"/></svg>Kind words</p><h2>What clients say</h2><span class="g-chip"><b>★★★★★</b> Reviews from Google</span></div>
+    <div class="rev-wrap" data-reveal>
+      <div class="rev-grid" id="revs" aria-label="Google reviews"></div>
+      <div class="rev-controls"><button class="rev-btn" data-dir="-1" aria-label="Previous reviews">←</button><button class="rev-btn" data-dir="1" aria-label="Next reviews">→</button></div>
     </div>
-    <p class="rev-note" data-reveal>Placeholder cards. Emma’s live Google reviews load here through her existing Trustindex widget, restyled to match.</p>
+    <p class="rev-note" data-reveal><a class="link" href="https://www.google.com/search?q=Emma+Divines+reviews" target="_blank" rel="noopener">Read all reviews on Google <span class="arr">→</span></a></p>
   </div>
 </section>
 
@@ -851,6 +861,19 @@ function parallax(){
 addEventListener('scroll',()=>{if(!pt)pt=requestAnimationFrame(parallax);},{passive:true});
 addEventListener('resize',parallax);reduce.addEventListener('change',parallax);
 parallax();
+
+/* ---------- Google reviews (pulled from Emma's site's Trustindex widget) ---------- */
+const REVIEWS=[{"n": "Terry Y.", "d": "Aug 2026", "t": "The session with Emma was truly a gift. I had a lot of anxiety prior to the session and Emma seemed to understand this. I loved her humor and genuine connection. One message, probably the most important one, has created a space for more healing from childhood trauma. My daughter and I were just astounded with the accuracy of our mutual connected loved ones on the other side. I can't wait to book again and share Emma's gift with my friends and family. Blessings, Emma"}, {"n": "Donna D.", "d": "Jul 2026", "t": "What a wonderful experience this was. Emma was so kind and wow spot on with everything!! I will definatly see her again. Thank you !!"}, {"n": "Sandy V.", "d": "Jul 2026", "t": "I really enjoyed my reading with Emma Divines. She was warm, kind, and made me feel comfortable from the start. Everything she shared felt thoughtful and personal, and she explained things in a way that was easy to understand. I left the reading feeling encouraged and with a lot to think about. It was a great experience overall, and I'd definitely recommend Emma Divines to anyone looking for an honest and meaningful reading."}, {"n": "Alisa G.", "d": "Jun 2026", "t": "Just had another guidance/psychic reading with Emma and the information she brought through was unbelievable!  It was an email reading and she replied within a couple hours!   She was spot on!  I would highly recommend and will be booking another session soon!!!!"}, {"n": "Kathleen S.", "d": "Jun 2026", "t": "Just had a deep dive session and it provided the clarity I needed! Emma is great at sharing what is being said on the other side and making those connections in my reading. Would absolutely recommend and will be booking with her agin in the future."}, {"n": "Margot P.", "d": "Jun 2026", "t": "Emma did a reiki session and a house cleanse for me. I felt so clear and renewed afterwards. She made the whole experience so comfortable and explained everything so well!! 10/10 would recommend! Looking forward to working with her again"}, {"n": "Linda E.", "d": "May 2026", "t": "Phenomenal experience. THANK YOU!!!"}];
+(()=>{const box=$('#revs');
+  box.innerHTML=REVIEWS.map(r=>`<article class="rev"><div class="stars-row" aria-label="5 out of 5 stars">★★★★★</div><blockquote></blockquote><button class="more" hidden>Read more</button><div class="who"><i aria-hidden="true">${r.n[0]}</i><span><b></b>Google review${r.d?' · '+r.d:''}</span></div></article>`).join('');
+  [...box.children].forEach((el,i)=>{el.querySelector('blockquote').textContent=REVIEWS[i].t;el.querySelector('.who b').textContent=REVIEWS[i].n;});
+  const fit=()=>[...box.children].forEach(el=>{const q=el.querySelector('blockquote');if(el.classList.contains('open'))return;el.querySelector('.more').hidden=q.scrollHeight<=q.clientHeight+2;});
+  fit();addEventListener('resize',fit);document.fonts&&document.fonts.ready.then(fit);
+  box.addEventListener('click',e=>{const b=e.target.closest('.more');if(!b)return;const c=b.closest('.rev');c.classList.toggle('open');b.textContent=c.classList.contains('open')?'Show less':'Read more';});
+  const btns=$$('.rev-btn'),upd=()=>{btns[0].disabled=box.scrollLeft<4;btns[1].disabled=box.scrollLeft+box.clientWidth>=box.scrollWidth-4;};
+  btns.forEach(b=>b.addEventListener('click',()=>{const card=box.firstElementChild;const step=card?card.getBoundingClientRect().width+24:box.clientWidth;box.scrollBy({left:+b.dataset.dir*step,behavior:reduce.matches?'auto':'smooth'});}));
+  box.addEventListener('scroll',upd,{passive:true});upd();
+})();
 
 /* ---------- Shooting stars: one every 1–3.5s while the section is on screen ---------- */
 function shooter(section){

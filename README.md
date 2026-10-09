@@ -28,6 +28,7 @@ python3 -m http.server 8000
 - **Scroll reveals.** Headings, steps, cards, the photo, reviews, FAQs and footer columns fade and rise in as you reach them, with a slight stagger.
 - **Parallax stars.** Three depth layers (far dust, mid and near sparkles) lag behind the page at different speeds as you scroll, with a slow, shallow twinkle. The sky glows and clouds drift with the scroll too.
 - **Every homepage section from the wireframe:** how it works, meet Emma, reviews, FAQ, and a footer with a contact form.
+- **Real Google reviews.** Seven reviews from Emma's Google profile (taken from the Trustindex widget on her current site), shown as first name + initial in a swipeable row with Read more. On WordPress, keep the Trustindex plugin so new reviews appear automatically, and style it to match.
 - **Life gallery ("A little more of me").** Four everyday-life photos from @emmadivines right after Meet Emma, with a Say hello button that jumps to the contact form.
 - **Reduced motion:** cards fade in, sparkles stop twinkling, and the aurora stays still.
 
@@ -43,7 +44,6 @@ These come from Emma's brand guide:
 ## Still placeholder
 
 - Emma's bio (the hero headshot, Meet Emma photo and gallery photos are from her Instagram, at screen resolution; swap in originals for launch)
-- Google reviews (the live site uses the Trustindex widget)
 - Descriptions for the Mediumship, Reiki and Classes sessions, and the FAQ answers (marked "draft" on the page)
 - Social links, and the contact form isn't connected to anything
 
