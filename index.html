@@ -313,6 +313,47 @@ dialog[open]{animation:pop .35s cubic-bezier(.2,1.1,.3,1)}
 .row a{font:600 13px/1 var(--f-body);padding:9px 14px;border-radius:999px;background:var(--deep-purple);color:#fff;text-decoration:none}
 .dlg-policy{font-size:13px;color:var(--ink-soft);margin:18px 0 0}
 
+/* ---------- Category sheet (opened from the nav: one category's sessions + a photo of Emma at work) ---------- */
+#cat{width:min(1000px,calc(100% - 32px));max-height:88vh;overflow:hidden}
+.cat-grid{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);height:min(88vh,720px)}
+.cat-photo{position:relative;overflow:hidden;background:radial-gradient(circle at 50% 35%,#CA93B3,#693F6A 75%)}
+.cat-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.cat-ph{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;color:#FFF6F3;text-align:center;padding:24px}
+.cat-ph svg{width:34px;height:34px;opacity:.75}
+.cat-ph span{font:500 14px/1.4 var(--f-body);opacity:.9;max-width:220px}
+.cat-ph small{font:600 10px/1 var(--f-body);letter-spacing:.12em;text-transform:uppercase;opacity:.7}
+.cat-body{overflow-y:auto;padding:40px 40px 28px;display:flex;flex-direction:column;gap:20px;position:relative}
+.cat-close{position:absolute;top:16px;right:16px}
+.cat-head{display:flex;flex-direction:column;gap:12px;padding-right:40px}
+.cat-head h2{font-size:38px}
+.cat-head p{margin:0;font-size:16px;line-height:1.55;color:var(--ink-soft)}
+.cat-list{list-style:none;margin:0;padding:0}
+.cat-row{display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:6px 18px;align-items:center;padding:18px 0;border-bottom:1px solid rgba(105,63,106,.12)}
+.cat-row:first-child{border-top:1px solid rgba(105,63,106,.12)}
+.cat-row b{font:700 20px/1.2 var(--f-display);color:var(--plum)}
+.cat-row .m{display:block;font-size:13px;color:var(--ink-soft);margin-top:3px}
+.cat-row .t{grid-column:1/-1;margin:0;font-size:14px;line-height:1.5;color:var(--ink-soft);max-width:520px}
+.cat-row .p{font:600 18px/1 var(--f-body);color:var(--deep-purple);font-variant-numeric:tabular-nums}
+.cat-row a.btn{padding:10px 18px;font-size:14px}
+.cat-foot{display:flex;flex-direction:column;gap:12px;margin-top:auto;padding-top:8px}
+.cat-foot .policy{text-align:left}
+.cat-links{display:flex;gap:24px;flex-wrap:wrap}
+@media (max-width:767px){
+  dialog{width:100%;max-width:none;margin:auto 0 0;border-radius:20px 20px 0 0;max-height:90vh}
+  dialog[open]{animation:sheetUp .4s cubic-bezier(.2,.9,.3,1)}
+  @keyframes sheetUp{from{transform:translateY(40px);opacity:0}}
+  #cat{overflow-y:auto}
+  .cat-grid{display:block;height:auto}
+  .cat-photo{height:210px}
+  .cat-body{overflow:visible;padding:24px 20px calc(24px + env(safe-area-inset-bottom,0px))}
+  .cat-close{position:absolute;top:12px;right:12px;z-index:2;background:rgba(251,244,241,.9)}
+  .cat-head{padding-right:0}.cat-head h2{font-size:30px}
+  .cat-row{grid-template-columns:minmax(0,1fr) auto;gap:6px 14px}
+  .cat-row .p{grid-row:1;grid-column:2;justify-self:end}
+  .cat-row a.btn{grid-column:1/-1;justify-self:start}
+  .cat-row .t{grid-row:2}
+}
+
 /* ---------- Tablet + mobile (Elementor breakpoints) ---------- */
 @media (max-width:1024px){
   :root{--cw:224px;--ch:360px}
@@ -570,6 +611,8 @@ dialog[open]{animation:pop .35s cubic-bezier(.2,1.1,.3,1)}
   <div class="wrap"><div class="copyright"><span>© <span id="yr"></span> Emma Divines</span><span>Prototype · Velvet Dusk</span></div></div>
 </footer>
 
+<dialog id="cat" aria-labelledby="cat-title"></dialog>
+
 <dialog id="prices" aria-labelledby="prices-title">
   <div class="dlg-head"><h2 id="prices-title">All sessions &amp; prices</h2><button class="close-btn" id="dlg-close" aria-label="Close">✕</button></div>
   <div class="dlg-body" id="prices-body"></div>
@@ -625,7 +668,7 @@ $('#yr').textContent=new Date().getFullYear();
 $('#tabs').innerHTML=Object.keys(OFFERS).map(k=>`<button class="tab" role="tab" aria-selected="${k===state.tab}" data-tab="${k}"><span class="long">${k}</span><span class="short">${SHORT[k]||k}</span></button>`).join('');
 function selectTab(k){if(!OFFERS[k])return;state.tab=k;state.page=0;$$('.tab').forEach(t=>t.setAttribute('aria-selected',t.dataset.tab===k));render();}
 $('#tabs').addEventListener('click',e=>{const b=e.target.closest('.tab');if(b&&b.dataset.tab!==state.tab)selectTab(b.dataset.tab);});
-$$('a[data-tab]').forEach(a=>a.addEventListener('click',()=>{closeMenu();selectTab(a.dataset.tab);}));
+$$('a[data-tab]').forEach(a=>a.addEventListener('click',e=>{e.preventDefault();closeMenu();selectTab(a.dataset.tab);openCat(a.dataset.tab);}));
 
 /* ---------- Card markup ---------- */
 function artHTML(i,h){
@@ -763,6 +806,35 @@ $('#prices-body').innerHTML=Object.entries(OFFERS).map(([k,list])=>`<section cla
 $$('.js-all').forEach(b=>b.addEventListener('click',()=>dlg.showModal()));
 $('#dlg-close').addEventListener('click',()=>dlg.close());
 dlg.addEventListener('click',e=>{if(e.target===dlg)dlg.close();});
+
+/* ---------- Category sheet ---------- */
+// Draft intros (Readings is from the wireframe); photos are placeholders until Emma sends shots of her at work
+const CAT={
+  'Psychic Readings':{eb:'Readings',intro:'Honest, compassionate guidance on love, career, and life’s crossroads, by video or email, from wherever you are.',photo:null,alt:'Emma giving a reading'},
+  'Mediumship':{eb:'Mediumship',intro:'A gentle space to connect with loved ones who have passed, through details you can recognise.',photo:null,alt:'Emma during a mediumship session'},
+  'Reiki':{eb:'Distance Reiki',intro:'Reiki from the comfort of home to rebalance, release what you’re carrying, and restore.',photo:null,alt:'Emma giving Reiki'},
+  'Classes':{eb:'Classes & mentorship',intro:'Learn to read the cards, deepen your intuition, or begin your own Reiki path.',photo:null,alt:'Emma teaching a class'}
+};
+const catDlg=$('#cat');
+function openCat(k){
+  const c=CAT[k],list=OFFERS[k];if(!c)return;
+  catDlg.innerHTML=`<div class="cat-grid">
+    <div class="cat-photo">${c.photo?`<img src="${c.photo}" alt="${c.alt}">`:`<div class="cat-ph"><svg><use href="#sp"/></svg><span>Photo: ${c.alt}</span><small>Emma’s photo goes here</small></div>`}</div>
+    <div class="cat-body">
+      <button class="close-btn cat-close" aria-label="Close">✕</button>
+      <div class="cat-head"><p class="eyebrow"><svg><use href="#sp"/></svg>${c.eb}</p><h2 id="cat-title">${k}</h2><p>${c.intro}</p></div>
+      <ul class="cat-list">${list.map(o=>`<li class="cat-row"><div><b>${o.n}</b><span class="m">${o.m}</span></div><span class="p">${o.p}</span><a class="btn btn-purple" href="${BOOK}" target="_blank" rel="noopener">Book <span class="arr">→</span></a><p class="t">${o.t}</p></li>`).join('')}</ul>
+      <div class="cat-foot"><p class="policy">All sessions on Google Meet unless noted · Reschedule free 24h+ ahead</p>
+        <div class="cat-links"><button class="link js-cat-all">See all sessions &amp; prices <span class="arr">→</span></button><a class="link" href="#draw">Not sure? Draw a card <svg class="sp"><use href="#sp"/></svg></a></div></div>
+    </div></div>`;
+  catDlg.querySelector('.cat-close').addEventListener('click',()=>catDlg.close());
+  catDlg.querySelector('.js-cat-all').addEventListener('click',()=>{catDlg.close();dlg.showModal();});
+  catDlg.querySelector('a[href="#draw"]').addEventListener('click',()=>catDlg.close());
+  if(!catDlg.open)catDlg.showModal();catDlg.querySelector('.cat-body').scrollTop=0;
+}
+catDlg.addEventListener('click',e=>{if(e.target===catDlg)catDlg.close();});
+// capture mode: ?sheet=Reiki opens a category sheet so it can be snapshotted
+{const q=new URLSearchParams(location.search).get('sheet');if(q&&CAT[q])requestAnimationFrame(()=>openCat(q));}
 
 /* ---------- Header + mobile menu + form ---------- */
 const hdr=$('#hdr');const onScroll=()=>hdr.classList.toggle('scrolled',scrollY>40);addEventListener('scroll',onScroll,{passive:true});onScroll();
