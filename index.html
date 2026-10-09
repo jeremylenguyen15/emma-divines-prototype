@@ -122,6 +122,11 @@ h1 em{font-style:italic;color:var(--rose-light)}
 .num{font:400 16px/1 var(--f-display);letter-spacing:.2em;color:var(--mauve);padding-left:.2em}
 .art{flex:1;width:100%;border-radius:6px;position:relative;overflow:hidden;min-height:0}
 .art svg{position:absolute;inset:0;width:100%;height:100%}
+/* Emma's illustrated card art: arched window like her card frames, thin gold keyline */
+.art-img{border-radius:999px 999px 6px 6px;background:#3A2140;box-shadow:inset 0 0 0 1px rgba(192,137,119,.55)}
+.art-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 12%}
+.rcard .art-img img{object-position:50% 34%}
+.art-img::after{content:"";position:absolute;inset:0;border-radius:inherit;box-shadow:inset 0 0 0 1px rgba(219,183,172,.6),inset 0 -24px 30px -20px rgba(42,24,48,.35);pointer-events:none}
 .name{font:700 20px/1.15 var(--f-display);color:var(--plum);margin:4px 0 0}
 .meta{font-size:13px;color:var(--ink-soft);margin:0}
 .price{font:600 21px/1.1 var(--f-body);color:var(--deep-purple);margin:2px 0 0;font-variant-numeric:tabular-nums}
@@ -649,6 +654,11 @@ const OFFERS={
     {n:'Reiki I & II',m:'Course',p:'$666',t:'Both levels together.',d:1}]
 };
 const SHORT={'Psychic Readings':'Readings'};
+// Card art: Emma's six "clair" illustrations (from Emma), matched to each session
+const CLAIR={vision:'clairvoyance',feel:'clairsentience',hear:'clairaudience',smell:'clairalience',taste:'clairgustance',know:'claircognizance'};
+const ART_FOR={'Email Reading':'vision','Quickie Reading':'feel','Classic Reading':'hear','Deep Dive':'know','Evidential Mediumship':'hear',
+  'Reiki Tune-Up':'feel','Reiki Full Session':'smell','Reiki Healing Package':'taste','Free Student Consult':'know','Intuitive Tarot Workshop':'vision',
+  'Mentorship Session':'know','Tarot Boot Camp':'hear','Reiki I':'feel','Reiki II':'smell','Reiki I & II':'taste'};
 const ROMAN=['I','II','III','IV','V','VI','VII','VIII','IX','X','XI','XII'];
 const ART_FROM=['#3A2140','#693F6A','#4A2A50','#693F6A'], ART_TO=['#A8638C','#CA93B3','#936A94','#C08977'];
 const PAGE=4;
@@ -677,7 +687,9 @@ $('#tabs').addEventListener('click',e=>{const b=e.target.closest('.tab');if(b&&b
 $$('a[data-tab]').forEach(a=>a.addEventListener('click',e=>{e.preventDefault();closeMenu();selectTab(a.dataset.tab);openCat(a.dataset.tab);}));
 
 /* ---------- Card markup ---------- */
-function artHTML(i,h){
+function artHTML(i,h,o){
+  const c=o&&ART_FOR[o.n]&&CLAIR[ART_FOR[o.n]];
+  if(c)return `<div class="art art-img"${h?` style="flex:0 0 ${h}px"`:''}><img src="images/card-${c}.jpg" alt="" loading="lazy"></div>`;
   const spots=[[50,50,22],[74,26,10],[28,74,7],[80,72,5]].slice(0,[2,3,4,3][i%4]);
   return `<div class="art" style="background:linear-gradient(${ART_FROM[i%4]},${ART_TO[i%4]})${h?';flex:0 0 '+h+'px':''}"><svg viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
     <circle cx="50" cy="50" r="40" fill="none" stroke="#F6E4EC" stroke-width=".7" stroke-dasharray="212 40" transform="rotate(${100+i*23} 50 50)" opacity=".85"/>
@@ -687,7 +699,7 @@ function backHTML(o){return `<h3 class="name">${o.n}</h3><p class="meta">${o.m}<
 function cardHTML(o,i){
   return `<article class="card" tabindex="0" aria-label="${o.n}, ${o.m}, ${o.p}. Press to see details.">
    <div class="tilt"><div class="flip">
-    <div class="face front"><div class="inner"><span class="num">${ROMAN[i]}</span>${artHTML(i)}<h3 class="name">${o.n}</h3><p class="meta">${o.m}</p><p class="price">${o.p}</p></div></div>
+    <div class="face front"><div class="inner"><span class="num">${ROMAN[i]}</span>${artHTML(i,0,o)}<h3 class="name">${o.n}</h3><p class="meta">${o.m}</p><p class="price">${o.p}</p></div></div>
     <div class="face back"><div class="inner">${backHTML(o)}<span class="turn">Tap to turn back</span></div></div>
    </div></div></article>`;
 }
@@ -768,7 +780,7 @@ backsEl.addEventListener('click',async e=>{
   await wait(reduce.matches?0:450);
   const k=Math.floor(Math.random()*POOL.length), o=POOL[k];
   revealEl.innerHTML=`<div class="rcard flipped" id="rcard"><div class="flip">
-     <div class="face front"><div class="inner"><span class="chosen-tag">✦ The cards suggest</span>${artHTML(k,110)}${backHTML(o)}</div></div>
+     <div class="face front"><div class="inner"><span class="chosen-tag">✦ The cards suggest</span>${artHTML(k,150,o)}${backHTML(o)}</div></div>
      <div class="face back rv-back"><div class="inner" style="padding:0;position:relative"><svg><use href="#cardback"/></svg><span class="cb-label">Emma Divines</span></div></div></div></div>
      <button class="link again" id="again">Shuffle and draw again <span class="arr">↻</span></button>`;
   backsEl.hidden=true;revealEl.hidden=false;
