@@ -24,7 +24,7 @@ python3 -m http.server 8000
 - **Tarot-card offerings above the fold.** Cards are dealt in on load, tilt toward the cursor, and flip to show the description, price and a Book button (Calendly). On desktop they sit in a fanned spread; tabs with more than four sessions are dealt in sets of four. On phones they become a swipeable deck.
 - **Draw a card.** Pick one of three card backs to get a suggested session.
 - **Breathing dusk sky.** A small hand-written WebGL shader (0.35× resolution) slowly swells and fades the soft glows and drifts faint nebula clouds through the sky, all in the existing palette. It pauses when off-screen and falls back to a CSS gradient.
-- **Shooting stars.** Every few seconds a soft streak crosses the hero or Draw a card sky, only while that section is on screen.
+- **Shooting stars.** Every 1–3.5 seconds a soft streak crosses the hero or Draw a card sky, only while that section is on screen.
 - **Scroll reveals.** Headings, steps, cards, the photo, reviews, FAQs and footer columns fade and rise in as you reach them, with a slight stagger.
 - **Parallax stars.** Three depth layers (far dust, mid and near sparkles) lag behind the page at different speeds as you scroll, with a slow, shallow twinkle. The sky glows and clouds drift with the scroll too.
 - **Every homepage section from the wireframe:** how it works, meet Emma, reviews, FAQ, and a footer with a contact form.
