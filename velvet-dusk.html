@@ -671,15 +671,15 @@ $$('[data-stars]').forEach((el,si)=>{
     vec3 col=y<.33?mix(G0,G1,y/.33):y<.66?mix(G1,G2,(y-.33)/.33):mix(G2,G3,(y-.66)/.34);
     /* the original soft glows, now slowly breathing: each swells and fades on its own long cycle */
     for(int i=0;i<4;i++){float fi=float(i);
-      vec2 p=P[i]+vec2(sin(T*(.07+.02*fi)+fi*1.7),cos(T*(.05+.03*fi)+fi))*.07;p.y-=O;
-      float breathe=.8+.2*sin(T*(.34+.06*fi)+fi*1.9);
-      vec2 d=uv-p;d.x*=asp;col=mix(col,C[i],exp(-dot(d,d)/(S[i]*(1.+.16*sin(T*(.26+.04*fi)+fi*2.3))))*A[i]*breathe);}
+      vec2 p=P[i]+vec2(sin(T*(.16+.04*fi)+fi*1.7),cos(T*(.12+.05*fi)+fi))*.13;p.y-=O;
+      float breathe=.62+.38*sin(T*(.5+.08*fi)+fi*1.9);
+      vec2 d=uv-p;d.x*=asp;col=mix(col,C[i],exp(-dot(d,d)/(S[i]*(1.+.3*sin(T*(.42+.06*fi)+fi*2.3))))*A[i]*breathe);}
     /* faint nebula clouds drifting through the upper sky, in the same rose and mauve */
     vec2 q=vec2(uv.x*asp,uv.y+O)*1.8;
-    vec2 w=vec2(fbm(q+vec2(T*.010,0.)),fbm(q+vec2(5.2,1.3)-vec2(0.,T*.008)));
-    float n=fbm(q+1.6*w+vec2(T*.006,-T*.004));
-    float cloud=smoothstep(.38,.82,n)*smoothstep(.25,.65,y+O)*(.7+.3*sin(T*.4));
-    col=mix(col,mix(vec3(.792,.576,.702),vec3(.953,.788,.851),w.x),cloud*.32);   /* #CA93B3 → #F3C9D9 */
+    vec2 w=vec2(fbm(q+vec2(T*.04,0.)),fbm(q+vec2(5.2,1.3)-vec2(0.,T*.03)));
+    float n=fbm(q+1.8*w+vec2(T*.025,-T*.015));
+    float cloud=smoothstep(.38,.82,n)*smoothstep(.25,.65,y+O)*(.6+.4*sin(T*.55));
+    col=mix(col,mix(vec3(.792,.576,.702),vec3(.953,.788,.851),w.x),cloud*.42);   /* #CA93B3 → #F3C9D9 */
     /* the faint light band from before */
     float x=uv.x*asp;float bw=.74-O+.05*sin(x*2.6+T*.18)+.03*sin(x*6.1-T*.27);
     col+=vec3(.953,.788,.851)*exp(-pow((y-bw)/.07,2.))*(.55+.45*sin(x*3.7+T*.31))*.08;
@@ -699,7 +699,7 @@ $$('[data-stars]').forEach((el,si)=>{
   gl.uniform3fv(U.C,new Float32Array(GL.flatMap(g=>hx(g[0]))));gl.uniform2fv(U.P,new Float32Array(GL.flatMap(g=>[g[1],g[2]])));
   gl.uniform1fv(U.A,new Float32Array(GL.map(g=>g[3])));gl.uniform1fv(U.S,new Float32Array(GL.map(g=>g[4])));
   let raf=0,visible=true;const t0=performance.now(), SCALE=.35; // soft by nature: render small, let CSS upscale
-  function frame(now,once){gl.uniform2f(U.R,canvas.width,canvas.height);gl.uniform1f(U.T,(now-t0)/1000*.8+40.);gl.drawArrays(gl.TRIANGLES,0,3);
+  function frame(now,once){gl.uniform2f(U.R,canvas.width,canvas.height);gl.uniform1f(U.T,(now-t0)/1000+40.);gl.drawArrays(gl.TRIANGLES,0,3);
     if(once===true)return;raf=(!reduce.matches&&visible&&!document.hidden)?requestAnimationFrame(frame):0;}
   function start(){if(!raf&&!reduce.matches)raf=requestAnimationFrame(frame);}
   function resize(){const r=hero.getBoundingClientRect();canvas.width=Math.max(2,Math.round(r.width*SCALE));canvas.height=Math.max(2,Math.round(r.height*SCALE));gl.viewport(0,0,canvas.width,canvas.height);frame(performance.now(),true);}
