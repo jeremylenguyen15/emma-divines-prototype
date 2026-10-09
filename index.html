@@ -667,6 +667,9 @@ const $=(s,el=document)=>el.querySelector(s), $$=(s,el=document)=>[...el.querySe
 const cardsEl=$('#cards'), offeringsEl=$('#offerings');
 const reduce=matchMedia('(prefers-reduced-motion: reduce)'), desktopMQ=matchMedia('(min-width:1025px)');
 // Capture mode (Figma capture or ?capture): render every section at rest so a static snapshot shows it all
+// Always open at the top (so the hero and card deal play) unless a link targets a section
+if('scrollRestoration' in history)history.scrollRestoration='manual';
+if(!location.hash)scrollTo(0,0);
 const CAPTURE=/figmacapture|[?&]capture\b/.test(location.href);
 if(CAPTURE){
   document.documentElement.classList.add('capture');
