@@ -208,7 +208,7 @@ section.band{padding-block:112px}
 .emma-grid{display:grid;grid-template-columns:420px minmax(0,1fr);gap:80px;align-items:center}
 .arch{aspect-ratio:420/520;max-width:100%;border-radius:999px 999px 24px 24px;position:relative;overflow:hidden;
   background:radial-gradient(circle at 50% 30%,#CA93B3,#693F6A 75%);box-shadow:0 30px 60px -20px rgba(58,33,64,.45);border:8px solid #fff;outline:1px solid rgba(192,137,119,.5)}
-.arch span{position:absolute;inset:auto 0 28px;text-align:center;font:500 13px/1 var(--f-body);color:#FFF6F3;opacity:.85}
+.arch img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 30%}
 .arch svg{position:absolute;inset:0;width:100%;height:100%}
 .emma-copy{display:flex;flex-direction:column;gap:20px;min-width:0}
 .roles{display:flex;flex-wrap:wrap;gap:8px;padding:0;margin:0;list-style:none}
@@ -474,10 +474,7 @@ dialog[open]{animation:pop .35s cubic-bezier(.2,1.1,.3,1)}
 
 <section class="band emma" id="emma">
   <div class="wrap emma-grid">
-    <div class="arch" data-reveal="left" role="img" aria-label="Photo of Emma (placeholder)">
-      <svg viewBox="0 0 420 520" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><path d="M60 360 A170 170 0 1 1 360 360" fill="none" stroke="#F6E4EC" stroke-width="1.2" opacity=".6"/>
-        <use href="#sp" x="282" y="96" width="40" height="40" style="color:#fff"/><use href="#sp" x="326" y="80" width="14" height="14" style="color:#fff" opacity=".8"/><use href="#sp" x="90" y="150" width="10" height="10" style="color:#fff" opacity=".7"/></svg>
-      <span>Emma’s photo goes here</span></div>
+    <div class="arch" data-reveal="left"><img src="images/meet-emma.jpg" alt="Emma smiling on a boat on the river in Sacramento" width="840" height="1040" loading="lazy"></div>
     <div class="emma-copy" data-reveal="right">
       <p class="eyebrow"><svg><use href="#sp"/></svg>Meet Emma</p>
       <h2>Welcome — I’m so glad you were <em>guided here</em></h2>
@@ -505,7 +502,7 @@ dialog[open]{animation:pop .35s cubic-bezier(.2,1.1,.3,1)}
       <li data-reveal data-stagger><figure><img src="images/life-everyday.jpg" alt="Emma relaxing outdoors with her eyes closed" width="564" height="705" loading="lazy"><figcaption>Everyday me</figcaption></figure></li>
       <li data-reveal data-stagger><figure><img src="images/life-wedding.jpg" alt="Emma and her wife dancing at their wedding" width="564" height="705" loading="lazy"><figcaption>Our wedding day</figcaption></figure></li>
       <li data-reveal data-stagger><figure><img src="images/life-pups.jpg" alt="A signature-drinks sign at Emma’s wedding illustrated with their four dogs" width="564" height="705" loading="lazy"><figcaption>Our four pups</figcaption></figure></li>
-      <li data-reveal data-stagger><figure><img src="images/life-happy-places.jpg" alt="Emma smiling on a boat on the river" width="564" height="705" loading="lazy"><figcaption>Happy places</figcaption></figure></li>
+      <li data-reveal data-stagger><figure><img src="images/life-little-joys.jpg" alt="A homemade ratatouille fresh out of the oven" width="564" height="705" loading="lazy"><figcaption>Little joys</figcaption></figure></li>
     </ul>
   </div>
 </section>

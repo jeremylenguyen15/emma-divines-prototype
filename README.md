@@ -42,7 +42,7 @@ These come from Emma's brand guide:
 
 ## Still placeholder
 
-- Emma's bio and the Meet Emma photo (the hero headshot and gallery photos are from her Instagram, at screen resolution; swap in originals for launch)
+- Emma's bio (the hero headshot, Meet Emma photo and gallery photos are from her Instagram, at screen resolution; swap in originals for launch)
 - Google reviews (the live site uses the Trustindex widget)
 - Descriptions for the Mediumship, Reiki and Classes sessions, and the FAQ answers (marked "draft" on the page)
 - Social links, and the contact form isn't connected to anything
