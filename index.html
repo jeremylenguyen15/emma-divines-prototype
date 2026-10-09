@@ -1,0 +1,631 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Emma Divines Prototype</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Philosopher:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+/* ---------- Brand palette (from Emma's guide) ---------- */
+:root{
+  --deep-purple:#693F6A; --mauve:#A8638C; --terracotta:#C08977;
+  --muted-purple:#936A94; --soft-rose:#CA93B3; --warm-blush:#DBB7AC;
+  /* extensions of the palette (darker / lighter steps) */
+  --night:#1C1020; --plum:#3A2140; --cream:#FBF4F1; --blush-tint:#F8EFEC;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{font-family:Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden;background:var(--page-bg);color:var(--ink)}
+button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:6px}
+
+/* ---------- Themes ---------- */
+body[data-theme=a]{
+  --page-bg:var(--night); --ink:#F6E4EC; --ink-2:#D9C4D2; --accent:var(--soft-rose); --eyebrow:var(--warm-blush);
+  --hdr-btn-bg:var(--warm-blush); --hdr-btn-fg:var(--plum); --nav:#EBD9E2;
+  --tab-on-bg:var(--warm-blush); --tab-on-fg:var(--plum); --tab-off-bd:rgba(202,147,179,.45); --tab-off-fg:#EBD9E2;
+  --card-face:linear-gradient(#2E1B34,#22142A); --card-bd:rgba(219,183,172,.55); --card-inner:rgba(192,137,119,.6);
+  --card-num:var(--warm-blush); --card-name:#F6E4EC; --card-meta:#CDB6C6; --card-price:var(--warm-blush);
+  --art-line:var(--warm-blush); --art-spark:#F6E4EC; --shadow:rgba(0,0,0,.5); --link:var(--warm-blush); --star:#F6E4EC; --ring:var(--warm-blush);
+  --book-bg:var(--warm-blush); --book-fg:var(--plum);
+}
+body[data-theme=b]{
+  --page-bg:var(--warm-blush); --ink:#FFF6F3; --ink-2:#F6E4EC; --accent:#F3C9D9; --eyebrow:#F1D9D0;
+  --hdr-btn-bg:#F6E4EC; --hdr-btn-fg:var(--plum); --nav:#F6E4EC;
+  --tab-on-bg:var(--plum); --tab-on-fg:#F6E4EC; --tab-off-bd:rgba(58,33,64,.35); --tab-off-fg:var(--plum);
+  --card-face:var(--cream); --card-bd:#fff; --card-inner:rgba(192,137,119,.7);
+  --card-num:var(--mauve); --card-name:var(--plum); --card-meta:#7A6478; --card-price:var(--deep-purple);
+  --art-line:#F6E4EC; --art-spark:#fff; --shadow:rgba(58,33,64,.42); --link:var(--plum); --star:#fff; --ring:#fff;
+  --book-bg:var(--deep-purple); --book-fg:#FFF6F3;
+}
+body[data-theme=c]{
+  --page-bg:var(--blush-tint); --ink:var(--plum); --ink-2:#5A4A5C; --accent:var(--mauve); --eyebrow:var(--mauve);
+  --hdr-btn-bg:var(--deep-purple); --hdr-btn-fg:#FFF6F3; --nav:var(--plum);
+  --tab-on-bg:var(--deep-purple); --tab-on-fg:#FFF6F3; --tab-off-bd:rgba(105,63,106,.3); --tab-off-fg:var(--deep-purple);
+  --card-face:linear-gradient(#4A2A50,#2A1830); --card-bd:rgba(192,137,119,.7); --card-inner:rgba(219,183,172,.45);
+  --card-num:var(--warm-blush); --card-name:#FFF6F3; --card-meta:#D9C4D2; --card-price:var(--warm-blush);
+  --art-line:#FBE9E3; --art-spark:#FFF6F3; --shadow:rgba(105,63,106,.32); --link:var(--deep-purple); --star:var(--mauve); --ring:#fff;
+  --book-bg:var(--warm-blush); --book-fg:var(--plum);
+}
+
+/* ---------- Card sizes ---------- */
+body{--cw:232px;--ch:364px;--gap:28px}
+body[data-theme=b]{--cw:200px;--ch:340px}
+body[data-theme=c]{--cw:252px;--ch:400px;--gap:64px}
+
+/* ---------- Hero shell ---------- */
+.hero{position:relative;min-height:100svh;isolation:isolate}
+.hero-bg{position:absolute;inset:0;z-index:-1;overflow:hidden}
+body[data-theme=a] .hero-bg{background:radial-gradient(60% 70% at 8% 0%,#693F6A,transparent 70%),radial-gradient(50% 60% at 92% 0%,rgba(168,99,140,.55),transparent 70%),var(--night)}
+body[data-theme=b] .hero-bg{background:linear-gradient(#2A1830,#693F6A 38%,#A8638C 75%,#DBB7AC)}
+body[data-theme=c] .hero-bg{background:radial-gradient(50% 50% at 88% 0%,rgba(202,147,179,.35),transparent 70%),radial-gradient(40% 40% at 6% 0%,rgba(219,183,172,.5),transparent 70%),var(--blush-tint)}
+#aurora{position:absolute;inset:0;width:100%;height:100%;display:block}
+.stars{position:absolute;inset:0}
+.star{position:absolute;color:var(--star);opacity:var(--o);animation:twinkle var(--t) ease-in-out var(--d) infinite alternate}
+@keyframes twinkle{from{opacity:calc(var(--o) * .2);scale:.55}to{opacity:var(--o);scale:1}}
+
+.wrap{max-width:1240px;margin-inline:auto;padding-inline:20px}
+.site-header{height:88px;display:flex;align-items:center;justify-content:space-between;position:relative;z-index:5}
+.logo img{height:68px;display:block}
+body:not([data-theme=c]) .logo-c, body[data-theme=c] .logo-w{display:none}
+.nav{display:flex;align-items:center;gap:36px}
+.nav a:not(.btn){text-decoration:none;font-weight:500;font-size:15px;color:var(--nav);opacity:.92}
+.nav a:not(.btn):hover{opacity:1;text-decoration:underline;text-underline-offset:6px;text-decoration-color:var(--accent)}
+.mobile-actions{display:none;align-items:center;gap:10px}
+.menu{display:flex;flex-direction:column;gap:5px;padding:13px 9px}
+.menu i{display:block;width:20px;height:1.6px;border-radius:1px;background:var(--nav)}
+
+.btn{display:inline-flex;align-items:center;gap:8px;border-radius:999px;padding:12px 22px;font:600 15px/1.2 Inter,sans-serif;text-decoration:none;border:1px solid transparent;white-space:nowrap;transition:transform .2s,box-shadow .25s,background-color .2s}
+.btn .arr{transition:translate .2s}
+.btn:hover .arr{translate:3px 0}
+.btn:hover{transform:translateY(-1px)}
+.btn-header{background:var(--hdr-btn-bg);color:var(--hdr-btn-fg)}
+.btn-primary{background:var(--plum);color:#FFF6F3;padding:14px 24px}
+.btn-ghost{border-color:currentColor;color:var(--plum);padding:14px 24px}
+body[data-theme=c] .btn-ghost{color:var(--deep-purple);border-color:rgba(105,63,106,.45);padding:12px 22px}
+.sparkle-i{width:12px;height:12px;display:inline-block;vertical-align:-1px}
+
+/* ---------- Hero copy ---------- */
+.eyebrow{display:flex;align-items:center;gap:10px;margin:0;font:600 12px/1 Inter,sans-serif;letter-spacing:.18em;color:var(--eyebrow)}
+.eyebrow svg{width:12px;height:12px;color:var(--eyebrow)}
+h1{font:400 60px/1.06 Philosopher,serif;margin:0;color:var(--ink);letter-spacing:-.005em;text-wrap:balance}
+h1 em{font-style:italic;color:var(--accent)}
+.byline{display:flex;align-items:center;gap:14px}
+.byline p{margin:0;font-size:17px;line-height:1.45;color:var(--ink-2);max-width:470px}
+.avatar{flex:none;width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,#CA93B3,#693F6A);border:2px solid var(--ring)}
+.ctas{display:flex;gap:12px;flex-wrap:wrap}
+
+/* ---------- Offerings ---------- */
+.offerings{display:flex;flex-direction:column;align-items:center;position:relative}
+.tabs-row{display:flex;align-items:center;justify-content:center;width:100%}
+.tabs{display:flex;gap:8px}
+.tab{padding:10px 20px;border-radius:999px;font:500 14px/1.2 Inter,sans-serif;border:1px solid var(--tab-off-bd);color:var(--tab-off-fg);white-space:nowrap;transition:background-color .25s,color .25s,border-color .25s}
+.tab[aria-selected=true]{background:var(--tab-on-bg);color:var(--tab-on-fg);border-color:var(--tab-on-bg);font-weight:600}
+.tab .short{display:none}
+.link{font:600 14px/1.2 Inter,sans-serif;color:var(--link);display:inline-flex;gap:8px;align-items:center}
+.link:hover .arr{translate:3px 0}.link .arr{transition:translate .2s}
+.after-cards{display:flex;gap:28px;align-items:center;justify-content:center}
+.see-all-top,.deck-hint,.mobile-only{display:none}
+
+/* ---------- Cards ---------- */
+.cards{position:relative;display:flex;gap:var(--gap);justify-content:center}
+.card{position:relative;flex:0 0 auto;width:var(--cw);height:var(--ch);perspective:1100px;cursor:pointer;
+  transform:var(--final,none);transition:translate .35s cubic-bezier(.2,.8,.2,1),transform .55s cubic-bezier(.2,.8,.2,1),opacity .35s;
+  animation:deal .8s cubic-bezier(.2,1.15,.35,1) calc(var(--i) * 85ms + 150ms) backwards}
+.card.dealt{animation:none}
+@keyframes deal{
+  from{transform:translate(var(--dx),var(--dy)) rotate(var(--dr)) scale(.9);opacity:0}
+  35%{opacity:1}
+  to{transform:var(--final,none);opacity:1}}
+.tilt,.flip{position:absolute;inset:0;transform-style:preserve-3d}
+.tilt{transform:rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));transition:transform .25s ease-out,translate .35s cubic-bezier(.2,.8,.2,1),rotate .35s cubic-bezier(.2,.8,.2,1),opacity .3s,scale .3s}
+.flip{transition:transform .75s cubic-bezier(.3,1.25,.4,1)}
+.card.flipped .flip{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:16px;padding:10px;background:var(--card-face);border:1px solid var(--card-bd);box-shadow:0 18px 40px -8px var(--shadow);overflow:hidden;transition:box-shadow .3s}
+.back{transform:rotateY(180deg)}
+.inner{height:100%;border:1px solid var(--card-inner);border-radius:10px;padding:12px 12px 14px;display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center}
+.num{font:400 16px/1 Philosopher,serif;letter-spacing:.2em;color:var(--card-num);padding-left:.2em}
+.art{flex:1;width:100%;border-radius:6px;position:relative;overflow:hidden;min-height:0}
+.art svg{position:absolute;inset:0;width:100%;height:100%}
+.name{font:700 21px/1.15 Philosopher,serif;color:var(--card-name);margin:4px 0 0}
+.meta{font-size:13px;color:var(--card-meta);margin:0}
+.price{font:600 22px/1.1 Inter,sans-serif;color:var(--card-price);margin:2px 0 0}
+/* glare that follows the cursor */
+.front::before{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;opacity:0;transition:opacity .3s;
+  background:radial-gradient(circle at var(--gx,50%) var(--gy,30%),rgba(255,255,255,.22),transparent 55%);z-index:2}
+/* one-time shimmer after the deal */
+.front::after{content:"";position:absolute;inset:-20%;pointer-events:none;z-index:3;
+  background:linear-gradient(105deg,transparent 40%,rgba(255,255,255,.38) 50%,transparent 60%);
+  transform:translateX(-120%);animation:shimmer 1.1s ease-out calc(var(--i) * 85ms + 900ms) 1 both}
+@keyframes shimmer{to{transform:translateX(120%)}}
+.back .inner{justify-content:center;gap:10px;padding:16px}
+.back .desc{font-size:14px;line-height:1.5;color:var(--card-meta);margin:0}
+.back .name{margin:0}
+.btn-book{background:var(--book-bg);color:var(--book-fg);padding:11px 18px;font-size:14px;margin-top:6px}
+.turn{font-size:12px;color:var(--card-meta);opacity:.8}
+.chosen-tag{display:none;font:600 11px/1 Inter,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:var(--card-price)}
+.card.chosen .chosen-tag{display:block}
+.card.chosen .face{box-shadow:0 0 0 1px var(--accent),0 0 48px 8px color-mix(in srgb,var(--accent) 55%,transparent),0 18px 40px -8px var(--shadow)}
+.draft{font-size:10px;letter-spacing:.08em;text-transform:uppercase;opacity:.55}
+
+@media (hover:hover) and (pointer:fine){
+  .card:hover .front::before{opacity:1}
+  .mode-row .card:hover .tilt,.mode-scroll .card:hover .tilt{translate:0 -10px}
+  .card:hover .face{box-shadow:0 28px 56px -10px var(--shadow)}
+}
+/* fan (B desktop) */
+.mode-fan{width:100%;height:calc(var(--ch) + 90px)}
+.mode-fan .card{position:absolute;left:calc(50% - var(--cw) / 2);top:24px}
+.mode-fan .card:hover,.mode-fan .card.flipped{translate:0 -28px;z-index:20}
+.mode-fan .card:hover .tilt,.mode-fan .card.flipped .tilt{rotate:calc(var(--r) * -1)}
+/* desktop overflow (more than 4 sessions) */
+.mode-scroll{justify-content:flex-start;overflow-x:auto;max-width:100%;padding:30px 4px 56px;margin:-30px 0 -56px;scroll-snap-type:x mandatory;scrollbar-width:none;
+  mask-image:linear-gradient(90deg,#000 85%,transparent)}
+.mode-scroll .card{scroll-snap-align:start}
+.cards::-webkit-scrollbar,.tabs::-webkit-scrollbar{display:none}
+
+.shuffling .card .tilt{animation:jiggle .65s ease-in-out calc(var(--i) * 45ms)}
+@keyframes jiggle{20%{transform:translateY(-12px) rotate(-3deg)}50%{transform:translateY(5px) rotate(3deg)}80%{transform:translateY(-4px) rotate(-1deg)}}
+.card.toss{animation:toss .38s cubic-bezier(.5,0,.75,0) forwards}
+@keyframes toss{to{transform:translate(-135%,-14px) rotate(-20deg);opacity:0}}
+
+/* ---------- Desktop layouts ---------- */
+@media (min-width:1025px){
+  /* A — centered */
+  body[data-theme=a] .hero-inner{display:flex;flex-direction:column;align-items:center;padding-top:40px}
+  body[data-theme=a] .copy{display:flex;flex-direction:column;align-items:center;gap:20px;text-align:center}
+  body[data-theme=a] .ctas{display:none}
+  body[data-theme=a] .byline{text-align:left}
+  body[data-theme=a] .tabs-row{margin-top:36px}
+  body[data-theme=a] .cards{margin-top:32px}
+  body[data-theme=a] .after-cards{margin-top:22px}
+  body[data-theme=a] .logo img{height:64px}
+  /* B — copy left, fan right */
+  body[data-theme=b] .hero-inner{display:grid;grid-template-columns:470px 1fr;column-gap:20px;align-items:start;padding-top:112px}
+  body[data-theme=b] .copy{display:flex;flex-direction:column;gap:24px}
+  body[data-theme=b] h1{font-size:54px}
+  body[data-theme=b] .byline p{max-width:420px}
+  body[data-theme=b] .offerings{margin-top:-20px}
+  body[data-theme=b] .tabs-row{order:2;margin-top:20px}
+  body[data-theme=b] .cards{order:1}
+  body[data-theme=b] .after-cards{order:3;margin-top:18px}
+  body[data-theme=b] .tab:not([aria-selected=true]){color:var(--plum)}
+  body[data-theme=b] .draw-inline{display:none}
+  /* C — headline left, byline right, full-width row */
+  body[data-theme=c] .hero-inner{padding-top:40px}
+  body[data-theme=c] .copy{display:grid;grid-template-columns:1fr 340px;column-gap:64px;row-gap:16px;
+    grid-template-areas:"eb ." "h1 by" "h1 cta";align-items:end}
+  body[data-theme=c] .eyebrow{grid-area:eb}
+  body[data-theme=c] h1{grid-area:h1;font-size:58px}
+  body[data-theme=c] .byline{grid-area:by}
+  body[data-theme=c] .byline p{font-size:16px}
+  body[data-theme=c] .ctas{grid-area:cta}
+  body[data-theme=c] .ctas .btn-primary{display:none}
+  body[data-theme=c] .offerings{align-items:stretch}
+  body[data-theme=c] .tabs-row{justify-content:space-between;margin-top:40px}
+  body[data-theme=c] .see-all-top{display:inline-flex}
+  body[data-theme=c] .cards{margin-top:28px}
+  body[data-theme=c] .after-cards{display:none}
+  }
+@media (max-width:1024px){.br-d{display:none}}
+body[data-theme=b] .br-d{display:none}
+
+/* ---------- Mobile / tablet (Elementor tablet + mobile) ---------- */
+@media (max-width:1024px){
+  body{--cw:232px;--ch:372px;--gap:14px}
+  body[data-theme=b]{--cw:224px;--ch:360px}
+  body[data-theme=c]{--gap:16px}
+  .site-header{height:64px;padding-inline:16px}
+  .logo img{height:52px}
+  .nav{display:none}.mobile-actions{display:flex}
+  .btn-header{padding:9px 16px;font-size:14px}
+  .hero-inner{padding-top:24px}
+  .copy{display:flex;flex-direction:column;gap:14px}
+  h1{font-size:34px}
+  .byline{gap:12px}.avatar{width:44px;height:44px}
+  .byline p{font-size:15px}
+  .ctas{display:none}
+  .eyebrow{font-size:11px;letter-spacing:.16em}
+  body[data-theme=a] .copy{align-items:center;text-align:center}
+  body[data-theme=a] .byline{text-align:left}
+  .tabs-row{margin-top:24px;justify-content:flex-start;margin-inline:-20px;width:auto;align-self:stretch}
+  .tabs{overflow-x:auto;padding-inline:20px;scrollbar-width:none}
+  .tab{padding:9px 16px}
+  .tab .long{display:none}.tab .short{display:inline}
+  body[data-theme=b] .tab:not([aria-selected=true]){--tab-off-bd:rgba(246,228,236,.5);color:#F6E4EC}
+  .offerings{align-items:stretch}
+  .cards{margin-top:22px}
+  .after-cards{flex-direction:column;gap:14px;margin:20px 0 96px}
+  .mobile-only{display:inline-flex}
+  /* A — centered carousel with peeking neighbours */
+  .mode-carousel,.mode-rail{justify-content:flex-start;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;
+    margin-inline:-20px;padding:6px 20px 48px;margin-bottom:-36px}
+  .mode-carousel{padding-inline:calc(50% - var(--cw) / 2)}
+  .mode-carousel .card{scroll-snap-align:center}
+  .mode-carousel .tilt{opacity:var(--o,1);scale:var(--s,1)}
+  .mode-rail .card{scroll-snap-align:start;scroll-margin-left:20px}
+  /* B — dealt deck */
+  .mode-deck{height:calc(var(--ch) + 44px);touch-action:pan-y;margin-top:30px}
+  .mode-deck .card{position:absolute;left:calc(50% - var(--cw) / 2);top:0}
+  .mode-deck .card:not(.is-front){pointer-events:none}
+  .mode-deck .card.is-hidden{opacity:0}
+  [data-mode=deck] .deck-hint{display:flex;align-self:center;gap:8px;font:500 13px/1 Inter,sans-serif;color:var(--plum);margin-top:4px}
+}
+
+/* ---------- Prices dialog ---------- */
+dialog{border:0;border-radius:20px;padding:0;width:min(720px,calc(100% - 32px));max-height:85vh;background:var(--cream);color:var(--plum);box-shadow:0 30px 80px -20px rgba(28,16,32,.6)}
+dialog::backdrop{background:rgba(28,16,32,.55);backdrop-filter:blur(4px)}
+dialog[open]{animation:pop .35s cubic-bezier(.2,1.1,.3,1)}
+@keyframes pop{from{opacity:0;transform:translateY(16px) scale(.98)}}
+.dlg-head{position:sticky;top:0;background:var(--cream);display:flex;justify-content:space-between;align-items:center;padding:22px 28px 14px;border-bottom:1px solid rgba(105,63,106,.12)}
+.dlg-head h2{font:700 28px/1.1 Philosopher,serif;margin:0;color:var(--deep-purple)}
+.dlg-close{width:40px;height:40px;border-radius:50%;font-size:20px;color:var(--deep-purple)}
+.dlg-close:hover{background:rgba(105,63,106,.08)}
+.dlg-body{padding:8px 28px 24px}
+.grp h3{font:600 12px/1 Inter,sans-serif;letter-spacing:.16em;color:var(--mauve);margin:22px 0 6px}
+.row{display:grid;grid-template-columns:1fr auto auto;gap:16px;align-items:center;padding:12px 0;border-bottom:1px solid rgba(105,63,106,.1)}
+.row b{font:700 18px/1.2 Philosopher,serif;color:var(--plum)} .row small{display:block;font-size:13px;color:#7A6478;margin-top:2px}
+.row .p{font-weight:600;font-size:16px}
+.row a{font:600 13px/1 Inter,sans-serif;padding:9px 14px;border-radius:999px;background:var(--deep-purple);color:#fff;text-decoration:none}
+.policy{font-size:13px;color:#7A6478;margin:18px 0 0}
+@media (max-width:767px){dialog{width:100%;max-width:none;margin:auto 0 0;border-radius:20px 20px 0 0;max-height:88vh}}
+
+/* ---------- Prototype chrome ---------- */
+.proto{position:fixed;left:50%;bottom:calc(16px + env(safe-area-inset-bottom, 0px));translate:-50% 0;z-index:50;display:flex;gap:4px;align-items:center;padding:5px;border-radius:999px;
+  background:rgba(28,16,32,.72);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);box-shadow:0 10px 30px rgba(0,0,0,.25);font:500 13px/1 Inter,sans-serif;color:#F6E4EC}
+.proto button{padding:9px 13px;border-radius:999px;white-space:nowrap}
+.proto button[aria-pressed=true]{background:#F6E4EC;color:var(--plum);font-weight:600}
+.proto .sep{width:1px;height:18px;background:rgba(246,228,236,.25);margin:0 4px}
+body.bare .proto{display:none}
+@media (max-width:480px){.proto .lbl{display:none}}
+
+@media (prefers-reduced-motion:reduce){
+  .card{animation:fade .4s ease both}
+  @keyframes fade{from{opacity:0}}
+  .front::after,.star{animation:none}
+  .flip{transition-duration:.35s}
+}
+</style>
+</head>
+<body data-theme="a">
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+  <symbol id="sp" viewBox="0 0 100 100"><path fill="currentColor" d="M50 0C52.6 37 63 47.4 100 50 63 52.6 52.6 63 50 100 47.4 63 37 52.6 0 50 37 47.4 47.4 37 50 0Z"/></symbol>
+</defs></svg>
+
+<section class="hero" id="top">
+  <div class="hero-bg" aria-hidden="true"><canvas id="aurora"></canvas><div class="stars" id="stars"></div></div>
+
+  <header class="site-header wrap">
+    <a class="logo" href="#top" aria-label="Emma Divines home">
+      <img class="logo-w" src="logo_white.png" alt="Emma Divines"><img class="logo-c" src="logo_color.png" alt="Emma Divines">
+    </a>
+    <nav class="nav" aria-label="Main">
+      <a href="#">Readings</a><a href="#">Mediumship</a><a href="#">Reiki</a><a href="#">Classes</a><a href="#">About</a>
+      <a class="btn btn-header" href="https://calendly.com/emmadivinesbook" target="_blank" rel="noopener">Book a Reading <span class="arr">→</span></a>
+    </nav>
+    <div class="mobile-actions">
+      <a class="btn btn-header" href="https://calendly.com/emmadivinesbook" target="_blank" rel="noopener">Book <span class="arr">→</span></a>
+      <button class="menu" aria-label="Open menu"><i></i><i></i><i></i></button>
+    </div>
+  </header>
+
+  <div class="hero-inner wrap">
+    <div class="copy">
+      <p class="eyebrow"><svg><use href="#sp"/></svg>PSYCHIC · MEDIUM · REIKI<svg class="eb-end"><use href="#sp"/></svg></p>
+      <h1>Readings, mediumship &amp; Reiki —<br class="br-d"> <em>from wherever you are</em></h1>
+      <div class="byline"><span class="avatar" role="img" aria-label="Photo of Emma (placeholder)"></span>
+        <p>Hi, I’m Emma — honest, compassionate guidance on Google Meet or by email.</p></div>
+      <div class="ctas">
+        <a class="btn btn-primary" href="https://calendly.com/emmadivinesbook" target="_blank" rel="noopener">Book a Reading <span class="arr">→</span></a>
+        <button class="btn btn-ghost js-draw">Not sure? Draw a card <svg class="sparkle-i"><use href="#sp"/></svg></button>
+      </div>
+    </div>
+
+    <div class="offerings" id="offerings">
+      <div class="tabs-row">
+        <div class="tabs" role="tablist" id="tabs"></div>
+        <button class="link see-all-top js-all">See all sessions &amp; prices <span class="arr">→</span></button>
+      </div>
+      <div class="cards" id="cards" aria-live="polite"></div>
+      <button class="deck-hint js-next">Swipe to deal the next card <span class="arr">→</span></button>
+      <div class="after-cards">
+        <button class="link js-all">See all sessions &amp; prices <span class="arr">→</span></button>
+        <button class="link draw-inline js-draw">Not sure? Draw a card <svg class="sparkle-i"><use href="#sp"/></svg></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<dialog id="prices" aria-labelledby="prices-title">
+  <div class="dlg-head"><h2 id="prices-title">All sessions &amp; prices</h2><button class="dlg-close" aria-label="Close">✕</button></div>
+  <div class="dlg-body" id="prices-body"></div>
+</dialog>
+
+<div class="proto" role="toolbar" aria-label="Prototype controls">
+  <button data-t="a">A<span class="lbl"> · Midnight</span></button>
+  <button data-t="b">B<span class="lbl"> · Dusk</span></button>
+  <button data-t="c">C<span class="lbl"> · Moonlit</span></button>
+  <span class="sep"></span>
+  <button class="js-replay">↻<span class="lbl"> Replay deal</span></button>
+</div>
+
+<script>
+const BOOK='https://calendly.com/emmadivinesbook';
+// Readings copy is from the wireframe; the rest is draft copy (d:1) pending Emma.
+const OFFERS={
+  'Psychic Readings':[
+    {n:'Email Reading',m:'Reply in 1 business day',p:'$22',t:'Quick insight or focused clarity on one question.'},
+    {n:'Quickie Reading',m:'10 min · Google Meet',p:'$33',t:'A few simple questions, or a check-in on one situation.'},
+    {n:'Classic Reading',m:'30 min · Google Meet',p:'$88',t:'A full reading with time for clarity and depth.'},
+    {n:'Deep Dive',m:'60 min · Google Meet',p:'$166',t:'Longer discussions and complicated situations.'}],
+  'Mediumship':[
+    {n:'Evidential Mediumship',m:'45 min · Google Meet',p:'$133',t:'Connect with a loved one who has passed, through details you can recognise.',d:1}],
+  'Reiki':[
+    {n:'Reiki Tune-Up',m:'30 min · Google Meet',p:'$99',t:'A short distance session to rebalance and reset.',d:1},
+    {n:'Reiki Full Session',m:'60 min · Google Meet',p:'$188',t:'A full distance session to release what you’re carrying.',d:1},
+    {n:'Reiki Healing Package',m:'3 × 60 min',p:'$555',t:'Three full sessions for deeper, steadier change.',d:1}],
+  'Classes':[
+    {n:'Free Student Consult',m:'Google Meet',p:'Free',t:'Not sure where to start? Let’s talk about your path.',d:1},
+    {n:'Intuitive Tarot Workshop',m:'60 min',p:'$33',t:'Learn to read the cards with your own intuition.',d:1},
+    {n:'Mentorship Session',m:'60 min',p:'$60',t:'One-on-one guidance for your own practice.',d:1},
+    {n:'Tarot Boot Camp',m:'4 weeks',p:'$333',t:'Four weeks from curious to confident reader.',d:1},
+    {n:'Reiki I',m:'Course',p:'$333',t:'Your Reiki I attunement and foundations.',d:1},
+    {n:'Reiki II',m:'Course',p:'$444',t:'Deepen your practice and learn distance healing.',d:1},
+    {n:'Reiki I & II',m:'Course',p:'$666',t:'Both levels together.',d:1}]
+};
+const SHORT={'Psychic Readings':'Readings'};
+const ROMAN=['I','II','III','IV','V','VI','VII','VIII','IX','X','XI','XII'];
+
+const THEMES={
+  a:{art:{from:['#693F6A','#936A94','#A8638C','#693F6A'],to:['#1C1020']},
+     shader:{g:['#1C1020','#1C1020','#23132A','#2C1936'],speed:1,band:.16,bc:'#CA93B3',
+       glows:[['#693F6A',.12,.95,.95,.16],['#A8638C',.88,.97,.55,.12],['#CA93B3',.5,.1,.22,.08],['#936A94',.92,.16,.35,.07]]},
+     stars:[30,14]},
+  b:{art:{from:['#3A2140','#693F6A','#4A2A50','#693F6A'],to:['#A8638C','#CA93B3','#936A94','#C08977']},
+     shader:{g:['#DBB7AC','#A8638C','#693F6A','#2A1830'],speed:.8,band:.08,bc:'#F3C9D9',
+       glows:[['#CA93B3',.68,.5,.35,.1],['#C08977',.1,.12,.3,.1],['#F3C9D9',.85,.78,.12,.05],['#000000',0,0,0,.1]]},
+     stars:[22,12]},
+  c:{art:{from:['#A8638C','#936A94','#C08977','#CA93B3'],to:['#2A1830']},
+     shader:{g:['#F8EFEC','#F8EFEC','#F8EFEC','#F8EFEC'],speed:.6,band:0,bc:'#000000',
+       glows:[['#CA93B3',.85,.99,.35,.1],['#DBB7AC',.08,.99,.5,.09],['#CA93B3',.5,.04,.18,.1],['#000000',0,0,0,.1]]},
+     stars:null}
+};
+
+const $=(s,el=document)=>el.querySelector(s), $$=(s,el=document)=>[...el.querySelectorAll(s)];
+const cardsEl=$('#cards'), offeringsEl=$('#offerings'), body=document.body;
+const reduce=matchMedia('(prefers-reduced-motion: reduce)');
+const desktopMQ=matchMedia('(min-width:1025px)');
+const params=new URLSearchParams(location.search);
+const hashT=(location.hash.match(/^#([abc])\b/)||[])[1];
+const state={theme:hashT||(['a','b','c'].includes(params.get('theme'))?params.get('theme'):'a'),tab:'Psychic Readings',order:[],mode:null,busy:false};
+if(params.has('bare')||/bare/.test(location.hash)) body.classList.add('bare');
+const wait=ms=>new Promise(r=>setTimeout(r,ms));
+
+/* ---------- Tabs ---------- */
+$('#tabs').innerHTML=Object.keys(OFFERS).map(k=>`<button class="tab" role="tab" aria-selected="${k===state.tab}" data-tab="${k}"><span class="long">${k}</span><span class="short">${SHORT[k]||k}</span></button>`).join('');
+$('#tabs').addEventListener('click',e=>{const b=e.target.closest('.tab');if(!b||b.dataset.tab===state.tab)return;
+  state.tab=b.dataset.tab;$$('.tab').forEach(t=>t.setAttribute('aria-selected',t===b));render();});
+
+/* ---------- Cards ---------- */
+function artSVG(i){
+  const th=THEMES[state.theme].art, from=th.from[i%th.from.length], to=th.to[i%th.to.length];
+  const spots=[[50,50,22],[74,26,10],[28,74,7],[80,72,5]].slice(0,[2,3,4,3][i%4]);
+  return `<div class="art" style="background:linear-gradient(${from},${to})"><svg viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+    <circle cx="50" cy="50" r="40" fill="none" stroke="var(--art-line)" stroke-width=".7" stroke-dasharray="212 40" transform="rotate(${100+i*23} 50 50)" opacity=".85"/>
+    ${spots.map(([x,y,s],k)=>`<use href="#sp" x="${x-s/2}" y="${y-s/2}" width="${s}" height="${s}" style="color:var(--art-spark)" opacity="${k?.8:1}"/>`).join('')}
+  </svg></div>`;
+}
+function cardHTML(o,i){
+  return `<article class="card" tabindex="0" aria-label="${o.n}, ${o.m}, ${o.p}. Press to see details.">
+   <div class="tilt"><div class="flip">
+    <div class="face front"><div class="inner"><span class="num">${ROMAN[i]}</span>${artSVG(i)}
+      <h3 class="name">${o.n}</h3><p class="meta">${o.m}</p><p class="price">${o.p}</p></div></div>
+    <div class="face back"><div class="inner"><span class="chosen-tag">✦ The cards chose this</span>
+      <h3 class="name">${o.n}</h3><p class="meta">${o.m}</p><p class="desc">${o.t}</p>${o.d?'<span class="draft">draft copy</span>':''}
+      <p class="price">${o.p}</p><a class="btn btn-book" href="${BOOK}" target="_blank" rel="noopener">Book this session <span class="arr">→</span></a>
+      <span class="turn">Tap to turn back</span></div></div>
+   </div></div></article>`;
+}
+function layoutMode(n){
+  const d=desktopMQ.matches;
+  if(state.theme==='b') return d?'fan':'deck';
+  if(state.theme==='a') return d?(n<=4?'row':'scroll'):'carousel';
+  return d?(n<=4?'row':'scroll'):'rail';
+}
+function setFinal(c,x,y,r){c.style.setProperty('--final',`translate(${x}px,${y}px) rotate(${r}deg)`);c.style.setProperty('--r',r+'deg');}
+function render(){
+  const list=OFFERS[state.tab], n=list.length, mode=layoutMode(n);
+  state.mode=mode; offeringsEl.dataset.mode=mode;
+  cardsEl.className='cards mode-'+mode;
+  cardsEl.innerHTML=list.map(cardHTML).join('');
+  const cs=getComputedStyle(cardsEl), cw=parseFloat(cs.getPropertyValue('--cw')), gap=parseFloat(cs.getPropertyValue('--gap'));
+  const cards=[...cardsEl.children];
+  cards.forEach((c,i)=>{
+    let fx=0,fy=0,r=0,dx=0,dy=50,dr=0; const t=i-(n-1)/2;
+    if(mode==='row'){dx=-t*(cw+gap);dy=46;dr=-t*5;}
+    else if(mode==='fan'){const maxT=(n-1)/2||1, many=n>4;
+      const step=n>1?(many?24/(n-1):Math.min(7,30/(n-1))):0, sp=n>1?(many?440/(n-1):Math.min(176,600/(n-1))):0;
+      r=t*step;fx=t*sp;fy=Math.pow(t/maxT,2)*(many?24:30);dx=-fx;dy=70;dr=-r;}
+    else {dx=-Math.min(i,3)*40;}
+    setFinal(c,fx,fy,r);
+    c.style.setProperty('--i',i);c.style.setProperty('--dx',dx+'px');c.style.setProperty('--dy',dy+'px');c.style.setProperty('--dr',dr+'deg');
+    c.addEventListener('animationend',e=>{if(e.target===c&&e.animationName==='deal')c.classList.add('dealt');});
+  });
+  if(mode==='deck'){state.order=cards.map((_,i)=>i);applyDeck(true);}
+  if(mode==='carousel'||mode==='rail'||mode==='scroll'){cardsEl.scrollLeft=0;}
+  updateFocus();
+}
+const DECK_POS=[[0,0,0],[26,8,6],[-54,18,-11],[56,26,13]];
+function applyDeck(initial){
+  const cards=[...cardsEl.children], n=cards.length;
+  state.order.forEach((idx,p)=>{const c=cards[idx];const [x,y,r]=DECK_POS[p]||[0,30,0];
+    setFinal(c,x,y,r);c.style.zIndex=n-p;c.classList.toggle('is-front',p===0);c.classList.toggle('is-hidden',p>=4);
+    if(initial){c.style.setProperty('--i',Math.min(n,4)-1-Math.min(p,3));c.style.setProperty('--dx',(-x)+'px');c.style.setProperty('--dy','60px');c.style.setProperty('--dr',(-r)+'deg');}});
+}
+function nextCard(){
+  if(state.mode!=='deck'||state.busy||cardsEl.children.length<2)return;
+  state.busy=true;
+  const front=cardsEl.children[state.order[0]];
+  front.classList.remove('flipped','chosen');front.classList.add('dealt','toss');
+  const done=e=>{if(e.animationName!=='toss')return;front.removeEventListener('animationend',done);
+    front.style.transition='none';front.classList.remove('toss');front.style.opacity='0';
+    state.order.push(state.order.shift());applyDeck(false);
+    requestAnimationFrame(()=>requestAnimationFrame(()=>{front.style.transition='';front.style.opacity='';state.busy=false;}));};
+  front.addEventListener('animationend',done);
+}
+function toggleFlip(card){
+  const was=card.classList.contains('flipped');
+  $$('.card.flipped',cardsEl).forEach(c=>c.classList.remove('flipped','chosen'));
+  if(!was)card.classList.add('flipped');
+}
+cardsEl.addEventListener('click',e=>{
+  if(state.mode==='deck'||e.target.closest('a'))return;
+  const card=e.target.closest('.card');if(card)toggleFlip(card);
+});
+cardsEl.addEventListener('keydown',e=>{
+  if((e.key==='Enter'||e.key===' ')&&e.target.classList.contains('card')){e.preventDefault();toggleFlip(e.target);}
+  if(state.mode==='deck'&&e.key==='ArrowRight')nextCard();
+});
+// deck: swipe deals the next card, tap flips the front one
+let sx=0,sy=0;
+cardsEl.addEventListener('pointerdown',e=>{sx=e.clientX;sy=e.clientY;});
+cardsEl.addEventListener('pointerup',e=>{
+  if(state.mode!=='deck')return;
+  const dx=e.clientX-sx, dy=e.clientY-sy;
+  if(Math.abs(dx)>40&&Math.abs(dx)>Math.abs(dy))return nextCard();
+  if(e.target.closest('a'))return;
+  const card=e.target.closest('.card.is-front');if(card&&Math.abs(dx)<8)toggleFlip(card);
+});
+$('.js-next').addEventListener('click',nextCard);
+
+// cursor tilt + glare (mouse only)
+if(matchMedia('(hover:hover) and (pointer:fine)').matches){
+  cardsEl.addEventListener('pointermove',e=>{
+    const c=e.target.closest('.card');if(!c||state.mode==='deck'||reduce.matches)return;
+    const r=c.getBoundingClientRect(), x=(e.clientX-r.left)/r.width, y=(e.clientY-r.top)/r.height;
+    const t=c.firstElementChild;t.style.setProperty('--rx',((.5-y)*10).toFixed(2)+'deg');t.style.setProperty('--ry',((x-.5)*12).toFixed(2)+'deg');
+    c.style.setProperty('--gx',(x*100).toFixed(1)+'%');c.style.setProperty('--gy',(y*100).toFixed(1)+'%');
+  });
+  cardsEl.addEventListener('pointerout',e=>{
+    const c=e.target.closest('.card');if(!c||c.contains(e.relatedTarget))return;
+    const t=c.firstElementChild;t.style.removeProperty('--rx');t.style.removeProperty('--ry');
+  });
+}
+// carousel: dim + shrink cards away from centre
+function updateFocus(){
+  if(state.mode!=='carousel')return;
+  const mid=cardsEl.scrollLeft+cardsEl.clientWidth/2;
+  [...cardsEl.children].forEach(c=>{const d=Math.min(1,Math.abs(c.offsetLeft+c.offsetWidth/2-mid)/(c.offsetWidth+14));
+    c.style.setProperty('--o',(1-d*.5).toFixed(3));c.style.setProperty('--s',(1-d*.06).toFixed(3));});
+}
+let ft=0;cardsEl.addEventListener('scroll',()=>{if(!ft)ft=requestAnimationFrame(()=>{ft=0;updateFocus();});},{passive:true});
+
+/* ---------- Draw a card ---------- */
+async function draw(){
+  if(state.busy)return;state.busy=true;
+  const r=cardsEl.getBoundingClientRect();
+  if(r.top<0||r.bottom>innerHeight)cardsEl.scrollIntoView({block:'center',behavior:reduce.matches?'auto':'smooth'});
+  $$('.card.flipped',cardsEl).forEach(c=>c.classList.remove('flipped','chosen'));
+  if(!reduce.matches){cardsEl.classList.add('shuffling');await wait(700);cardsEl.classList.remove('shuffling');}
+  const cards=[...cardsEl.children], pick=Math.floor(Math.random()*cards.length), card=cards[pick];
+  if(state.mode==='deck'){while(state.order[0]!==pick)state.order.push(state.order.shift());applyDeck(false);await wait(450);}
+  else if(state.mode!=='row'&&state.mode!=='fan'){card.scrollIntoView({inline:'center',block:'nearest',behavior:reduce.matches?'auto':'smooth'});await wait(420);}
+  card.classList.add('chosen','flipped');state.busy=false;
+}
+$$('.js-draw').forEach(b=>b.addEventListener('click',draw));
+
+/* ---------- All prices dialog ---------- */
+const dlg=$('#prices');
+$('#prices-body').innerHTML=Object.entries(OFFERS).map(([k,list])=>`<section class="grp"><h3>${k.toUpperCase()}</h3>${list.map(o=>
+  `<div class="row"><div><b>${o.n}</b><small>${o.m}</small></div><span class="p">${o.p}</span><a href="${BOOK}" target="_blank" rel="noopener">Book</a></div>`).join('')}</section>`).join('')+
+  '<p class="policy">All sessions on Google Meet unless noted · Reschedule free 24h+ ahead · 50% fee if cancelled &lt;48h</p>';
+$$('.js-all').forEach(b=>b.addEventListener('click',()=>dlg.showModal()));
+$('.dlg-close').addEventListener('click',()=>dlg.close());
+dlg.addEventListener('click',e=>{if(e.target===dlg)dlg.close();});
+
+/* ---------- Stars ---------- */
+function makeStars(){
+  const el=$('#stars'), th=THEMES[state.theme];
+  let seed=state.theme==='a'?7:11;const rnd=()=>{seed=(seed*9301+49297)%233280;return seed/233280;};
+  if(!th.stars){ // C: a few larger, deliberate sparkles
+    const fixed=desktopMQ.matches?[[63,15,28],[66.5,12,10],[61,24,8],[96,47,10],[4,30,8]]:[[85,11,22],[90,10,9],[78,15,7]];
+    el.innerHTML=fixed.map(([x,y,s],i)=>`<svg class="star" style="left:${x}%;top:${y}%;width:${s}px;height:${s}px;--o:.75;--t:${3+i*.7}s;--d:${-i}s"><use href="#sp"/></svg>`).join('');return;}
+  const n=th.stars[desktopMQ.matches?0:1];let h='';
+  for(let i=0;i<n;i++){const s=3+rnd()*7;h+=`<svg class="star" style="left:${(rnd()*100).toFixed(2)}%;top:${(8+rnd()*34).toFixed(2)}%;width:${s.toFixed(1)}px;height:${s.toFixed(1)}px;--o:${(.3+rnd()*.6).toFixed(2)};--t:${(2.5+rnd()*3.5).toFixed(2)}s;--d:${(-rnd()*5).toFixed(2)}s"><use href="#sp"/></svg>`;}
+  el.innerHTML=h;
+}
+
+/* ---------- Aurora shader (tiny WebGL, no library) ---------- */
+const Aurora=(()=>{
+  const canvas=$('#aurora'), hero=$('.hero');
+  const gl=canvas.getContext('webgl',{antialias:false,depth:false,powerPreference:'low-power'});
+  if(!gl){canvas.remove();return{set(){}}}
+  const vs='attribute vec2 p;void main(){gl_Position=vec4(p,0.,1.);}';
+  const fs=`precision mediump float;
+  uniform vec2 R;uniform float T;uniform vec3 G0,G1,G2,G3,BC;uniform vec3 C[4];uniform vec2 P[4];uniform float A[4];uniform float S[4];uniform float BAND;
+  float h(vec2 p){return fract(sin(dot(p,vec2(12.9898,78.233)))*43758.5453);}
+  void main(){
+    vec2 uv=gl_FragCoord.xy/R;float asp=R.x/R.y;float y=uv.y;
+    vec3 col=y<.33?mix(G0,G1,y/.33):y<.66?mix(G1,G2,(y-.33)/.33):mix(G2,G3,(y-.66)/.34);
+    for(int i=0;i<4;i++){float fi=float(i);
+      vec2 p=P[i]+vec2(sin(T*(.07+.02*fi)+fi*1.7),cos(T*(.05+.03*fi)+fi))*.07;
+      vec2 d=uv-p;d.x*=asp;col=mix(col,C[i],exp(-dot(d,d)/S[i])*A[i]);}
+    float x=uv.x*asp;
+    float w=.74+.05*sin(x*2.6+T*.18)+.03*sin(x*6.1-T*.27);
+    float band=exp(-pow((y-w)/.07,2.))*(.55+.45*sin(x*3.7+T*.31));
+    col+=BC*band*BAND;
+    col+=(h(gl_FragCoord.xy+fract(T))-.5)/160.;
+    gl_FragColor=vec4(col,1.);}`;
+  const sh=(t,src)=>{const s=gl.createShader(t);gl.shaderSource(s,src);gl.compileShader(s);return gl.getShaderParameter(s,gl.COMPILE_STATUS)?s:null;};
+  const v=sh(gl.VERTEX_SHADER,vs), f=sh(gl.FRAGMENT_SHADER,fs);
+  if(!v||!f){canvas.remove();return{set(){}}}
+  const prog=gl.createProgram();gl.attachShader(prog,v);gl.attachShader(prog,f);gl.linkProgram(prog);gl.useProgram(prog);
+  const buf=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,buf);gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,3,-1,-1,3]),gl.STATIC_DRAW);
+  const loc=gl.getAttribLocation(prog,'p');gl.enableVertexAttribArray(loc);gl.vertexAttribPointer(loc,2,gl.FLOAT,false,0,0);
+  const U={};['R','T','G0','G1','G2','G3','BC','C','P','A','S','BAND'].forEach(k=>U[k]=gl.getUniformLocation(prog,k));
+  const hx=hh=>[1,3,5].map(k=>parseInt(hh.slice(k,k+2),16)/255);
+  let speed=1,raf=0,visible=true;const t0=performance.now();
+  const SCALE=.35; // the aurora is soft, so render small and let CSS upscale it: cheap on any phone
+  function resize(){const r=hero.getBoundingClientRect();canvas.width=Math.max(2,Math.round(r.width*SCALE));canvas.height=Math.max(2,Math.round(r.height*SCALE));gl.viewport(0,0,canvas.width,canvas.height);frame(performance.now(),true);}
+  function frame(now,once){
+    gl.uniform2f(U.R,canvas.width,canvas.height);gl.uniform1f(U.T,(now-t0)/1000*speed+40.);
+    gl.drawArrays(gl.TRIANGLES,0,3);
+    if(once===true)return;
+    raf=(!reduce.matches&&visible&&!document.hidden)?requestAnimationFrame(frame):0;
+  }
+  function start(){if(!raf&&!reduce.matches)raf=requestAnimationFrame(frame);}
+  function set(theme){
+    const s=THEMES[theme].shader;speed=s.speed;
+    ['G0','G1','G2','G3'].forEach((k,i)=>gl.uniform3fv(U[k],hx(s.g[i])));
+    gl.uniform3fv(U.BC,hx(s.bc));gl.uniform1f(U.BAND,s.band);
+    gl.uniform3fv(U.C,new Float32Array(s.glows.flatMap(g=>hx(g[0]))));
+    gl.uniform2fv(U.P,new Float32Array(s.glows.flatMap(g=>[g[1],g[2]])));
+    gl.uniform1fv(U.A,new Float32Array(s.glows.map(g=>g[3])));
+    gl.uniform1fv(U.S,new Float32Array(s.glows.map(g=>g[4])));
+    resize();start();
+  }
+  new ResizeObserver(resize).observe(hero);
+  new IntersectionObserver(([e])=>{visible=e.isIntersecting;if(visible)start();}).observe(hero);
+  document.addEventListener('visibilitychange',()=>{if(!document.hidden)start();});
+  reduce.addEventListener('change',()=>{if(!reduce.matches)start();});
+  return{set};
+})();
+
+/* ---------- Theme + boot ---------- */
+function setTheme(t){
+  state.theme=t;body.dataset.theme=t;
+  $$('.proto [data-t]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.t===t));
+  try{history.replaceState(null,'','#'+t);}catch(e){}
+  Aurora.set(t);makeStars();render();
+}
+$$('.proto [data-t]').forEach(b=>b.addEventListener('click',()=>setTheme(b.dataset.t)));
+$('.js-replay').addEventListener('click',render);
+addEventListener('keydown',e=>{if(e.target.closest('input,textarea')||dlg.open)return;if(['1','2','3'].includes(e.key))setTheme('abc'[e.key-1]);});
+desktopMQ.addEventListener('change',()=>{makeStars();render();});
+setTheme(state.theme);
+</script>
+</body>
+</html>
