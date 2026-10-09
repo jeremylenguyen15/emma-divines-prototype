@@ -667,9 +667,17 @@ const $=(s,el=document)=>el.querySelector(s), $$=(s,el=document)=>[...el.querySe
 const cardsEl=$('#cards'), offeringsEl=$('#offerings');
 const reduce=matchMedia('(prefers-reduced-motion: reduce)'), desktopMQ=matchMedia('(min-width:1025px)');
 // Capture mode (Figma capture or ?capture): render every section at rest so a static snapshot shows it all
-// Always open at the top (so the hero and card deal play) unless a link targets a section
+// Always open at the top so the hero and card deal play: no scroll restoration, and drop any #section left in the address
 if('scrollRestoration' in history)history.scrollRestoration='manual';
-if(!location.hash)scrollTo(0,0);
+if(location.hash){history.replaceState(null,'',location.pathname+location.search);}
+const toTop=()=>scrollTo({top:0,left:0,behavior:'instant'});
+toTop();addEventListener('DOMContentLoaded',toTop);addEventListener('load',toTop);addEventListener('pageshow',toTop);
+// In-page links scroll smoothly without writing #section into the address
+document.addEventListener('click',e=>{
+  const a=e.target.closest('a[href^="#"]');if(!a||e.defaultPrevented)return;
+  const id=a.getAttribute('href').slice(1);const t=id==='top'?document.body:document.getElementById(id);if(!t)return;
+  e.preventDefault();if(id==='top')scrollTo({top:0,behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});else t.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});
+});
 const CAPTURE=/figmacapture|[?&]capture\b/.test(location.href);
 if(CAPTURE){
   document.documentElement.classList.add('capture');
