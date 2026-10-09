@@ -87,9 +87,9 @@ h2 em{font-style:italic;color:var(--mauve)}
 .hero .eyebrow{color:#F1D9D0}
 h1{font:400 54px/1.06 var(--f-display);margin:0;color:#FFF6F3;letter-spacing:-.005em;text-shadow:0 2px 28px rgba(42,24,48,.35)}
 h1 em{font-style:italic;color:var(--rose-light)}
-.byline{display:flex;align-items:center;gap:14px}
+.byline{display:flex;align-items:center;gap:22px}
 .byline p{margin:0;font-size:17px;line-height:1.45;color:var(--on-dark);max-width:420px}
-.avatar{flex:none;width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,#DBB7AC,#693F6A);border:2px solid #fff}
+.avatar{flex:none;width:140px;height:140px;border-radius:50%;object-fit:cover;display:block;background:linear-gradient(135deg,#DBB7AC,#693F6A);border:4px solid #fff;box-shadow:0 0 36px 2px rgba(202,147,179,.55)}
 .ctas{display:flex;gap:12px;flex-wrap:wrap}
 .hero .btn-outline{border-color:rgba(58,33,64,.5)}
 .offerings{display:flex;flex-direction:column;align-items:center;margin-top:-20px;min-width:0}
@@ -214,6 +214,15 @@ section.band{padding-block:112px}
 .roles{display:flex;flex-wrap:wrap;gap:8px;padding:0;margin:0;list-style:none}
 .roles li{padding:8px 14px;border-radius:999px;border:1px solid rgba(105,63,106,.25);font-size:14px;color:var(--deep-purple)}
 
+.life{background:linear-gradient(var(--cream),#F5E8E3)}
+.life-top{display:flex;justify-content:space-between;align-items:flex-end;gap:32px;flex-wrap:wrap}
+.life-head{display:flex;flex-direction:column;gap:14px;max-width:560px}
+.life-ctas{display:flex;gap:20px;align-items:center;flex-wrap:wrap}
+.life-grid{list-style:none;margin:48px 0 0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px}
+.life-grid figure{margin:0;display:flex;flex-direction:column;gap:12px}
+.life-grid img{width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;border-radius:16px;display:block;box-shadow:0 18px 40px -18px rgba(58,33,64,.35);transition:transform .4s cubic-bezier(.2,.8,.2,1)}
+.life-grid li:hover img{transform:translateY(-4px)}
+.life-grid figcaption{font:400 18px/1.2 var(--f-display);color:var(--plum)}
 .reviews{background:var(--blush-tint)}
 .rev-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;margin-top:48px}
 .rev{background:var(--cream);border:1px solid rgba(192,137,119,.35);border-radius:20px;padding:28px;display:flex;flex-direction:column;gap:14px;min-width:0}
@@ -305,7 +314,7 @@ dialog[open]{animation:pop .35s cubic-bezier(.2,1.1,.3,1)}
   .hero-inner{display:block;padding-top:88px}
   .copy{gap:14px}
   h1{font-size:34px}
-  .avatar{width:44px;height:44px}.byline{gap:12px}.byline p{font-size:15px}
+  .avatar{width:96px;height:96px;border-width:3px;box-shadow:0 0 24px 2px rgba(202,147,179,.55)}.byline{gap:16px}.byline p{font-size:15px}
   .ctas{display:none}
   .hero .eyebrow{font-size:11px}
   .offerings{margin-top:0;align-items:stretch}
@@ -336,6 +345,12 @@ dialog[open]{animation:pop .35s cubic-bezier(.2,1.1,.3,1)}
   .emma-grid,.faq-grid{grid-template-columns:minmax(0,1fr);gap:40px}
   .arch{width:min(100%,360px);margin-inline:auto}
   .faq-side{position:static}
+  .life .wrap{display:flex;flex-direction:column}
+  .life-top{display:contents}
+  .life-head{order:1}
+  .life-grid{order:2;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px 16px;margin-top:32px}
+  .life-grid figcaption{font-size:16px}
+  .life-ctas{order:3;margin-top:32px;flex-direction:column;align-items:flex-start;gap:14px}
   .rev-grid{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;margin-inline:-20px;padding:4px 20px 12px;scrollbar-width:none}
   .rev{flex:0 0 82%;scroll-snap-align:center}
   .foot-grid{grid-template-columns:minmax(0,1fr);gap:48px}
@@ -409,7 +424,7 @@ dialog[open]{animation:pop .35s cubic-bezier(.2,1.1,.3,1)}
     <div class="copy">
       <p class="eyebrow"><svg><use href="#sp"/></svg>Psychic · Medium · Reiki</p>
       <h1>Readings, mediumship &amp; Reiki — <em>from wherever you are</em></h1>
-      <div class="byline"><span class="avatar" role="img" aria-label="Photo of Emma (placeholder)"></span>
+      <div class="byline"><img class="avatar" src="images/emma-avatar.jpg" alt="Emma Divines, smiling" width="140" height="140">
         <p>Hi, I’m Emma — honest, compassionate guidance on Google Meet or by email.</p></div>
       <div class="ctas">
         <a class="btn btn-plum" href="https://calendly.com/emmadivinesbook" target="_blank" rel="noopener">Book a Reading <span class="arr">→</span></a>
@@ -471,6 +486,27 @@ dialog[open]{animation:pop .35s cubic-bezier(.2,1.1,.3,1)}
       <ul class="roles" aria-label="What Emma offers"><li>Psychic medium</li><li>Tarot reader</li><li>Reiki practitioner &amp; teacher</li><li>Sound healer</li><li>Energy healer</li></ul>
       <a class="btn btn-outline" href="#emma" style="align-self:flex-start">Read my story <span class="arr">→</span></a>
     </div>
+  </div>
+</section>
+
+<section class="band life" id="life">
+  <div class="wrap">
+    <div class="life-top">
+      <div class="life-head" data-reveal="left"><p class="eyebrow"><svg><use href="#sp"/></svg>Off the clock</p>
+        <h2>A little more of <em>me</em></h2>
+        <p class="lede">There’s a real person behind the cards. Here’s a peek at my everyday life. If something’s on your mind, just say hi.</p>
+        <span class="draft-tag" style="align-self:flex-start">Photos from @emmadivines · draft copy</span></div>
+      <div class="life-ctas" data-reveal="right">
+        <a class="btn btn-plum js-hello" href="#contact">Say hello <span class="arr">→</span></a>
+        <a class="link" href="https://www.instagram.com/emmadivines/" target="_blank" rel="noopener">Follow along on Instagram <span class="arr">→</span></a>
+      </div>
+    </div>
+    <ul class="life-grid" aria-label="Photos from Emma’s life">
+      <li data-reveal data-stagger><figure><img src="images/life-everyday.jpg" alt="Emma relaxing outdoors with her eyes closed" width="564" height="705" loading="lazy"><figcaption>Everyday me</figcaption></figure></li>
+      <li data-reveal data-stagger><figure><img src="images/life-wedding.jpg" alt="Emma and her wife dancing at their wedding" width="564" height="705" loading="lazy"><figcaption>Our wedding day</figcaption></figure></li>
+      <li data-reveal data-stagger><figure><img src="images/life-pups.jpg" alt="A signature-drinks sign at Emma’s wedding illustrated with their four dogs" width="564" height="705" loading="lazy"><figcaption>Our four pups</figcaption></figure></li>
+      <li data-reveal data-stagger><figure><img src="images/life-happy-places.jpg" alt="Emma smiling on a boat on the river" width="564" height="705" loading="lazy"><figcaption>Happy places</figcaption></figure></li>
+    </ul>
   </div>
 </section>
 
@@ -728,6 +764,7 @@ function closeMenu(){if(mm.hidden)return;mm.hidden=true;$('#menu-open').setAttri
 $('#menu-open').addEventListener('click',()=>{mm.hidden=false;$('#menu-open').setAttribute('aria-expanded','true');document.documentElement.style.overflow='hidden';$('#menu-close').focus();});
 $('#menu-close').addEventListener('click',closeMenu);
 $$('#mmenu nav a').forEach(a=>a.addEventListener('click',closeMenu));
+$$('.js-hello').forEach(a=>a.addEventListener('click',()=>setTimeout(()=>$('#f-name').focus({preventScroll:true}),reduce.matches?0:650)));
 $('#contact').addEventListener('submit',e=>{e.preventDefault();$('#form-note').textContent='Prototype only: this form isn’t connected yet, so nothing was sent.';});
 
 /* ---------- Stars: three depth layers, gentle twinkle ---------- */
