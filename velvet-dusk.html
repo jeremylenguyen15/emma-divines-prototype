@@ -656,7 +656,7 @@ $$('[data-stars]').forEach((el,si)=>{
   }).join('');
 });
 
-/* ---------- Northern-lights shader (tiny WebGL, no library) ---------- */
+/* ---------- Breathing dusk-sky shader (tiny WebGL, no library) ---------- */
 (()=>{
   const canvas=$('#aurora'), hero=$('.hero');
   const gl=canvas.getContext('webgl',{antialias:false,depth:false,powerPreference:'low-power'});
@@ -667,26 +667,22 @@ $$('[data-stars]').forEach((el,si)=>{
   float vn(vec2 p){vec2 i=floor(p),f=fract(p);vec2 u=f*f*(3.-2.*f);
     return mix(mix(hs(i),hs(i+vec2(1.,0.)),u.x),mix(hs(i+vec2(0.,1.)),hs(i+vec2(1.,1.)),u.x),u.y);}
   float fbm(vec2 p){float v=0.,a=.5;for(int i=0;i<4;i++){v+=a*vn(p);p=p*2.03+vec2(1.7,9.2);a*=.5;}return v;}
-  // one aurora curtain: a rippling lower edge with rays rising from it
-  vec3 curtain(vec2 uv,float asp,float base,float amp,float sp,float sd,vec3 lo,vec3 hi,float k){
-    float x=uv.x*asp;
-    float yc=base+amp*(fbm(vec2(x*.45+sd,T*sp))-.5)*2.+.025*sin(x*1.7+T*sp*5.+sd);
-    float d=uv.y+O-yc;   /* O = scroll parallax offset: the lights lag behind the page */
-    /* vertical rays: noise that varies across x only, so it streaks straight up */
-    float rays=.35+.65*pow(vn(vec2(x*14.+sd*3.,T*sp*3.))*.75+vn(vec2(x*33.+sd,T*sp*5.))*.25,1.6);
-    float rise=exp(-max(d,0.)/(.18+.07*sin(x*.8+sd+T*.05)));
-    float edge=exp(-pow(d/.02,2.))*.4;   /* the bright lower hem of the curtain */
-    float a=(smoothstep(-.04,.004,d)*rise+edge)*rays*k*(.8+.2*sin(x*11.+T*.9+sd*4.));
-    return mix(lo,hi,clamp(d/.22,0.,1.))*a;}
   void main(){vec2 uv=gl_FragCoord.xy/R;float asp=R.x/R.y;float y=uv.y;
     vec3 col=y<.33?mix(G0,G1,y/.33):y<.66?mix(G1,G2,(y-.33)/.33):mix(G2,G3,(y-.66)/.34);
-    for(int i=0;i<4;i++){float fi=float(i);vec2 p=P[i]+vec2(sin(T*(.07+.02*fi)+fi*1.7),cos(T*(.05+.03*fi)+fi))*.07;
-      vec2 d=uv-p;d.x*=asp;col=mix(col,C[i],exp(-dot(d,d)/S[i])*A[i]);}
-    vec3 au=curtain(uv,asp,.60,.07,.018,1.3,vec3(.953,.788,.851),vec3(.792,.576,.702),.85)   /* #F3C9D9 → #CA93B3 */
-           +curtain(uv,asp,.71,.06,.013,4.1,vec3(.859,.718,.675),vec3(.792,.576,.702),.55)   /* #DBB7AC → #CA93B3 */
-           +curtain(uv,asp,.82,.05,.022,7.7,vec3(.965,.894,.925),vec3(.659,.388,.549),.3);  /* #F6E4EC → #A8638C */
-    au*=mix(.6,1.,smoothstep(.05,.75,uv.x))*smoothstep(.35,.6,y+O);
-    col=1.-(1.-col)*(1.-clamp(au,0.,1.));
+    /* the original soft glows, now slowly breathing: each swells and fades on its own long cycle */
+    for(int i=0;i<4;i++){float fi=float(i);
+      vec2 p=P[i]+vec2(sin(T*(.07+.02*fi)+fi*1.7),cos(T*(.05+.03*fi)+fi))*.07;p.y-=O;
+      float breathe=.8+.2*sin(T*(.34+.06*fi)+fi*1.9);
+      vec2 d=uv-p;d.x*=asp;col=mix(col,C[i],exp(-dot(d,d)/(S[i]*(1.+.16*sin(T*(.26+.04*fi)+fi*2.3))))*A[i]*breathe);}
+    /* faint nebula clouds drifting through the upper sky, in the same rose and mauve */
+    vec2 q=vec2(uv.x*asp,uv.y+O)*1.8;
+    vec2 w=vec2(fbm(q+vec2(T*.010,0.)),fbm(q+vec2(5.2,1.3)-vec2(0.,T*.008)));
+    float n=fbm(q+1.6*w+vec2(T*.006,-T*.004));
+    float cloud=smoothstep(.38,.82,n)*smoothstep(.25,.65,y+O)*(.7+.3*sin(T*.4));
+    col=mix(col,mix(vec3(.792,.576,.702),vec3(.953,.788,.851),w.x),cloud*.32);   /* #CA93B3 → #F3C9D9 */
+    /* the faint light band from before */
+    float x=uv.x*asp;float bw=.74-O+.05*sin(x*2.6+T*.18)+.03*sin(x*6.1-T*.27);
+    col+=vec3(.953,.788,.851)*exp(-pow((y-bw)/.07,2.))*(.55+.45*sin(x*3.7+T*.31))*.08;
     col=mix(col,G0,smoothstep(.08,0.,y));   /* land exactly on #DBB7AC so the hero melts into the next section */
     col+=(hs(gl_FragCoord.xy+fract(T))-.5)/160.;
     gl_FragColor=vec4(col,1.);}`;
@@ -702,7 +698,7 @@ $$('[data-stars]').forEach((el,si)=>{
   ['G0','G1','G2','G3'].forEach((k,i)=>gl.uniform3fv(U[k],hx(G[i])));
   gl.uniform3fv(U.C,new Float32Array(GL.flatMap(g=>hx(g[0]))));gl.uniform2fv(U.P,new Float32Array(GL.flatMap(g=>[g[1],g[2]])));
   gl.uniform1fv(U.A,new Float32Array(GL.map(g=>g[3])));gl.uniform1fv(U.S,new Float32Array(GL.map(g=>g[4])));
-  let raf=0,visible=true;const t0=performance.now(), SCALE=.5; // soft by nature: render small, let CSS upscale
+  let raf=0,visible=true;const t0=performance.now(), SCALE=.35; // soft by nature: render small, let CSS upscale
   function frame(now,once){gl.uniform2f(U.R,canvas.width,canvas.height);gl.uniform1f(U.T,(now-t0)/1000*.8+40.);gl.drawArrays(gl.TRIANGLES,0,3);
     if(once===true)return;raf=(!reduce.matches&&visible&&!document.hidden)?requestAnimationFrame(frame):0;}
   function start(){if(!raf&&!reduce.matches)raf=requestAnimationFrame(frame);}
