@@ -6,17 +6,17 @@ Emma chose the **Velvet Dusk** direction.
 
 | File | What it is |
 |---|---|
-| `velvet-dusk.html` | The full homepage in the chosen direction (start here) |
-| `index.html` | The earlier explorer comparing directions A · Midnight Aurora, B · Velvet Dusk, C · Moonlit Blush (`#a` / `#b` / `#c`) |
-| `logo_white.png`, `logo_color.png` | Emma's logo, taken from the live site (white version generated for dark backgrounds) |
+| `index.html` | The full homepage in the chosen direction (start here) |
+| `explore.html` | The earlier explorer comparing directions A · Midnight Aurora, B · Velvet Dusk, C · Moonlit Blush (`#a` / `#b` / `#c`) |
+| `logo_white.png`, `logo_color.png` | Emma's logo, taken from the live site (white version generated for dark backgrounds). The pages embed copies so they never break. |
 
 ## Run it
 
-No build step and no dependencies. Open `velvet-dusk.html` in a browser, or serve the folder:
+No build step and no dependencies. Open `index.html` in a browser, or serve the folder:
 
 ```sh
 python3 -m http.server 8000
-# then open http://localhost:8000/velvet-dusk.html
+# then open http://localhost:8000
 ```
 
 ## What's in it
