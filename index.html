@@ -390,6 +390,9 @@ dialog[open]{animation:pop .35s cubic-bezier(.2,1.1,.3,1)}
   .cards .card:hover,.cards .card.flipped{translate:none}
   .cards .card:hover .tilt,.cards .card.flipped .tilt{rotate:none}
   .card:not(.is-front){pointer-events:none}
+  .card.is-front{cursor:grab;touch-action:pan-y;user-select:none;-webkit-user-select:none}
+  .card img{-webkit-user-drag:none;user-drag:none;-webkit-touch-callout:none;pointer-events:none}
+  .card.is-front:active{cursor:grabbing}
   .card.is-hidden{opacity:0}
   .deck-hint{display:flex;align-self:center;gap:8px;font:500 13px/1 var(--f-body);color:var(--plum);margin-top:4px}
   .pager{display:none!important}
@@ -700,7 +703,7 @@ $$('a[data-tab]').forEach(a=>a.addEventListener('click',e=>{e.preventDefault();c
 /* ---------- Card markup ---------- */
 function artHTML(i,h,o){
   const c=o&&ART_FOR[o.n]&&CLAIR[ART_FOR[o.n]];
-  if(c)return `<div class="art art-img"${h?` style="flex:0 0 ${h}px"`:''}><img src="images/card-${c}.jpg" alt="" loading="lazy"></div>`;
+  if(c)return `<div class="art art-img"${h?` style="flex:0 0 ${h}px"`:''}><img src="images/card-${c}.jpg" alt="" loading="lazy" draggable="false"></div>`;
   const spots=[[50,50,22],[74,26,10],[28,74,7],[80,72,5]].slice(0,[2,3,4,3][i%4]);
   return `<div class="art" style="background:linear-gradient(${ART_FROM[i%4]},${ART_TO[i%4]})${h?';flex:0 0 '+h+'px':''}"><svg viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
     <circle cx="50" cy="50" r="40" fill="none" stroke="#F6E4EC" stroke-width=".7" stroke-dasharray="212 40" transform="rotate(${100+i*23} 50 50)" opacity=".85"/>
@@ -751,15 +754,18 @@ function applyDeck(initial){
     setFinal(c,x,y,r);c.style.zIndex=n-p;c.classList.toggle('is-front',p===0);c.classList.toggle('is-hidden',p>=4);
     if(initial){c.style.setProperty('--i',Math.min(n,4)-1-Math.min(p,3));c.style.setProperty('--dx',(-x)+'px');c.style.setProperty('--dy','60px');c.style.setProperty('--dr',(-r)+'deg');}});
 }
+// Deck card leaves to one side, then fades back in at the bottom of the deck
+function flyOut(c,dir,dy=0){
+  state.busy=true;c.classList.add('dealt');c.classList.remove('flipped');
+  c.style.transition='translate .38s cubic-bezier(.3,.6,.4,1),rotate .38s ease-out,opacity .38s ease-in,scale .2s';
+  c.style.scale='';c.style.translate=`${dir*Math.round(innerWidth*1.1)}px ${Math.round(dy*.4-20)}px`;c.style.rotate=`${dir*28}deg`;c.style.opacity='0';
+  setTimeout(()=>{c.style.transition='none';c.style.translate='';c.style.rotate='';
+    state.order.push(state.order.shift());applyDeck(false);
+    requestAnimationFrame(()=>requestAnimationFrame(()=>{c.style.transition='';c.style.opacity='';state.busy=false;}));},400);
+}
 function nextCard(){
   if(state.mode!=='deck'||state.busy||cardsEl.children.length<2)return;
-  state.busy=true;const front=cardsEl.children[state.order[0]];
-  front.classList.remove('flipped');front.classList.add('dealt','toss');
-  const done=e=>{if(e.animationName!=='toss')return;front.removeEventListener('animationend',done);
-    front.style.transition='none';front.classList.remove('toss');front.style.opacity='0';
-    state.order.push(state.order.shift());applyDeck(false);
-    requestAnimationFrame(()=>requestAnimationFrame(()=>{front.style.transition='';front.style.opacity='';state.busy=false;}));};
-  front.addEventListener('animationend',done);
+  flyOut(cardsEl.children[state.order[0]],-1,0);
 }
 $('#deck-next').addEventListener('click',nextCard);
 function toggleFlip(card){const was=card.classList.contains('flipped');$$('.card.flipped',cardsEl).forEach(c=>c.classList.remove('flipped'));if(!was)card.classList.add('flipped');}
@@ -767,12 +773,34 @@ cardsEl.addEventListener('click',e=>{if(state.mode==='deck'||e.target.closest('a
 cardsEl.addEventListener('keydown',e=>{
   if((e.key==='Enter'||e.key===' ')&&e.target.classList.contains('card')){e.preventDefault();toggleFlip(e.target);}
   if(state.mode==='deck'&&e.key==='ArrowRight')nextCard();});
-let sx=0,sy=0;
-cardsEl.addEventListener('pointerdown',e=>{sx=e.clientX;sy=e.clientY;});
-cardsEl.addEventListener('pointerup',e=>{
-  if(state.mode!=='deck')return;const dx=e.clientX-sx, dy=e.clientY-sy;
-  if(Math.abs(dx)>40&&Math.abs(dx)>Math.abs(dy))return nextCard();
-  if(e.target.closest('a'))return;const c=e.target.closest('.card.is-front');if(c&&Math.abs(dx)<8)toggleFlip(c);});
+// Tinder-style drag: the front card sticks to the finger, flings away or springs back; a tap flips it
+let drag=null;
+cardsEl.addEventListener('dragstart',e=>e.preventDefault());
+cardsEl.addEventListener('pointerdown',e=>{
+  if(state.mode!=='deck'||state.busy||drag)return;
+  const c=e.target.closest('.card.is-front');if(!c||e.target.closest('a'))return;
+  const r=c.getBoundingClientRect(),now=performance.now();
+  drag={c,id:e.pointerId,x0:e.clientX,y0:e.clientY,dx:0,dy:0,vx:0,lx:e.clientX,lt:now,moved:false,pivot:e.clientY<r.top+r.height/2?1:-1};
+  c.classList.add('dealt');c.setPointerCapture(e.pointerId);c.style.transition='scale .2s';c.style.scale='1.03';
+});
+cardsEl.addEventListener('pointermove',e=>{
+  if(!drag||e.pointerId!==drag.id)return;
+  const now=performance.now();drag.dx=e.clientX-drag.x0;drag.dy=e.clientY-drag.y0;
+  drag.vx=(e.clientX-drag.lx)/Math.max(1,now-drag.lt);drag.lx=e.clientX;drag.lt=now;
+  if(Math.abs(drag.dx)>6||Math.abs(drag.dy)>6)drag.moved=true;
+  drag.c.style.translate=`${drag.dx}px ${drag.dy*.35}px`;drag.c.style.rotate=`${(drag.dx*.07*drag.pivot).toFixed(2)}deg`;
+});
+function endDrag(e,cancelled){
+  if(!drag||e.pointerId!==drag.id)return;const d=drag,c=d.c;drag=null;
+  if(!cancelled&&!d.moved){c.style.transition='';c.style.scale='';c.style.translate='';c.style.rotate='';toggleFlip(c);return;}
+  const fling=Math.abs(d.dx)>90||(Math.abs(d.vx)>.45&&Math.abs(d.dx)>25);
+  if(!cancelled&&fling&&cardsEl.children.length>1)return flyOut(c,Math.sign(d.dx||d.vx),d.dy);
+  c.style.transition='translate .5s cubic-bezier(.2,1.5,.4,1),rotate .5s cubic-bezier(.2,1.5,.4,1),scale .25s';
+  c.style.translate='0px 0px';c.style.rotate='0deg';c.style.scale='';
+  setTimeout(()=>{if(drag&&drag.c===c)return;c.style.transition='';c.style.translate='';c.style.rotate='';},520);
+}
+cardsEl.addEventListener('pointerup',e=>endDrag(e,false));
+cardsEl.addEventListener('pointercancel',e=>endDrag(e,true));
 if(matchMedia('(hover:hover) and (pointer:fine)').matches){
   cardsEl.addEventListener('pointermove',e=>{const c=e.target.closest('.card');if(!c||reduce.matches)return;
     const r=c.getBoundingClientRect(),x=(e.clientX-r.left)/r.width,y=(e.clientY-r.top)/r.height,t=c.firstElementChild;

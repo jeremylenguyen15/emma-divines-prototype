@@ -21,7 +21,7 @@ python3 -m http.server 8000
 
 ## What's in it
 
-- **Tarot-card offerings above the fold.** Cards are dealt in on load, tilt toward the cursor, and flip to show the description, price and a Book button (Calendly). On desktop they sit in a fanned spread; tabs with more than four sessions are dealt in sets of four. On phones they become a swipeable deck.
+- **Tarot-card offerings above the fold.** Cards are dealt in on load, tilt toward the cursor, and flip to show the description, price and a Book button (Calendly). On desktop they sit in a fanned spread; tabs with more than four sessions are dealt in sets of four. On phones they become a swipeable deck: the front card sticks to your finger like Tinder, flings away past a threshold (or with a quick flick) and springs back otherwise; a tap flips it.
 - **Card art.** Each session card shows one of Emma's six "clair" illustrations (clairvoyance, clairsentience, clairaudience, clairalience, clairgustance, claircognizance) in an arched window, matched to the session in `ART_FOR`. The images are cropped from a single sheet she sent, so ask for the individual full-size originals before launch.
 - **Draw a card.** When the section scrolls into view, three cards fall from the sky flipping side over side (purple back, cream moon face), then land in a spread with a sparkle burst. Pick one to get a suggested session; reshuffling drops them again.
 - **Breathing dusk sky.** A small hand-written WebGL shader (0.35× resolution) slowly swells and fades the soft glows and drifts faint nebula clouds through the sky, all in the existing palette. It pauses when off-screen and falls back to a CSS gradient.
