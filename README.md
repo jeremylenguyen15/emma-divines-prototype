@@ -46,6 +46,6 @@ These come from Emma's brand guide:
 
 - Emma's bio (the hero headshot, Meet Emma photo and gallery photos are from her Instagram, at screen resolution; swap in originals for launch)
 - Descriptions for the Mediumship, Reiki and Classes sessions, and the FAQ answers (marked "draft" on the page)
-- Social links, and the contact form isn't connected to anything
+- The contact form isn't connected to anything
 
 Production target is WordPress with Elementor Pro. This prototype is a reference for look, motion and behaviour, not drop-in theme code.
