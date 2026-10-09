@@ -75,12 +75,17 @@ h2 em{font-style:italic;color:var(--mauve)}
 .hero-bg{position:absolute;inset:0;z-index:-1;overflow:hidden;background:linear-gradient(#2A1830,#693F6A 38%,#A8638C 75%,#DBB7AC)}
 #aurora{position:absolute;inset:0;width:100%;height:100%;display:block}
 .stars{position:absolute;inset:0;pointer-events:none}
-.star{position:absolute;color:#fff;opacity:var(--o);animation:twinkle var(--t) ease-in-out var(--d) infinite alternate}
-@keyframes twinkle{from{opacity:calc(var(--o) * .2);scale:.55}to{opacity:var(--o);scale:1}}
+.layer{position:absolute;left:0;right:0;will-change:transform}
+.star,.dot{position:absolute;opacity:var(--o);animation:twinkle var(--t) ease-in-out var(--d) infinite}
+.star{color:#fff}
+.dot{border-radius:50%;background:#fff;box-shadow:0 0 6px rgba(255,240,246,.7)}
+.layer:last-child .star{filter:drop-shadow(0 0 4px rgba(255,228,240,.75))}
+/* a slow, shallow breathe rather than a blink */
+@keyframes twinkle{0%,100%{opacity:var(--o)}50%{opacity:calc(var(--o) * .45)}}
 .hero-inner{display:grid;grid-template-columns:470px minmax(0,1fr);column-gap:20px;align-items:start;padding-top:200px}
 .copy{display:flex;flex-direction:column;gap:24px}
 .hero .eyebrow{color:#F1D9D0}
-h1{font:400 54px/1.06 var(--f-display);margin:0;color:#FFF6F3;letter-spacing:-.005em}
+h1{font:400 54px/1.06 var(--f-display);margin:0;color:#FFF6F3;letter-spacing:-.005em;text-shadow:0 2px 28px rgba(42,24,48,.35)}
 h1 em{font-style:italic;color:var(--rose-light)}
 .byline{display:flex;align-items:center;gap:14px}
 .byline p{margin:0;font-size:17px;line-height:1.45;color:var(--on-dark);max-width:420px}
@@ -149,6 +154,10 @@ section.band{padding-block:112px}
 .step p{margin:0;font-size:15px;line-height:1.55;color:var(--ink-soft);max-width:280px}
 
 .draw{position:relative;isolation:isolate;overflow:hidden;color:var(--on-dark);background:linear-gradient(#2A1830,#693F6A 60%,#A8638C)}
+.draw::before{content:"";position:absolute;inset:-20% -10%;z-index:-1;pointer-events:none;
+  background:radial-gradient(42% 24% at 28% 26%,rgba(243,201,217,.2),transparent 70%),radial-gradient(36% 20% at 74% 18%,rgba(202,147,179,.18),transparent 70%);
+  animation:drift 28s ease-in-out infinite alternate}
+@keyframes drift{to{transform:translate3d(4%,3%,0) scale(1.08)}}
 .draw .eyebrow{color:#F1D9D0}
 .draw h2{color:#FFF6F3}.draw h2 em{color:var(--rose-light)}
 .draw .lede{color:var(--on-dark);opacity:.85}
@@ -292,7 +301,7 @@ dialog[open]{animation:pop .35s cubic-bezier(.2,1.1,.3,1)}
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
   .card{animation:fade .4s ease both}@keyframes fade{from{opacity:0}}
-  .front::after,.star{animation:none}
+  .front::after,.star,.dot,.draw::before{animation:none}
   .flip{transition-duration:.35s}
 }
 </style>
@@ -629,44 +638,71 @@ $('#menu-close').addEventListener('click',closeMenu);
 $$('#mmenu nav a').forEach(a=>a.addEventListener('click',closeMenu));
 $('#contact').addEventListener('submit',e=>{e.preventDefault();$('#form-note').textContent='Prototype only: this form isn’t connected yet, so nothing was sent.';});
 
-/* ---------- Stars ---------- */
+/* ---------- Stars: three depth layers, gentle twinkle ---------- */
+// k = how much the layer lags the page on scroll (far dust lags most, so it reads as distant)
+const LAYERS=[{k:.55,kind:'dot',share:.55,min:1.2,max:2.4,o:[.25,.6]},{k:.3,kind:'star',share:.33,min:3,max:5.5,o:[.35,.7]},{k:.12,kind:'star',share:.12,min:6,max:9,o:[.55,.85]}];
 $$('[data-stars]').forEach((el,si)=>{
   const [dn,mn]=el.dataset.stars.split(',').map(Number), top=+el.dataset.top, span=+el.dataset.span;
   let seed=11+si*7;const rnd=()=>{seed=(seed*9301+49297)%233280;return seed/233280;};
-  const n=desktopMQ.matches?dn:mn;let h='';
-  for(let i=0;i<n;i++){const s=3+rnd()*6;h+=`<svg class="star" style="left:${(rnd()*100).toFixed(2)}%;top:${(top+rnd()*span).toFixed(2)}%;width:${s.toFixed(1)}px;height:${s.toFixed(1)}px;--o:${(.3+rnd()*.5).toFixed(2)};--t:${(2.5+rnd()*3.5).toFixed(2)}s;--d:${(-rnd()*5).toFixed(2)}s"><use href="#sp"/></svg>`;}
-  el.innerHTML=h;
+  const n=(desktopMQ.matches?dn:mn)*2;
+  el.innerHTML=LAYERS.map(L=>{
+    const cnt=Math.round(n*L.share), extra=L.k*100;let h='';
+    for(let i=0;i<cnt;i++){
+      const sz=L.min+rnd()*(L.max-L.min), ys=top-extra*.5+rnd()*(span+extra*.5), y=(ys+extra)/(100+extra)*100;
+      const st=`left:${(rnd()*100).toFixed(2)}%;top:${y.toFixed(2)}%;width:${sz.toFixed(1)}px;height:${sz.toFixed(1)}px;--o:${(L.o[0]+rnd()*(L.o[1]-L.o[0])).toFixed(2)};--t:${(5+rnd()*6).toFixed(2)}s;--d:${(-rnd()*10).toFixed(2)}s`;
+      h+=L.kind==='dot'?`<i class="dot" style="${st}"></i>`:`<svg class="star" style="${st}"><use href="#sp"/></svg>`;}
+    // the layer is taller than its section by k, so it never runs out of sky while it lags behind
+    return `<div class="layer" data-k="${L.k}" style="top:${-extra}%;height:${100+extra}%">${h}</div>`;
+  }).join('');
 });
 
-/* ---------- Aurora shader (tiny WebGL, no library) ---------- */
+/* ---------- Northern-lights shader (tiny WebGL, no library) ---------- */
 (()=>{
   const canvas=$('#aurora'), hero=$('.hero');
   const gl=canvas.getContext('webgl',{antialias:false,depth:false,powerPreference:'low-power'});
   if(!gl){canvas.remove();return;}
   const fs=`precision mediump float;
-  uniform vec2 R;uniform float T;uniform vec3 G0,G1,G2,G3,BC;uniform vec3 C[4];uniform vec2 P[4];uniform float A[4];uniform float S[4];uniform float BAND;
-  float h(vec2 p){return fract(sin(dot(p,vec2(12.9898,78.233)))*43758.5453);}
+  uniform vec2 R;uniform float T;uniform float O;uniform vec3 G0,G1,G2,G3;uniform vec3 C[4];uniform vec2 P[4];uniform float A[4];uniform float S[4];
+  float hs(vec2 p){p=fract(p*vec2(123.34,456.21));p+=dot(p,p+45.32);return fract(p.x*p.y);}
+  float vn(vec2 p){vec2 i=floor(p),f=fract(p);vec2 u=f*f*(3.-2.*f);
+    return mix(mix(hs(i),hs(i+vec2(1.,0.)),u.x),mix(hs(i+vec2(0.,1.)),hs(i+vec2(1.,1.)),u.x),u.y);}
+  float fbm(vec2 p){float v=0.,a=.5;for(int i=0;i<4;i++){v+=a*vn(p);p=p*2.03+vec2(1.7,9.2);a*=.5;}return v;}
+  // one aurora curtain: a rippling lower edge with rays rising from it
+  vec3 curtain(vec2 uv,float asp,float base,float amp,float sp,float sd,vec3 lo,vec3 hi,float k){
+    float x=uv.x*asp;
+    float yc=base+amp*(fbm(vec2(x*.45+sd,T*sp))-.5)*2.+.025*sin(x*1.7+T*sp*5.+sd);
+    float d=uv.y+O-yc;   /* O = scroll parallax offset: the lights lag behind the page */
+    /* vertical rays: noise that varies across x only, so it streaks straight up */
+    float rays=.35+.65*pow(vn(vec2(x*14.+sd*3.,T*sp*3.))*.75+vn(vec2(x*33.+sd,T*sp*5.))*.25,1.6);
+    float rise=exp(-max(d,0.)/(.18+.07*sin(x*.8+sd+T*.05)));
+    float edge=exp(-pow(d/.02,2.))*.4;   /* the bright lower hem of the curtain */
+    float a=(smoothstep(-.04,.004,d)*rise+edge)*rays*k*(.8+.2*sin(x*11.+T*.9+sd*4.));
+    return mix(lo,hi,clamp(d/.22,0.,1.))*a;}
   void main(){vec2 uv=gl_FragCoord.xy/R;float asp=R.x/R.y;float y=uv.y;
     vec3 col=y<.33?mix(G0,G1,y/.33):y<.66?mix(G1,G2,(y-.33)/.33):mix(G2,G3,(y-.66)/.34);
     for(int i=0;i<4;i++){float fi=float(i);vec2 p=P[i]+vec2(sin(T*(.07+.02*fi)+fi*1.7),cos(T*(.05+.03*fi)+fi))*.07;
       vec2 d=uv-p;d.x*=asp;col=mix(col,C[i],exp(-dot(d,d)/S[i])*A[i]);}
-    float x=uv.x*asp;float w=.74+.05*sin(x*2.6+T*.18)+.03*sin(x*6.1-T*.27);
-    col+=BC*exp(-pow((y-w)/.07,2.))*(.55+.45*sin(x*3.7+T*.31))*BAND;
-    col+=(h(gl_FragCoord.xy+fract(T))-.5)/160.;gl_FragColor=vec4(col,1.);}`;
+    vec3 au=curtain(uv,asp,.60,.07,.018,1.3,vec3(.953,.788,.851),vec3(.792,.576,.702),.85)   /* #F3C9D9 → #CA93B3 */
+           +curtain(uv,asp,.71,.06,.013,4.1,vec3(.859,.718,.675),vec3(.792,.576,.702),.55)   /* #DBB7AC → #CA93B3 */
+           +curtain(uv,asp,.82,.05,.022,7.7,vec3(.965,.894,.925),vec3(.659,.388,.549),.3);  /* #F6E4EC → #A8638C */
+    au*=mix(.6,1.,smoothstep(.05,.75,uv.x))*smoothstep(.35,.6,y+O);
+    col=1.-(1.-col)*(1.-clamp(au,0.,1.));
+    col=mix(col,G0,smoothstep(.08,0.,y));   /* land exactly on #DBB7AC so the hero melts into the next section */
+    col+=(hs(gl_FragCoord.xy+fract(T))-.5)/160.;
+    gl_FragColor=vec4(col,1.);}`;
   const sh=(t,src)=>{const s=gl.createShader(t);gl.shaderSource(s,src);gl.compileShader(s);return gl.getShaderParameter(s,gl.COMPILE_STATUS)?s:null;};
   const v=sh(gl.VERTEX_SHADER,'attribute vec2 p;void main(){gl_Position=vec4(p,0.,1.);}'),f=sh(gl.FRAGMENT_SHADER,fs);
   if(!v||!f){canvas.remove();return;}
   const prog=gl.createProgram();gl.attachShader(prog,v);gl.attachShader(prog,f);gl.linkProgram(prog);gl.useProgram(prog);
   gl.bindBuffer(gl.ARRAY_BUFFER,gl.createBuffer());gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,3,-1,-1,3]),gl.STATIC_DRAW);
   const loc=gl.getAttribLocation(prog,'p');gl.enableVertexAttribArray(loc);gl.vertexAttribPointer(loc,2,gl.FLOAT,false,0,0);
-  const U={};['R','T','G0','G1','G2','G3','BC','C','P','A','S','BAND'].forEach(k=>U[k]=gl.getUniformLocation(prog,k));
+  const U={};['R','T','O','G0','G1','G2','G3','C','P','A','S'].forEach(k=>U[k]=gl.getUniformLocation(prog,k));
   const hx=c=>[1,3,5].map(k=>parseInt(c.slice(k,k+2),16)/255);
   const G=['#DBB7AC','#A8638C','#693F6A','#2A1830'], GL=[['#CA93B3',.68,.5,.35,.1],['#C08977',.1,.12,.3,.1],['#F3C9D9',.85,.78,.12,.05],['#000000',0,0,0,.1]];
   ['G0','G1','G2','G3'].forEach((k,i)=>gl.uniform3fv(U[k],hx(G[i])));
-  gl.uniform3fv(U.BC,hx('#F3C9D9'));gl.uniform1f(U.BAND,.08);
   gl.uniform3fv(U.C,new Float32Array(GL.flatMap(g=>hx(g[0]))));gl.uniform2fv(U.P,new Float32Array(GL.flatMap(g=>[g[1],g[2]])));
   gl.uniform1fv(U.A,new Float32Array(GL.map(g=>g[3])));gl.uniform1fv(U.S,new Float32Array(GL.map(g=>g[4])));
-  let raf=0,visible=true;const t0=performance.now(), SCALE=.35;
+  let raf=0,visible=true;const t0=performance.now(), SCALE=.5; // soft by nature: render small, let CSS upscale
   function frame(now,once){gl.uniform2f(U.R,canvas.width,canvas.height);gl.uniform1f(U.T,(now-t0)/1000*.8+40.);gl.drawArrays(gl.TRIANGLES,0,3);
     if(once===true)return;raf=(!reduce.matches&&visible&&!document.hidden)?requestAnimationFrame(frame):0;}
   function start(){if(!raf&&!reduce.matches)raf=requestAnimationFrame(frame);}
@@ -675,8 +711,24 @@ $$('[data-stars]').forEach((el,si)=>{
   new IntersectionObserver(([e])=>{visible=e.isIntersecting;if(visible)start();}).observe(hero);
   document.addEventListener('visibilitychange',()=>{if(!document.hidden)start();});
   reduce.addEventListener('change',()=>{if(!reduce.matches)start();});
+  window.setAuroraOffset=o=>{gl.uniform1f(U.O,o);if(!raf)frame(performance.now(),true);};
   resize();start();
 })();
+
+/* ---------- Parallax: star layers and the aurora lag behind the page ---------- */
+const para=$$('.layer').map(l=>({l,k:+l.dataset.k,host:l.closest('section,footer')}));
+const heroEl=$('.hero');let pt=0;
+function parallax(){
+  pt=0;const vh=innerHeight;
+  if(reduce.matches){para.forEach(p=>p.l.style.transform='');window.setAuroraOffset&&setAuroraOffset(0);return;}
+  for(const p of para){const r=p.host.getBoundingClientRect();if(r.bottom<-80||r.top>vh+80)continue;
+    p.l.style.transform=`translate3d(0,${(-r.top*p.k).toFixed(1)}px,0)`;}
+  const hr=heroEl.getBoundingClientRect();
+  if(window.setAuroraOffset&&hr.bottom>0)setAuroraOffset(-hr.top*.35/hr.height);
+}
+addEventListener('scroll',()=>{if(!pt)pt=requestAnimationFrame(parallax);},{passive:true});
+addEventListener('resize',parallax);reduce.addEventListener('change',parallax);
+parallax();
 
 desktopMQ.addEventListener('change',()=>{state.page=0;render();});
 render();

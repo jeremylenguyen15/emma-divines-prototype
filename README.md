@@ -23,7 +23,8 @@ python3 -m http.server 8000
 
 - **Tarot-card offerings above the fold.** Cards are dealt in on load, tilt toward the cursor, and flip to show the description, price and a Book button (Calendly). On desktop they sit in a fanned spread; tabs with more than four sessions are dealt in sets of four. On phones they become a swipeable deck.
 - **Draw a card.** Pick one of three card backs to get a suggested session.
-- **Aurora background.** A small hand-written WebGL shader rendered at 0.35× resolution. It pauses when off-screen and falls back to a CSS gradient.
+- **Northern-lights background.** A small hand-written WebGL shader draws rippling aurora curtains with rising rays, in the existing palette, at 0.5× resolution. It pauses when off-screen and falls back to a CSS gradient.
+- **Parallax stars.** Three depth layers (far dust, mid and near sparkles) lag behind the page at different speeds as you scroll, with a slow, shallow twinkle. The aurora drifts with the scroll too.
 - **Every homepage section from the wireframe:** how it works, meet Emma, reviews, FAQ, and a footer with a contact form.
 - **Reduced motion:** cards fade in, sparkles stop twinkling, and the aurora stays still.
 
