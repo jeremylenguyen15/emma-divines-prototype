@@ -29,6 +29,7 @@ python3 -m http.server 8000
 - **Scroll reveals.** Headings, steps, cards, the photo, reviews, FAQs and footer columns fade and rise in as you reach them, with a slight stagger.
 - **Parallax stars.** Three depth layers (far dust, mid and near sparkles) lag behind the page at different speeds as you scroll, with a slow, shallow twinkle. The sky glows and clouds drift with the scroll too.
 - **Every homepage section from the wireframe:** how it works, meet Emma, reviews, FAQ, and a footer with a contact form.
+- **Events sheet.** "Events" in the menu opens a sheet with a 2×2 photo gallery (Emma's circles and performances, placeholders for now) beside her two events: the Artistry of Mediumship Tour and the Private Sacred Ceremony (in person, Sacramento).
 - **Category sheets.** Readings / Mediumship / Reiki / Classes in the header, mobile menu and footer open a sheet for that category: a photo of Emma doing that work (placeholder slots for now), a short intro, every session with price, description and Book. On phones it's a bottom sheet. Open one directly with `?sheet=Reiki`.
 - **Real Google reviews.** Seven reviews from Emma's Google profile (taken from the Trustindex widget on her current site), shown as first name + initial in a swipeable row with Read more. On WordPress, keep the Trustindex plugin so new reviews appear automatically, and style it to match.
 - **Life gallery ("A little more of me").** Four everyday-life photos from @emmadivines right after Meet Emma, with a Say hello button that jumps to the contact form.
@@ -47,6 +48,7 @@ These come from Emma's brand guide:
 
 - Emma's bio (the hero headshot, Meet Emma photo and gallery photos are from her Instagram, at screen resolution; swap in originals for launch)
 - Descriptions for the Mediumship, Reiki and Classes sessions, and the FAQ answers (marked "draft" on the page)
+- Emma's phone number (shown as (916) XXX-XXXX; replace `tel:+19160000000` and the text)
 - The contact form isn't connected to anything
 
 Production target is WordPress with Elementor Pro. This prototype is a reference for look, motion and behaviour, not drop-in theme code.
