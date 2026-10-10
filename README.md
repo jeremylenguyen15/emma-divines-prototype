@@ -48,7 +48,6 @@ These come from Emma's brand guide:
 
 - Emma's bio (the hero headshot, Meet Emma photo and gallery photos are from her Instagram, at screen resolution; swap in originals for launch)
 - Descriptions for the Mediumship, Reiki and Classes sessions, and the FAQ answers (marked "draft" on the page)
-- Emma's phone number (shown as (916) XXX-XXXX; replace `tel:+19160000000` and the text)
 - The contact form isn't connected to anything
 
 Production target is WordPress with Elementor Pro. This prototype is a reference for look, motion and behaviour, not drop-in theme code.
