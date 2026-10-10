@@ -324,6 +324,57 @@ dialog[open]{animation:pop .35s cubic-bezier(.2,1.1,.3,1)}
 .row a{font:600 13px/1 var(--f-body);padding:9px 14px;border-radius:999px;background:var(--deep-purple);color:#fff;text-decoration:none}
 .dlg-policy{font-size:13px;color:var(--ink-soft);margin:18px 0 0}
 
+/* ---------- Draw a card: Ask the cards (focus → fan of 22 Major Arcana → reading) ---------- */
+.dstep{display:flex;flex-direction:column;align-items:center;gap:22px;width:100%}
+.dstep[hidden]{display:none}
+.dstep.enter{animation:stepIn .6s cubic-bezier(.2,.8,.2,1) both}
+@keyframes stepIn{from{opacity:0;transform:translateY(18px)}}
+.step-title{font:400 32px/1.15 var(--f-display);color:#FFF6F3;margin:0;text-align:center;text-wrap:balance}
+.step-sub{margin:-10px 0 0;font-size:16px;color:var(--on-dark);opacity:.85;text-align:center}
+.focus-chips{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;max-width:780px}
+.fchip{display:inline-flex;align-items:center;gap:10px;padding:14px 22px;border-radius:999px;border:1px solid rgba(243,201,217,.55);color:#F6E4EC;font:500 16px/1 var(--f-body);transition:background-color .25s,color .25s,box-shadow .3s,transform .2s}
+.fchip svg{width:11px;height:11px;color:#F3C9D9}
+.fchip:hover{transform:translateY(-2px);border-color:#F3C9D9}
+.fchip[aria-pressed=true]{background:var(--cream);color:var(--plum);border-color:var(--cream);box-shadow:0 0 26px 2px rgba(202,147,179,.6)}
+.fchip[aria-pressed=true] svg{color:var(--mauve)}
+.shuffle-btn{margin-top:8px}
+.shuffle-btn:disabled{opacity:.45;cursor:default;transform:none}
+.pick-for{color:#F1D9D0}
+.fan{position:relative;width:100%;max-width:1060px;height:var(--fh,360px);margin-top:6px}
+.fcard{position:absolute;left:0;top:0;width:var(--cw);height:calc(var(--cw) * 1.6);padding:0;border-radius:calc(var(--cw) * .09);cursor:pointer;
+  background:radial-gradient(circle at 50% 45%,#7E4C80,#3A2140 75%);border:1px solid rgba(219,183,172,.65);box-shadow:0 8px 18px -6px rgba(0,0,0,.45);
+  transform:translate(var(--x),var(--y)) rotate(var(--r)) rotateY(0deg);transition:translate .3s cubic-bezier(.2,.8,.2,1),box-shadow .3s,opacity .45s}
+.fcard::before{content:"";position:absolute;inset:6%;border:1px solid rgba(219,183,172,.4);border-radius:calc(var(--cw) * .06)}
+.fcard::after{content:"";position:absolute;left:22%;right:22%;top:50%;aspect-ratio:1;translate:0 -50%;border:1px solid rgba(219,183,172,.55);border-radius:50%}
+.fcard svg{position:absolute;left:50%;top:50%;width:26%;height:26%;translate:-50% -50%;color:#F6E4EC}
+.fan.dealing .fcard{animation:fanIn .9s cubic-bezier(.2,.9,.3,1) calc(var(--i) * 35ms) both;pointer-events:none}
+@keyframes fanIn{from{transform:translate(var(--x0),-180px) rotate(0deg) rotateY(540deg);opacity:0}35%{opacity:1}to{transform:translate(var(--x),var(--y)) rotate(var(--r)) rotateY(0deg)}}
+@media (hover:hover) and (pointer:fine){.fcard:hover,.fcard:focus-visible{translate:0 -22px;box-shadow:0 0 0 1px #F3C9D9,0 0 30px 4px rgba(243,201,217,.6)}}
+.fcard:focus-visible{translate:0 -22px;outline:none;box-shadow:0 0 0 2px #F3C9D9,0 0 30px 4px rgba(243,201,217,.6)}
+.fan.picked .fcard:not(.chosen){opacity:0;translate:0 30px;pointer-events:none}
+.fan .fcard.chosen{translate:0 -48px;box-shadow:0 0 0 1px #F3C9D9,0 0 40px 8px rgba(243,201,217,.7)}
+.pick-meta{display:flex;gap:28px;align-items:center;font:500 14px/1 var(--f-body);color:var(--on-dark);opacity:.9}
+.link.light{color:#FFF6F3}
+.read-step{flex-direction:row;justify-content:center;align-items:center;gap:64px}
+.read-step .rcard{flex:none}
+.arc-face .inner{gap:10px;justify-content:center}
+.arc-num{font:400 18px/1 var(--f-display);letter-spacing:.2em;color:var(--mauve);padding-left:.2em}
+.arc-art{flex:1;width:100%;display:grid;place-items:center;border-radius:999px 999px 6px 6px;border:1px solid rgba(219,183,172,.6)}
+.arc-art svg{width:62%;height:auto;overflow:visible}
+.arc-name{font:700 24px/1.1 var(--f-display);color:var(--plum);margin:0}
+.reading{max-width:520px;display:flex;flex-direction:column;gap:16px;text-align:left}
+.for-chip{align-self:flex-start;padding:7px 14px;border-radius:999px;background:rgba(251,244,241,.15);font:500 13px/1 var(--f-body);color:#F6E4EC}
+.reading h3{font:400 52px/1.05 var(--f-display);color:#FFF6F3;margin:0}
+.reading .msg{font:italic 400 26px/1.35 var(--f-display);color:#FFF6F3;margin:0}
+.reading .kw{font-size:14px;color:#F3C9D9;margin:0}
+.reading hr{border:0;border-top:1px solid rgba(246,228,236,.25);margin:4px 0;width:100%}
+.reading .go{font:500 14px/1.3 var(--f-body);color:#F6E4EC;opacity:.9;margin:0}
+.sess{display:flex;align-items:center;gap:16px;padding:16px 16px 16px 20px;border-radius:18px;background:var(--cream)}
+.sess div{flex:1;min-width:0}.sess b{display:block;font:700 20px/1.2 var(--f-display);color:var(--plum)}.sess span{font-size:13px;color:var(--ink-soft)}
+.sess .btn{padding:11px 18px;font-size:14px;flex:none}
+.read-links{display:flex;gap:28px;flex-wrap:wrap}
+.draft-note{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#F3C9D9;opacity:.75;margin:0}
+
 /* ---------- Category sheet (opened from the nav: one category's sessions + a photo of Emma at work) ---------- */
 #cat{width:min(1000px,calc(100% - 32px));max-height:88vh;overflow:hidden}
 .cat-grid{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);height:min(88vh,720px)}
@@ -407,6 +458,15 @@ dialog[open]{animation:pop .35s cubic-bezier(.2,1.1,.3,1)}
   .cback{width:min(30vw,150px);height:auto;aspect-ratio:200/330}
   .cback .cb-label{font-size:8px;letter-spacing:.22em}
   .draw-stage{min-height:400px;margin-top:40px}
+  .step-title{font-size:26px}
+  .fchip{padding:12px 18px;font-size:15px}
+  .read-step{flex-direction:column;gap:28px}
+  .read-step .rcard{width:220px;height:346px}
+  .arc-name{font-size:20px}
+  .reading{gap:14px}
+  .reading h3{font-size:38px}
+  .reading .msg{font-size:21px}
+  .pick-meta{flex-direction:column;gap:14px}
   .emma-grid,.faq-grid{grid-template-columns:minmax(0,1fr);gap:40px}
   .arch{width:min(100%,360px);margin-inline:auto}
   .faq-side{position:static}
@@ -526,14 +586,21 @@ dialog[open]{animation:pop .35s cubic-bezier(.2,1.1,.3,1)}
   <div class="wrap">
     <div class="sec-head" data-reveal><p class="eyebrow"><svg><use href="#sp"/></svg>A little guidance</p>
       <h2>Not sure where to start? <em>Draw a card.</em></h2>
-      <p class="lede">Take a breath, think of your question, and choose the card that pulls you.</p></div>
-    <div class="draw-stage">
-      <div class="backs" id="backs">
-        <button class="cback" aria-label="Draw the first card"><span class="cb-face cb-back"><span class="inner"><svg><use href="#cardback"/></svg><span class="cb-label">Emma Divines</span></span></span><span class="cb-face cb-front" aria-hidden="true"><span class="inner"><svg><use href="#cardfront"/></svg><span class="cb-label">Emma Divines</span></span></span></button>
-        <button class="cback" aria-label="Draw the second card"><span class="cb-face cb-back"><span class="inner"><svg><use href="#cardback"/></svg><span class="cb-label">Emma Divines</span></span></span><span class="cb-face cb-front" aria-hidden="true"><span class="inner"><svg><use href="#cardfront"/></svg><span class="cb-label">Emma Divines</span></span></span></button>
-        <button class="cback" aria-label="Draw the third card"><span class="cb-face cb-back"><span class="inner"><svg><use href="#cardback"/></svg><span class="cb-label">Emma Divines</span></span></span><span class="cb-face cb-front" aria-hidden="true"><span class="inner"><svg><use href="#cardfront"/></svg><span class="cb-label">Emma Divines</span></span></span></button>
+      <p class="lede">Choose what’s on your heart, then pick from the 22 cards of the Major Arcana for a little guidance.</p></div>
+    <div class="draw-stage" id="drawStage">
+      <div class="dstep" id="step-focus">
+        <h3 class="step-title">What’s on your heart today?</h3>
+        <div class="focus-chips" role="group" aria-label="Choose a focus" id="focusChips"></div>
+        <button class="btn btn-light shuffle-btn" id="shuffleBtn" disabled>Shuffle the deck <svg class="sp"><use href="#sp"/></svg></button>
       </div>
-      <div class="reveal" id="reveal" hidden></div>
+      <div class="dstep" id="step-pick" hidden>
+        <p class="eyebrow pick-for" id="pickFor"></p>
+        <h3 class="step-title">Choose the card that calls to you</h3>
+        <p class="step-sub">Take a breath and hold your question in mind.</p>
+        <div class="fan" id="fan" aria-label="The 22 cards of the Major Arcana, face down"></div>
+        <div class="pick-meta"><span>22 cards · the Major Arcana</span><button class="link light js-refocus">← Change focus</button></div>
+      </div>
+      <div class="dstep read-step" id="step-read" hidden></div>
     </div>
   </div>
 </section>
@@ -810,50 +877,72 @@ if(matchMedia('(hover:hover) and (pointer:fine)').matches){
     const t=c.firstElementChild;t.style.removeProperty('--rx');t.style.removeProperty('--ry');});
 }
 
-/* ---------- Draw a card ---------- */
-const POOL=[OFFERS['Psychic Readings'][0],OFFERS['Psychic Readings'][1],OFFERS['Psychic Readings'][2],OFFERS['Psychic Readings'][3],OFFERS['Mediumship'][0],OFFERS['Reiki'][0],OFFERS['Classes'][0]];
-const backsEl=$('#backs'), revealEl=$('#reveal');
-backsEl.addEventListener('click',async e=>{
-  const b=e.target.closest('.cback');if(!b||backsEl.classList.contains('picking')||b.classList.contains('dropping'))return;
-  b.classList.add('picked');backsEl.classList.add('picking');
-  await wait(reduce.matches?0:450);
-  const k=Math.floor(Math.random()*POOL.length), o=POOL[k];
-  revealEl.innerHTML=`<div class="rcard flipped" id="rcard"><div class="flip">
-     <div class="face front"><div class="inner"><span class="chosen-tag">✦ The cards suggest</span>${artHTML(k,150,o)}${backHTML(o)}</div></div>
-     <div class="face back rv-back"><div class="inner" style="padding:0;position:relative"><svg><use href="#cardback"/></svg><span class="cb-label">Emma Divines</span></div></div></div></div>
-     <button class="link again" id="again">Shuffle and draw again <span class="arr">↻</span></button>`;
-  backsEl.hidden=true;revealEl.hidden=false;
-  requestAnimationFrame(()=>requestAnimationFrame(()=>$('#rcard').classList.remove('flipped')));
-  $('#again').addEventListener('click',()=>{revealEl.hidden=true;revealEl.innerHTML='';backsEl.hidden=false;
-    $$('.cback').forEach(c=>c.classList.remove('picked'));backsEl.classList.remove('picking');$('.cback').focus();
-    if(!reduce.matches){backsEl.classList.add('await');requestAnimationFrame(()=>requestAnimationFrame(dropCards));}});
+/* ---------- Draw a card: Ask the cards ---------- */
+// The 22 Major Arcana. Messages are DRAFTS for Emma to rewrite in her own words (one per focus).
+const ARC=[{"num": "0", "name": "The Fool", "kw": "New beginnings · Trust · Leap", "sym": "<path d='M14 74 H60 L72 88'/><path d='M40 74 C40 62 30 60 30 48'/><circle cx='70' cy='28' r='10'/><path d='M50 0C52.6 37 63 47.4 100 50 63 52.6 52.6 63 50 100 47.4 63 37 52.6 0 50 37 47.4 47.4 37 50 0Z' fill='currentColor' stroke='none' transform='translate(24.0 36.0) scale(0.12)'/>", "guide": "Something new is calling you. You don’t need the whole map, just the courage to take the first step.", "sess": "Quickie Reading", "love": "Love is asking you to be open. Something new could begin if you let your guard down a little.", "career": "A fresh start is possible. Take the first step, even if you can’t see the whole path yet.", "healing": "Give yourself permission to begin again. Healing doesn’t need a perfect plan.", "loved": "Your loved one wants you to keep living fully. They’re with you as you step into what’s next."}, {"num": "I", "name": "The Magician", "kw": "Manifestation · Focus · Power", "sym": "<path d='M20 50 C20 38 40 38 50 50 C60 62 80 62 80 50 C80 38 60 38 50 50 C40 62 20 62 20 50Z'/><path d='M50 62 V90'/><path d='M50 0C52.6 37 63 47.4 100 50 63 52.6 52.6 63 50 100 47.4 63 37 52.6 0 50 37 47.4 47.4 37 50 0Z' fill='currentColor' stroke='none' transform='translate(42.0 16.0) scale(0.16)'/>", "guide": "You already have what you need. Gather your energy, name what you want, and act on it.", "sess": "Classic Reading", "love": "You have more say in your love life than you think. Ask clearly for what you want.", "career": "You already have the skills you need. Focus your energy and make your move.", "healing": "Your healing starts with your intention. Decide how you want to feel, and begin.", "loved": "Signs from your loved one are around you. Notice the little things that feel like them."}, {"num": "II", "name": "The High Priestess", "kw": "Intuition · Stillness · Inner knowing", "sym": "<path d='M22 22 V88 M78 22 V88 M16 18 H28 M72 18 H84'/><path d='M58 38 A16 16 0 1 0 58 66 A12 12 0 1 1 58 38Z'/>", "guide": "The answer is already inside you. Get quiet enough to hear it.", "sess": "Intuitive Tarot Workshop", "love": "Your intuition already knows how you feel. Trust it more than the noise around you.", "career": "Before you decide, get quiet. The right direction will feel calm, not rushed.", "healing": "Rest and stillness are part of healing. Listen to what your body is telling you.", "loved": "Your loved one often reaches you in quiet moments. Notice what comes up when you’re still."}, {"num": "III", "name": "The Empress", "kw": "Nurture · Abundance · Self-care", "sym": "<circle cx='50' cy='42' r='16'/><path d='M50 58 V88 M38 74 H62'/><path d='M50 0C52.6 37 63 47.4 100 50 63 52.6 52.6 63 50 100 47.4 63 37 52.6 0 50 37 47.4 47.4 37 50 0Z' fill='currentColor' stroke='none' transform='translate(17.0 23.0) scale(0.1)'/><path d='M50 0C52.6 37 63 47.4 100 50 63 52.6 52.6 63 50 100 47.4 63 37 52.6 0 50 37 47.4 47.4 37 50 0Z' fill='currentColor' stroke='none' transform='translate(73.0 23.0) scale(0.1)'/>", "guide": "Tend to yourself the way you tend to everyone else. What you nourish will grow.", "sess": "Reiki Full Session", "love": "Love grows when it’s nurtured. Make space for warmth, comfort and being cared for.", "career": "Something you’ve been tending is ready to grow. Keep nourishing it.", "healing": "Be as gentle with yourself as you’d be with someone you love. You deserve that care.", "loved": "Their love is still wrapped around you. Let yourself feel held."}, {"num": "IV", "name": "The Emperor", "kw": "Structure · Stability · Boundaries", "sym": "<path d='M26 88 V46 H74 V88 M26 62 H74'/><path d='M34 36 L40 22 L50 32 L60 22 L66 36Z'/>", "guide": "This is a moment for steady footing. Clear boundaries will give you room to breathe.", "sess": "Classic Reading", "love": "Healthy love has healthy boundaries. It’s okay to ask for stability and respect.", "career": "Structure is your friend right now. A clear plan will move you forward.", "healing": "Boundaries are healing too. Protect your energy and your time.", "loved": "Your loved one wants you to feel safe and steady. They’re proud of how you’re holding things together."}, {"num": "V", "name": "The Hierophant", "kw": "Learning · Guidance · Tradition", "sym": "<path d='M30 30 L72 78 M70 30 L28 78'/><circle cx='26' cy='26' r='6'/><circle cx='74' cy='26' r='6'/><path d='M62 70 l9 -3 M38 70 l-9 -3'/>", "guide": "Seek out a teacher or a practice that grounds you. You’re ready to learn.", "sess": "Mentorship Session", "love": "Think about what commitment really means to you. Shared values matter here.", "career": "Learning from someone experienced will help. Look for a mentor or a course.", "healing": "A steady practice, like meditation or Reiki, will support your healing.", "loved": "Rituals can keep you close to them. Light a candle, tell a story, remember."}, {"num": "VI", "name": "The Lovers", "kw": "Love · Alignment · Choice", "sym": "<circle cx='40' cy='56' r='20'/><circle cx='60' cy='56' r='20'/><path d='M50 0C52.6 37 63 47.4 100 50 63 52.6 52.6 63 50 100 47.4 63 37 52.6 0 50 37 47.4 47.4 37 50 0Z' fill='currentColor' stroke='none' transform='translate(42.0 14.0) scale(0.16)'/>", "guide": "A heart-led choice is in front of you. Choose what aligns with who you’re becoming.", "sess": "Classic Reading", "love": "A meaningful connection is highlighted. Choose with your heart and your values.", "career": "Choose the path that feels aligned with who you are, not just what looks good.", "healing": "Make peace with every part of yourself. Self-love is the relationship that heals the rest.", "loved": "The love you shared doesn’t end. That bond is still very much alive."}, {"num": "VII", "name": "The Chariot", "kw": "Willpower · Momentum · Direction", "sym": "<path d='M24 42 H76 M30 42 V70 H70 V42'/><circle cx='34' cy='80' r='8'/><circle cx='66' cy='80' r='8'/><path d='M50 0C52.6 37 63 47.4 100 50 63 52.6 52.6 63 50 100 47.4 63 37 52.6 0 50 37 47.4 47.4 37 50 0Z' fill='currentColor' stroke='none' transform='translate(43.0 19.0) scale(0.14)'/>", "guide": "You’re moving forward. Hold the reins with confidence and keep going.", "sess": "Quickie Reading", "love": "Go after what you want in love with confidence. You can clear up the mixed signals.", "career": "Momentum is on your side. Stay focused and keep driving forward.", "healing": "You’re moving through this. Keep going, one steady step at a time.", "loved": "Your loved one is cheering you on as you move forward. Keep going, for them too."}, {"num": "VIII", "name": "Strength", "kw": "Courage · Compassion · Resilience", "sym": "<path d='M34 26 C34 20 44 20 50 26 C56 32 66 32 66 26 C66 20 56 20 50 26 C44 32 34 32 34 26Z'/><path d='M50 88 C30 74 22 62 32 54 C40 48 48 54 50 60 C52 54 60 48 68 54 C78 62 70 74 50 88Z'/>", "guide": "Your softness is your strength. Be gentle with yourself as you face what’s ahead.", "sess": "Reiki Tune-Up", "love": "Lead with patience and kindness, including toward yourself.", "career": "Quiet confidence will carry you further than pushing harder.", "healing": "You’re stronger than you feel right now. Be gentle with yourself as you heal.", "loved": "They see your courage. It’s okay to be strong and still miss them."}, {"num": "IX", "name": "The Hermit", "kw": "Reflection · Solitude · Inner light", "sym": "<path d='M40 42 L50 34 L60 42 V62 L50 70 L40 62Z'/><path d='M50 70 V92 M50 18 V34'/><path d='M50 0C52.6 37 63 47.4 100 50 63 52.6 52.6 63 50 100 47.4 63 37 52.6 0 50 37 47.4 47.4 37 50 0Z' fill='currentColor' stroke='none' transform='translate(44.0 46.0) scale(0.12)'/>", "guide": "Step back and look within. Some answers only come in the quiet.", "sess": "Email Reading", "love": "Take a little time for yourself before deciding. Clarity comes when you step back.", "career": "Step back and reflect on what you really want from your work.", "healing": "Solitude can be healing. Give yourself some quiet time to recharge.", "loved": "In your quiet moments you may feel them close. Let yourself listen."}, {"num": "X", "name": "Wheel of Fortune", "kw": "Cycles · Change · Destiny", "sym": "<circle cx='50' cy='52' r='30'/><circle cx='50' cy='52' r='11'/><path d='M50 22 V82 M20 52 H80 M29 31 L71 73 M71 31 L29 73'/>", "guide": "Life is turning. What’s shifting now is making room for what’s next.", "sess": "Deep Dive", "love": "Things are shifting in love. A new chapter may be closer than you think.", "career": "Change is coming, and it’s working in your favor. Be ready to say yes.", "healing": "This hard season won’t last forever. The wheel is already turning.", "loved": "Life keeps moving, and your loved one moves with you. They’re part of what comes next."}, {"num": "XI", "name": "Justice", "kw": "Truth · Balance · Decisions", "sym": "<path d='M50 16 V88 M36 88 H64 M22 32 H78'/><path d='M22 32 L12 54 H32Z M78 32 L68 54 H88Z'/>", "guide": "Look at the situation honestly. The fair choice will also be the freeing one.", "sess": "Classic Reading", "love": "Be honest about what you need. Fairness and balance matter in this relationship.", "career": "A fair outcome is on its way. Make your decisions with integrity.", "healing": "Look honestly at what’s out of balance, and gently set it right.", "loved": "Let go of any guilt. Your loved one holds nothing against you."}, {"num": "XII", "name": "The Hanged Man", "kw": "Pause · Surrender · New perspective", "sym": "<path d='M18 20 H82 M50 20 V44'/><circle cx='50' cy='58' r='13'/><path d='M50 71 V88 M40 88 H60'/>", "guide": "It’s okay to pause. Looking at things from a new angle will show you the way.", "sess": "Email Reading", "love": "It’s okay to pause before you act. Seeing things differently may change everything.", "career": "A pause isn’t failure. Use this time to look at your options from a new angle.", "healing": "Surrender what you can’t control. Rest is part of moving forward.", "loved": "Your loved one asks you to see this differently: they’re at peace."}, {"num": "XIII", "name": "Death", "kw": "Endings · Transformation · Release", "sym": "<path d='M10 70 H90'/><path d='M30 70 A20 20 0 0 1 70 70'/><path d='M50 42 V30 M32 50 L24 42 M68 50 L76 42'/><path d='M20 70 V88 M80 70 V88'/>", "guide": "Something is ending so something better can begin. Let it go with love.", "sess": "Deep Dive", "love": "An old pattern in love is ending. Let it go to make room for something better.", "career": "One chapter is closing so a better one can open. Trust the transition.", "healing": "Let go of what you’ve outgrown. You’re becoming someone new.", "loved": "Endings aren’t the end. Your loved one has simply changed form, and they’re still near."}, {"num": "XIV", "name": "Temperance", "kw": "Balance · Healing · Patience", "sym": "<path d='M22 26 H40 L36 48 H26Z M60 54 H78 L74 76 H64Z'/><path d='M38 40 C52 42 58 54 66 62'/><path d='M50 0C52.6 37 63 47.4 100 50 63 52.6 52.6 63 50 100 47.4 63 37 52.6 0 50 37 47.4 47.4 37 50 0Z' fill='currentColor' stroke='none' transform='translate(45.0 81.0) scale(0.1)'/>", "guide": "Healing is happening, gently. Slow down and let things find their balance.", "sess": "Reiki Healing Package", "love": "Patience and balance will help this relationship find its rhythm.", "career": "Slow and steady wins here. Find the middle ground between too much and too little.", "healing": "Healing is happening, gently. Keep balancing rest and care.", "loved": "Your loved one sends calm. Let peace slowly replace the ache."}, {"num": "XV", "name": "The Devil", "kw": "Patterns · Attachments · Freedom", "sym": "<ellipse cx='36' cy='54' rx='17' ry='10'/><ellipse cx='64' cy='54' rx='17' ry='10'/><path d='M50 18 V36 M50 72 V88'/>", "guide": "Notice what’s holding you back. You have more power to break free than you think.", "sess": "Deep Dive", "love": "Notice any pattern that keeps you stuck in love. You’re free to choose differently.", "career": "Look at what’s really holding you back at work. You have more freedom than you think.", "healing": "Be honest about the habits that drain you. You can break the cycle.", "loved": "Your loved one wants you free of regret. Release what you’ve been carrying."}, {"num": "XVI", "name": "The Tower", "kw": "Sudden change · Breakthrough · Truth", "sym": "<path d='M38 90 V36 H62 V90 M34 36 H66 L62 26 H38Z'/><path d='M74 10 L58 32 H68 L54 54'/>", "guide": "Things may feel shaken, but what falls away wasn’t built to hold you.", "sess": "Deep Dive", "love": "Something may be shaken up in love, but the truth will set you free.", "career": "A sudden change may feel scary, but it’s clearing space for something real.", "healing": "What falls apart now makes room to rebuild stronger.", "loved": "Even when life feels upside down, your loved one is right beside you."}, {"num": "XVII", "name": "The Star", "kw": "Hope · Renewal · Faith", "sym": "<path d='M50 0C52.6 37 63 47.4 100 50 63 52.6 52.6 63 50 100 47.4 63 37 52.6 0 50 37 47.4 47.4 37 50 0Z' fill='currentColor' stroke='none' transform='translate(26.0 24.0) scale(0.48)'/><path d='M50 0C52.6 37 63 47.4 100 50 63 52.6 52.6 63 50 100 47.4 63 37 52.6 0 50 37 47.4 47.4 37 50 0Z' fill='currentColor' stroke='none' transform='translate(15.0 17.0) scale(0.1)'/><path d='M50 0C52.6 37 63 47.4 100 50 63 52.6 52.6 63 50 100 47.4 63 37 52.6 0 50 37 47.4 47.4 37 50 0Z' fill='currentColor' stroke='none' transform='translate(75.0 17.0) scale(0.1)'/><path d='M50 0C52.6 37 63 47.4 100 50 63 52.6 52.6 63 50 100 47.4 63 37 52.6 0 50 37 47.4 47.4 37 50 0Z' fill='currentColor' stroke='none' transform='translate(14.0 72.0) scale(0.08)'/><path d='M50 0C52.6 37 63 47.4 100 50 63 52.6 52.6 63 50 100 47.4 63 37 52.6 0 50 37 47.4 47.4 37 50 0Z' fill='currentColor' stroke='none' transform='translate(78.0 72.0) scale(0.08)'/><path d='M50 0C52.6 37 63 47.4 100 50 63 52.6 52.6 63 50 100 47.4 63 37 52.6 0 50 37 47.4 47.4 37 50 0Z' fill='currentColor' stroke='none' transform='translate(46.0 84.0) scale(0.08)'/>", "guide": "After the storm comes calm. Trust that you’re being guided toward healing.", "sess": "Reiki Full Session", "love": "Hope is returning to your love life. Stay open, something good is coming.", "career": "Keep believing in your dream. You’re on the right path.", "healing": "After the storm comes calm. You’re being guided toward healing.", "loved": "Your loved one is shining over you. Look for the signs that bring you comfort."}, {"num": "XVIII", "name": "The Moon", "kw": "Intuition · Dreams · The unknown", "sym": "<path d='M60 18 A22 22 0 1 0 60 62 A16 16 0 1 1 60 18Z'/><path d='M18 90 V68 H30 V90 M70 90 V68 H82 V90'/>", "guide": "Not everything is clear yet, and that’s okay. Trust your intuition through the fog.", "sess": "Classic Reading", "love": "In love, not everything is clear yet, and that’s okay. Give it a little time before you decide.", "career": "Not every detail is visible yet. Trust your instincts and ask questions.", "healing": "Pay attention to your dreams and feelings. They’re guiding your healing.", "loved": "Your loved one may visit in dreams. Keep a notebook by your bed."}, {"num": "XIX", "name": "The Sun", "kw": "Joy · Clarity · Success", "sym": "<circle cx='50' cy='50' r='16'/><path d='M50 14 V26 M50 74 V86 M14 50 H26 M74 50 H86 M25 25 L33 33 M67 67 L75 75 M75 25 L67 33 M33 67 L25 75'/>", "guide": "Warmth and good energy are around you. Let yourself enjoy it.", "sess": "Quickie Reading", "love": "Warmth and joy surround your love life. Let yourself enjoy it.", "career": "Success and recognition are shining on you. Celebrate the wins.", "healing": "Brighter days are here. Let yourself feel good again.", "loved": "Your loved one wants you to feel joy again. Laughing doesn’t mean you’ve forgotten them."}, {"num": "XX", "name": "Judgement", "kw": "Awakening · Calling · Messages", "sym": "<path d='M22 70 L70 36 L76 44 L28 76Z'/><path d='M80 28 L88 18 M84 40 L96 38 M70 26 L72 12'/><path d='M50 0C52.6 37 63 47.4 100 50 63 52.6 52.6 63 50 100 47.4 63 37 52.6 0 50 37 47.4 47.4 37 50 0Z' fill='currentColor' stroke='none' transform='translate(24.0 20.0) scale(0.12)'/>", "guide": "You’re being called to rise into something new. Your loved ones are cheering you on.", "sess": "Evidential Mediumship", "love": "It’s time to rise above the past in love. A fresh perspective changes everything.", "career": "You’re being called to step into something bigger. Answer the call.", "healing": "Forgive yourself and rise. You’re ready for a new chapter.", "loved": "Your loved ones are reaching out. A message may be waiting for you."}, {"num": "XXI", "name": "The World", "kw": "Completion · Wholeness · Celebration", "sym": "<ellipse cx='50' cy='52' rx='24' ry='32'/><path d='M50 0C52.6 37 63 47.4 100 50 63 52.6 52.6 63 50 100 47.4 63 37 52.6 0 50 37 47.4 47.4 37 50 0Z' fill='currentColor' stroke='none' transform='translate(41.0 43.0) scale(0.18)'/><circle cx='16' cy='16' r='4'/><circle cx='84' cy='16' r='4'/><circle cx='16' cy='88' r='4'/><circle cx='84' cy='88' r='4'/>", "guide": "A chapter is coming full circle. Celebrate how far you’ve come.", "sess": "Classic Reading", "love": "A chapter in love is coming full circle. Celebrate how far you’ve grown.", "career": "You’ve reached a milestone. Take a moment to honor what you’ve achieved.", "healing": "You’ve come so far. Feel how whole you’re becoming.", "loved": "Your loved one is at peace, and part of them will always travel with you."}];
+const FOCI={
+  love:{label:'Love & relationships',go:'Want clarity on this relationship? Emma suggests',sess:'Classic Reading'},
+  career:{label:'Career & purpose',go:'Want to map out your next move? Emma suggests',sess:'Deep Dive'},
+  healing:{label:'Healing & self',go:'Ready to feel lighter? Emma suggests',sess:'Reiki Full Session'},
+  loved:{label:'A loved one who’s passed',go:'Want to hear from them? Emma suggests',sess:'Evidential Mediumship'},
+  guide:{label:'Just guide me',go:'Want to go deeper? Emma suggests',sess:null}
+};
+const SESS=Object.values(OFFERS).flat().reduce((m,o)=>(m[o.n]=o,m),{});
+const ARC_GRAD=[['#4A2A50','#A8638C'],['#3A2140','#936A94'],['#693F6A','#CA93B3'],['#2A1830','#693F6A']];
+const arcSVG=i=>`<svg viewBox="0 0 100 100" fill="none" stroke="#FBE9E3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:#FBE9E3" aria-hidden="true">${ARC[i].sym}</svg>`;
+const drawEl={focus:$('#step-focus'),pick:$('#step-pick'),read:$('#step-read'),fan:$('#fan'),chips:$('#focusChips'),shuffle:$('#shuffleBtn')};
+let drawFocus=null,deck=[],drawBusy=false;
+drawEl.chips.innerHTML=Object.entries(FOCI).map(([k,f])=>`<button class="fchip" data-f="${k}" aria-pressed="false"><svg><use href="#sp"/></svg>${f.label}</button>`).join('');
+drawEl.chips.addEventListener('click',e=>{const b=e.target.closest('.fchip');if(!b)return;drawFocus=b.dataset.f;
+  $$('.fchip',drawEl.chips).forEach(c=>c.setAttribute('aria-pressed',c===b));drawEl.shuffle.disabled=false;});
+function showStep(name){['focus','pick','read'].forEach(k=>{const el=drawEl[k];const on=k===name;el.hidden=!on;el.classList.toggle('enter',on&&!reduce.matches);});}
+function layoutFan(){
+  const fan=drawEl.fan,W=fan.clientWidth||900,n=deck.length;
+  const cw=W<600?Math.max(44,Math.min(60,(W-20)/7)):Math.min(92,W/11.5),ch=cw*1.6,A=(W<600?36:38)*Math.PI/180,R=(W-cw-10)/(2*Math.sin(A)),top=56;
+  fan.style.setProperty('--cw',cw+'px');fan.style.setProperty('--fh',(top+R*(1-Math.cos(A))+ch+10)+'px');
+  [...fan.children].forEach((c,i)=>{const a=-A+2*A*i/(n-1);
+    c.style.setProperty('--x',(W/2+R*Math.sin(a)-cw/2).toFixed(1)+'px');c.style.setProperty('--y',(top+R*(1-Math.cos(a))).toFixed(1)+'px');
+    c.style.setProperty('--r',(a*180/Math.PI).toFixed(2)+'deg');c.style.setProperty('--x0',(W/2-cw/2).toFixed(1)+'px');c.style.setProperty('--i',i);});
+}
+function dealFan(){
+  deck=ARC.map((_,i)=>i).sort(()=>Math.random()-.5);
+  drawEl.fan.className='fan';
+  drawEl.fan.innerHTML=deck.map((_,i)=>`<button class="fcard" aria-label="Card ${i+1} of 22"><svg><use href="#sp"/></svg></button>`).join('');
+  $('#pickFor').innerHTML=`<svg><use href="#sp"/></svg>${FOCI[drawFocus].label}`;
+  showStep('pick');layoutFan();
+  if(!reduce.matches){drawEl.fan.classList.add('dealing');setTimeout(()=>drawEl.fan.classList.remove('dealing'),22*35+950);}
+  drawBusy=false;
+}
+drawEl.shuffle.addEventListener('click',()=>{if(drawFocus)dealFan();});
+drawEl.fan.addEventListener('click',async e=>{
+  const c=e.target.closest('.fcard');if(!c||drawBusy||drawEl.fan.classList.contains('dealing'))return;drawBusy=true;
+  c.classList.add('chosen');drawEl.fan.classList.add('picked');await wait(reduce.matches?0:650);
+  revealArcana(deck[[...drawEl.fan.children].indexOf(c)]);
 });
-const FLIPS=['-1080deg','1080deg','-1080deg'], TILTS=['-18deg','10deg','18deg'];
-function burst(card){
-  const stage=$('.draw-stage'),sr=stage.getBoundingClientRect(),cr=card.getBoundingClientRect();
-  for(let k=0;k<9;k++){
-    const a=Math.PI*(1.05+Math.random()*.9)+(k%2?0:Math.PI*.95), d=50+Math.random()*70, sz=6+Math.random()*8;
-    const el=document.createElementNS('http://www.w3.org/2000/svg','svg');el.setAttribute('class','burst');
-    el.innerHTML='<use href="#sp"/>';
-    el.style.cssText=`left:${(cr.left-sr.left+cr.width*(.2+Math.random()*.6)).toFixed(0)}px;top:${(cr.bottom-sr.top-14-Math.random()*cr.height*.25).toFixed(0)}px;--bs:${sz.toFixed(1)}px;--bx:${(Math.cos(a)*d).toFixed(0)}px;--by:${(Math.sin(a)*d*.8).toFixed(0)}px`;
-    el.addEventListener('animationend',()=>el.remove());stage.appendChild(el);
-  }
+function revealArcana(i){
+  const a=ARC[i],f=FOCI[drawFocus],msg=drawFocus==='guide'?a.guide:a[drawFocus],o=SESS[f.sess||a.sess],g=ARC_GRAD[i%4];
+  drawEl.read.innerHTML=`<div class="rcard flipped" id="arcCard"><div class="flip">
+      <div class="face front arc-face"><div class="inner"><span class="arc-num">${a.num}</span><div class="arc-art" style="background:linear-gradient(${g[0]},${g[1]})">${arcSVG(i)}</div><p class="arc-name">${a.name}</p></div></div>
+      <div class="face back rv-back"><div class="inner" style="padding:0;position:relative"><svg><use href="#cardback"/></svg><span class="cb-label">Emma Divines</span></div></div></div></div>
+    <div class="reading">
+      <span class="for-chip">For: ${f.label}</span>
+      <h3>${a.num} · ${a.name}</h3>
+      <p class="msg">“${msg}”</p>
+      <p class="kw">${a.kw}</p>
+      <hr>
+      <p class="go">${f.go}</p>
+      <div class="sess"><div><b>${o.n}</b><span>${o.m} · ${o.p}</span></div><a class="btn btn-purple" href="${BOOK}" target="_blank" rel="noopener">Book <span class="arr">→</span></a></div>
+      <div class="read-links"><button class="link light js-again">Draw again <span class="arr">↻</span></button><button class="link light js-refocus">Choose another focus</button></div>
+      <p class="draft-note">Draft message · Emma’s words go here</p>
+    </div>`;
+  showStep('read');
+  requestAnimationFrame(()=>requestAnimationFrame(()=>$('#arcCard').classList.remove('flipped')));
 }
-function dropCards(){
-  backsEl.classList.remove('await');
-  $$('.cback').forEach((c,i)=>{
-    c.classList.remove('landed');c.style.setProperty('--i',i);c.style.setProperty('--flips',FLIPS[i%3]);c.style.setProperty('--tilt',TILTS[i%3]);c.classList.add('dropping');
-    const done=e=>{if(e.animationName!=='cardDrop')return;c.removeEventListener('animationend',done);
-      c.classList.remove('dropping');c.classList.add('landed');burst(c);
-      c.addEventListener('animationend',function g(ev){if(ev.animationName==='landGlow'){c.classList.remove('landed');c.removeEventListener('animationend',g);}});};
-    c.addEventListener('animationend',done);
-  });
-}
-if(!reduce.matches&&!CAPTURE&&'IntersectionObserver' in window){
-  backsEl.classList.add('await');
-  const dio=new IntersectionObserver(([e])=>{if(e.isIntersecting){dio.disconnect();dropCards();}},{threshold:.35});
-  dio.observe(backsEl);
-}
+$('#drawStage').addEventListener('click',e=>{
+  if(e.target.closest('.js-again')){dealFan();}
+  if(e.target.closest('.js-refocus')){showStep('focus');}
+});
+addEventListener('resize',()=>{if(!drawEl.pick.hidden)layoutFan();});
 
 /* ---------- Prices dialog ---------- */
 const dlg=$('#prices');
