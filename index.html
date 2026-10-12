@@ -375,6 +375,8 @@ dialog[open]{animation:pop .35s cubic-bezier(.2,1.1,.3,1)}
 .arc-num{font:400 18px/1 var(--f-display);letter-spacing:.2em;color:var(--mauve);padding-left:.2em}
 .arc-art{flex:1;width:100%;display:grid;place-items:center;border-radius:999px 999px 6px 6px;border:1px solid rgba(219,183,172,.6)}
 .arc-art svg{width:62%;height:auto;overflow:visible}
+.arc-art{position:relative;overflow:hidden}
+.arc-art img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 20%}
 .arc-name{font:700 24px/1.1 var(--f-display);color:var(--plum);margin:0}
 .reading{max-width:520px;display:flex;flex-direction:column;gap:16px;text-align:left}
 .for-chip{align-self:flex-start;padding:7px 14px;border-radius:999px;background:rgba(251,244,241,.15);font:500 13px/1 var(--f-body);color:#F6E4EC}
@@ -937,6 +939,8 @@ const FOCI={
 };
 const SESS=Object.values(OFFERS).flat().reduce((m,o)=>(m[o.n]=o,m),{});
 const ARC_GRAD=[['#4A2A50','#A8638C'],['#3A2140','#936A94'],['#693F6A','#CA93B3'],['#2A1830','#693F6A']];
+// Major Arcana art: images/arcana/<NN>.jpg (Rider-Waite-Smith scenes in the offering-card style)
+const arcImg=i=>`<img src="images/arcana/${String(i).padStart(2,'0')}.jpg" alt="${ARC[i].name} tarot card" draggable="false">`;
 const arcSVG=i=>`<svg viewBox="0 0 100 100" fill="none" stroke="#FBE9E3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:#FBE9E3" aria-hidden="true">${ARC[i].sym}</svg>`;
 const drawEl={focus:$('#step-focus'),pick:$('#step-pick'),read:$('#step-read'),fan:$('#fan'),chips:$('#focusChips'),shuffle:$('#shuffleBtn')};
 let drawFocus=null,deck=[],drawBusy=false;
@@ -970,7 +974,7 @@ drawEl.fan.addEventListener('click',async e=>{
 function revealArcana(i){
   const a=ARC[i],f=FOCI[drawFocus],msg=drawFocus==='guide'?a.guide:a[drawFocus],o=SESS[f.sess||a.sess],g=ARC_GRAD[i%4];
   drawEl.read.innerHTML=`<div class="rcard flipped" id="arcCard"><div class="flip">
-      <div class="face front arc-face"><div class="inner"><span class="arc-num">${a.num}</span><div class="arc-art" style="background:linear-gradient(${g[0]},${g[1]})">${arcSVG(i)}</div><p class="arc-name">${a.name}</p></div></div>
+      <div class="face front arc-face"><div class="inner"><span class="arc-num">${a.num}</span><div class="arc-art" style="background:linear-gradient(${g[0]},${g[1]})">${arcImg(i)}</div><p class="arc-name">${a.name}</p></div></div>
       <div class="face back rv-back"><div class="inner" style="padding:0;position:relative"><svg><use href="#cardback"/></svg><span class="cb-label">Emma Divines</span></div></div></div></div>
     <div class="reading">
       <span class="for-chip">For: ${f.label}</span>
