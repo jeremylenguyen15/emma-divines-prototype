@@ -138,8 +138,8 @@ h1 em{font-style:italic;color:var(--rose-light)}
 .art svg{position:absolute;inset:0;width:100%;height:100%}
 /* Emma's illustrated card art: arched window like her card frames, thin gold keyline */
 .art-img{border-radius:999px 999px 6px 6px;background:#3A2140;box-shadow:inset 0 0 0 1px rgba(192,137,119,.55)}
-.art-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 12%}
-.rcard .art-img img{object-position:50% 34%}
+.art-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 18%}
+.rcard .art-img img{object-position:50% 26%}
 .art-img::after{content:"";position:absolute;inset:0;border-radius:inherit;box-shadow:inset 0 0 0 1px rgba(219,183,172,.6),inset 0 -24px 30px -20px rgba(42,24,48,.35);pointer-events:none}
 .name{font:700 20px/1.15 var(--f-display);color:var(--plum);margin:4px 0 0}
 .meta{font-size:13px;color:var(--ink-soft);margin:0}
@@ -770,6 +770,8 @@ const OFFERS={
 };
 const SHORT={'Psychic Readings':'Readings'};
 // Card art: Emma's six "clair" illustrations (from Emma), matched to each session
+// One illustration per offering, in images/tarot/<slug>.jpg
+const tarotSlug=n=>n.toLowerCase().replace(/&/g,'and').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
 const CLAIR={vision:'clairvoyance',feel:'clairsentience',hear:'clairaudience',smell:'clairalience',taste:'clairgustance',know:'claircognizance'};
 const ART_FOR={'Email Reading':'vision','Quickie Reading':'feel','Classic Reading':'hear','Deep Dive':'know','Evidential Mediumship':'hear',
   'Reiki Tune-Up':'feel','Reiki Full Session':'smell','Reiki Healing Package':'taste','Free Student Consult':'know','Intuitive Tarot Workshop':'vision',
@@ -815,8 +817,8 @@ $$('a[data-sheet]').forEach(a=>a.addEventListener('click',e=>{e.preventDefault()
 
 /* ---------- Card markup ---------- */
 function artHTML(i,h,o){
-  const c=o&&ART_FOR[o.n]&&CLAIR[ART_FOR[o.n]];
-  if(c)return `<div class="art art-img"${h?` style="flex:0 0 ${h}px"`:''}><img src="images/card-${c}.jpg" alt="" loading="lazy" draggable="false"></div>`;
+  const slug=o&&tarotSlug(o.n);
+  if(slug)return `<div class="art art-img"${h?` style="flex:0 0 ${h}px"`:''}><img src="images/tarot/${slug}.jpg" alt="" loading="lazy" draggable="false"></div>`;
   const spots=[[50,50,22],[74,26,10],[28,74,7],[80,72,5]].slice(0,[2,3,4,3][i%4]);
   return `<div class="art" style="background:linear-gradient(${ART_FROM[i%4]},${ART_TO[i%4]})${h?';flex:0 0 '+h+'px':''}"><svg viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
     <circle cx="50" cy="50" r="40" fill="none" stroke="#F6E4EC" stroke-width=".7" stroke-dasharray="212 40" transform="rotate(${100+i*23} 50 50)" opacity=".85"/>
@@ -1001,11 +1003,11 @@ dlg.addEventListener('click',e=>{if(e.target===dlg)dlg.close();});
 /* ---------- Category sheet ---------- */
 // Category sheets: intro + an illustration of Emma
 const CAT={
-  'Psychic Readings':{eb:'Readings',intro:'Honest, compassionate guidance on love, career, and life’s crossroads, by phone, video or email, from wherever you are.',photo:'images/scene-clairvoyance.jpg',alt:'Illustration of Emma receiving a vision'},
-  'Mediumship':{eb:'Mediumship',intro:'A gentle space to connect with loved ones who have passed, through details you can recognise.',photo:'images/scene-clairaudience.jpg',alt:'Illustration of Emma listening to spirit'},
-  'Reiki':{eb:'Distance Reiki',intro:'Reiki from the comfort of home to rebalance, release what you’re carrying, and restore.',photo:'images/scene-clairsentience.jpg',alt:'Illustration of Emma with healing light at her heart'},
-  'Events':{eb:'Gather & create community',intro:'Mediumship evenings, sacred circles and ceremonies. I’ve been hosting and attending sacred circles since 2018, and it’s one of my greatest joys.',gallery:['clairalience','clairgustance','clairaudience','clairvoyance']},
-  'Classes':{eb:'Classes & mentorship',intro:'Learn to read the cards, deepen your intuition, or begin your own Reiki path.',photo:'images/scene-claircognizance.jpg',alt:'Illustration of Emma reading a glowing book'}
+  'Psychic Readings':{eb:'Readings',intro:'Honest, compassionate guidance on love, career, and life’s crossroads, by phone, video or email, from wherever you are.',photo:'images/tarot/classic-reading.jpg',alt:'Illustration of Emma holding glowing tarot cards under a crescent moon'},
+  'Mediumship':{eb:'Mediumship',intro:'A gentle space to connect with loved ones who have passed, through details you can recognise.',photo:'images/tarot/evidential-mediumship.jpg',alt:'Illustration of Emma listening to spirit, with doves'},
+  'Reiki':{eb:'Distance Reiki',intro:'Reiki from the comfort of home to rebalance, release what you’re carrying, and restore.',photo:'images/tarot/reiki-full-session.jpg',alt:'Illustration of Emma with healing light at her heart'},
+  'Events':{eb:'Gather & create community',intro:'Mediumship evenings, sacred circles and ceremonies. I’ve been hosting and attending sacred circles since 2018, and it’s one of my greatest joys.',gallery:['artistry-of-mediumship-tour','private-sacred-ceremony','reiki-i-and-ii','evidential-mediumship']},
+  'Classes':{eb:'Classes & mentorship',intro:'Learn to read the cards, deepen your intuition, or begin your own Reiki path.',photo:'images/tarot/tarot-boot-camp.jpg',alt:'Illustration of Emma with a glowing book of tarot cards'}
 };
 const EVENTS=[
   {n:'Artistry of Mediumship Tour',m:'Nationwide · live mediumship demonstrations',p:'',t:'Emma is a featured psychic medium on this nationwide tour: evenings full of love, laughter and messages from loved ones who have passed.',href:'https://www.artistryofmediumship.com/north-california-tour',cta:'See dates'},
@@ -1015,7 +1017,7 @@ const catDlg=$('#cat');
 function openCat(k){
   const c=CAT[k],list=OFFERS[k]||EVENTS;if(!c)return;
   catDlg.innerHTML=`<div class="cat-grid">
-    <div class="cat-photo${c.gallery?' cat-gallery':''}">${c.gallery?c.gallery.map(g=>`<figure class="cg-tile"><img src="images/scene-${g}.jpg" alt="" loading="lazy"></figure>`).join(''):c.photo?`<img src="${c.photo}" alt="${c.alt}">`:`<div class="cat-ph"><svg><use href="#sp"/></svg></div>`}</div>
+    <div class="cat-photo${c.gallery?' cat-gallery':''}">${c.gallery?c.gallery.map(g=>`<figure class="cg-tile"><img src="images/tarot/${g}.jpg" alt="" loading="lazy"></figure>`).join(''):c.photo?`<img src="${c.photo}" alt="${c.alt}">`:`<div class="cat-ph"><svg><use href="#sp"/></svg></div>`}</div>
     <div class="cat-body">
       <button class="close-btn cat-close" aria-label="Close">✕</button>
       <div class="cat-head"><p class="eyebrow"><svg><use href="#sp"/></svg>${c.eb}</p><h2 id="cat-title">${k}</h2><p>${c.intro}</p></div>
