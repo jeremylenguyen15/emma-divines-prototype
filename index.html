@@ -751,26 +751,28 @@ const BOOK='https://calendly.com/emmadivinesbook';
 // Sessions and prices
 const OFFERS={
   'Psychic Readings':[
-    {n:'Classic Reading',m:'30 min · Phone or video',p:'$88',t:'A full reading with time for clarity and depth. Where most people start.',start:1},
-    {n:'Deep Dive',m:'60 min · Phone or video',p:'$166',t:'Longer discussions and complicated situations.',start:1},
-    {n:'Quickie Reading',m:'10 min · Phone or video',p:'$33',t:'For checking back in, or one simple question.',quick:1},
-    {n:'Email Reading',m:'Reply in 1 business day',p:'$22',t:'One focused question, answered by email. A gentle option on a smaller budget.',quick:1}],
+    {n:'Classic Reading',b:'classic',m:'30 min · Phone or video',p:'$88',t:'A full reading with time for clarity and depth. Where most people start.',start:1},
+    {n:'Deep Dive',b:'60min-deepdive',m:'60 min · Phone or video',p:'$166',t:'Longer discussions and complicated situations.',start:1},
+    {n:'Quickie Reading',b:'quickie-reading',m:'10 min · Phone or video',p:'$33',t:'For checking back in, or one simple question.',quick:1},
+    {n:'Email Reading',b:'email-reading',m:'Reply in 1 business day',p:'$22',t:'One focused question, answered by email. A gentle option on a smaller budget.',quick:1}],
   'Mediumship':[
-    {n:'Evidential Mediumship',m:'45 min · Phone or video',p:'$133',t:'Connect with a loved one who has passed, through details you can recognise.',d:1}],
+    {n:'Evidential Mediumship',b:'mediumship-session',m:'45 min · Phone or video',p:'$133',t:'Connect with a loved one who has passed, through details you can recognise.',d:1}],
   'Reiki':[
-    {n:'Reiki Tune-Up',m:'30 min · Phone or video',p:'$99',t:'A short distance session to rebalance and reset.',d:1},
-    {n:'Reiki Full Session',m:'60 min · Phone or video',p:'$188',t:'A full distance session to release what you’re carrying.',d:1},
-    {n:'Reiki Healing Package',m:'3 × 60 min',p:'$555',t:'Three full sessions for deeper, steadier change.',d:1}],
+    {n:'Reiki Tune-Up',b:'reiki-tune-up',m:'30 min · Phone or video',p:'$99',t:'A short distance session to rebalance and reset.',d:1},
+    {n:'Reiki Full Session',b:'reiki-full-session',m:'60 min · Phone or video',p:'$188',t:'A full distance session to release what you’re carrying.',d:1},
+    {n:'Reiki Healing Package',b:'reiki-healing-package',m:'3 × 60 min',p:'$555',t:'Three full sessions for deeper, steadier change.',d:1}],
   'Classes':[
-    {n:'Free Student Consult',m:'Phone or video',p:'Free',t:'Not sure where to start? Let’s talk about your path.',d:1},
-    {n:'Intuitive Tarot Workshop',m:'60 min',p:'$33',t:'Learn to read the cards with your own intuition.',d:1},
-    {n:'Mentorship Session',m:'60 min',p:'$60',t:'One-on-one guidance for your own practice.',d:1},
-    {n:'Tarot Boot Camp',m:'4 weeks',p:'$333',t:'Four weeks from curious to confident reader.',d:1},
-    {n:'Reiki I',m:'Course',p:'$333',t:'Your Reiki I attunement and foundations.',d:1},
-    {n:'Reiki II',m:'Course',p:'$444',t:'Deepen your practice and learn distance healing.',d:1},
-    {n:'Reiki I & II',m:'Course',p:'$666',t:'Both levels together.',d:1}]
+    {n:'Free Student Consult',b:'free-student-consultation',m:'Phone or video',p:'Free',t:'Not sure where to start? Let’s talk about your path.',d:1},
+    {n:'Intuitive Tarot Workshop',b:'read-tarot-intuitively-workshop',m:'60 min',p:'$33',t:'Learn to read the cards with your own intuition.',d:1},
+    {n:'Mentorship Session',b:'mentorship',m:'60 min',p:'$60',t:'One-on-one guidance for your own practice.',d:1},
+    {n:'Tarot Boot Camp',b:'tarot-boot-camp',m:'4 weeks',p:'$333',t:'Four weeks from curious to confident reader.',d:1},
+    {n:'Reiki I',b:'reiki-1',m:'Course',p:'$333',t:'Your Reiki I attunement and foundations.',d:1},
+    {n:'Reiki II',b:'reiki-2',m:'Course',p:'$444',t:'Deepen your practice and learn distance healing.',d:1},
+    {n:'Reiki I & II',b:'reiki-1and2',m:'Course',p:'$666',t:'Both levels together.',d:1}]
 };
 const SHORT={'Psychic Readings':'Readings'};
+// Each session books straight into its own Calendly event
+const bookUrl=o=>o.href||(o.b?BOOK+'/'+o.b:BOOK);
 // Card art: Emma's six "clair" illustrations (from Emma), matched to each session
 // One illustration per offering, in images/tarot/<slug>.jpg
 const tarotSlug=n=>n.toLowerCase().replace(/&/g,'and').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
@@ -826,7 +828,7 @@ function artHTML(i,h,o){
     <circle cx="50" cy="50" r="40" fill="none" stroke="#F6E4EC" stroke-width=".7" stroke-dasharray="212 40" transform="rotate(${100+i*23} 50 50)" opacity=".85"/>
     ${spots.map(([x,y,s],k)=>`<use href="#sp" x="${x-s/2}" y="${y-s/2}" width="${s}" height="${s}" style="color:#fff" opacity="${k?.8:1}"/>`).join('')}</svg></div>`;
 }
-function backHTML(o){return `<h3 class="name">${o.n}</h3><p class="meta">${o.m}</p><p class="desc">${o.t}</p><p class="price">${o.p}</p><a class="btn btn-book" href="${BOOK}" target="_blank" rel="noopener">Book this session <span class="arr">→</span></a>`;}
+function backHTML(o){return `<h3 class="name">${o.n}</h3><p class="meta">${o.m}</p><p class="desc">${o.t}</p><p class="price">${o.p}</p><a class="btn btn-book" href="${bookUrl(o)}" target="_blank" rel="noopener">Book this session <span class="arr">→</span></a>`;}
 function cardHTML(o,i){
   return `<article class="card" tabindex="0" aria-label="${o.n}, ${o.m}, ${o.p}. Press to see details.">
    <div class="tilt"><div class="flip">
@@ -983,7 +985,7 @@ function revealArcana(i){
       <p class="kw">${a.kw}</p>
       <hr>
       <p class="go">${f.go}</p>
-      <div class="sess"><div><b>${o.n}</b><span>${o.m} · ${o.p}</span></div><a class="btn btn-purple" href="${BOOK}" target="_blank" rel="noopener">Book <span class="arr">→</span></a></div>
+      <div class="sess"><div><b>${o.n}</b><span>${o.m} · ${o.p}</span></div><a class="btn btn-purple" href="${bookUrl(o)}" target="_blank" rel="noopener">Book <span class="arr">→</span></a></div>
       <div class="read-links"><button class="link light js-again">Draw again <span class="arr">↻</span></button><button class="link light js-refocus">Choose another focus</button></div>
     </div>`;
   showStep('read');
@@ -998,7 +1000,7 @@ addEventListener('resize',()=>{if(!drawEl.pick.hidden)layoutFan();});
 /* ---------- Prices dialog ---------- */
 const dlg=$('#prices');
 $('#prices-body').innerHTML=Object.entries(OFFERS).map(([k,list])=>`<section class="grp"><h3>${k.toUpperCase()}</h3>${list.map(o=>
-  `<div class="row"><div><b>${o.n}</b><small>${o.m}</small></div><span class="p">${o.p}</span><a href="${BOOK}" target="_blank" rel="noopener">Book</a></div>`).join('')}</section>`).join('')+
+  `<div class="row"><div><b>${o.n}</b><small>${o.m}</small></div><span class="p">${o.p}</span><a href="${bookUrl(o)}" target="_blank" rel="noopener">Book</a></div>`).join('')}</section>`).join('')+
   '<p class="dlg-policy">All sessions by phone or video unless noted · Reschedule free 24h+ ahead · See the cancellation policy for late changes</p>';
 $$('.js-all').forEach(b=>b.addEventListener('click',()=>dlg.showModal()));
 $('#dlg-close').addEventListener('click',()=>dlg.close());
@@ -1025,7 +1027,7 @@ function openCat(k){
     <div class="cat-body">
       <button class="close-btn cat-close" aria-label="Close">✕</button>
       <div class="cat-head"><p class="eyebrow"><svg><use href="#sp"/></svg>${c.eb}</p><h2 id="cat-title">${k}</h2><p>${c.intro}</p></div>
-      <ul class="cat-list">${list.map((o,j)=>`${o.start&&j===0?'<li class="cat-group">Most people start here</li>':''}${o.quick&&!list[j-1].quick?'<li class="cat-group">Quick check-ins</li>':''}<li class="cat-row"><div><b>${o.n}</b>${o.start?'<span class="start-tag inline">✦ Start here</span>':''}<span class="m">${o.m}</span></div>${o.p?`<span class="p">${o.p}</span>`:'<span></span>'}<a class="btn btn-purple" href="${o.href||BOOK}" target="_blank" rel="noopener">${o.cta||'Book'} <span class="arr">→</span></a><p class="t">${o.t}</p></li>`).join('')}</ul>${k==='Events'?'<p class="policy">Private ceremonies are in person in the Sacramento area. Evenings and weekends. <a href="tel:+19162486213">Call to plan yours</a>.</p>':''}
+      <ul class="cat-list">${list.map((o,j)=>`${o.start&&j===0?'<li class="cat-group">Most people start here</li>':''}${o.quick&&!list[j-1].quick?'<li class="cat-group">Quick check-ins</li>':''}<li class="cat-row"><div><b>${o.n}</b>${o.start?'<span class="start-tag inline">✦ Start here</span>':''}<span class="m">${o.m}</span></div>${o.p?`<span class="p">${o.p}</span>`:'<span></span>'}<a class="btn btn-purple" href="${bookUrl(o)}" target="_blank" rel="noopener">${o.cta||'Book'} <span class="arr">→</span></a><p class="t">${o.t}</p></li>`).join('')}</ul>${k==='Events'?'<p class="policy">Private ceremonies are in person in the Sacramento area. Evenings and weekends. <a href="tel:+19162486213">Call to plan yours</a>.</p>':''}
       <div class="cat-foot">${k==='Events'?'':`<p class="policy">All sessions by phone or video unless noted · Reschedule free 24h+ ahead</p><p class="policy in-person">In the Sacramento area? In-person sessions are possible in special circumstances. <a href="tel:+19162486213">Call to discuss</a>.</p>`}
         <div class="cat-links"><button class="link js-cat-all">See all sessions &amp; prices <span class="arr">→</span></button><a class="link" href="#draw">Not sure? Draw a card <svg class="sp"><use href="#sp"/></svg></a></div></div>
     </div></div>`;
