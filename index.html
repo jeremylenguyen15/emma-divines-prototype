@@ -354,8 +354,32 @@ dialog[open]{animation:pop .35s cubic-bezier(.2,1.1,.3,1)}
 .fchip:hover{transform:translateY(-2px);border-color:#F3C9D9}
 .fchip[aria-pressed=true]{background:var(--cream);color:var(--plum);border-color:var(--cream);box-shadow:0 0 26px 2px rgba(202,147,179,.6)}
 .fchip[aria-pressed=true] svg{color:var(--mauve)}
-.shuffle-btn{margin-top:8px}
-.shuffle-btn:disabled{opacity:.45;cursor:default;transform:none}
+.deck-stage{position:relative;display:flex;flex-direction:column;align-items:center;margin-top:18px}
+/* the face-down deck: same card-back art as the 22-card fan */
+.deck{position:relative;width:150px;height:240px;cursor:pointer;filter:drop-shadow(0 0 44px rgba(202,147,179,.35))}
+.deck i{position:absolute;inset:0;border-radius:14px;background:radial-gradient(circle at 50% 45%,#7E4C80,#3A2140 75%);border:1px solid rgba(219,183,172,.65);box-shadow:0 8px 18px -6px rgba(0,0,0,.45);transform:translate(var(--dx),var(--dy)) rotate(var(--dr));transition:transform .35s cubic-bezier(.2,.8,.2,1)}
+.deck i::before{content:"";position:absolute;inset:6%;border:1px solid rgba(219,183,172,.4);border-radius:9px}
+.deck i::after{content:"";position:absolute;left:31%;right:31%;top:50%;aspect-ratio:1;translate:0 -50%;border:1px solid rgba(219,183,172,.55);border-radius:50%}
+.deck i svg{position:absolute;left:50%;top:50%;width:16%;height:16%;translate:-50% -50%;color:#F6E4EC}
+.deck i:nth-child(1){--dx:-8px;--dy:7px;--dr:-9deg}.deck i:nth-child(2){--dx:7px;--dy:4px;--dr:8deg}.deck i:nth-child(3){--dx:-4px;--dy:2px;--dr:-4deg}
+.deck i:nth-child(4){--dx:4px;--dy:-1px;--dr:4deg}.deck i:nth-child(5){--dx:-1px;--dy:-3px;--dr:-1.5deg}.deck i:nth-child(6){--dx:0px;--dy:-6px;--dr:0deg}
+.deck-stage.ready .deck:hover i:nth-child(6){transform:translate(0,-12px) rotate(0deg)}
+.deck.nudge{animation:deckNudge .55s ease-in-out}
+@keyframes deckNudge{20%{rotate:-4deg}45%{rotate:3.5deg}70%{rotate:-2deg}100%{rotate:0deg}}
+.focus-chips.nudge .fchip{animation:chipGlow 1s ease-out}
+@keyframes chipGlow{30%{border-color:#F3C9D9;box-shadow:0 0 22px 2px rgba(243,201,217,.55)}}
+/* Shuffle the deck: sits on the deck. Waiting = dashed hint, Ready = the one glowing "magic" button */
+.shuffle-btn{position:relative;z-index:2;margin-top:-30px;display:inline-flex;align-items:center;gap:10px;padding:15px 28px 15px 24px;border-radius:999px;font:600 17px/1 var(--f-body);cursor:pointer;
+  border:1.2px dashed rgba(243,201,217,.6);background:rgba(42,24,48,.72);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);color:rgba(246,228,236,.88);transition:background .35s,color .35s,box-shadow .35s,border-color .35s,transform .2s}
+.shuffle-btn .sb-icon{width:20px;height:20px;fill:none;stroke:#F3C9D9;stroke-width:1.5}
+.shuffle-btn .sb-sp{display:none;width:13px;height:13px;color:var(--mauve)}
+.deck-stage.ready .shuffle-btn{border:1.2px solid transparent;background:linear-gradient(90deg,#FBF4F1,#F3C9D9 55%,#DBB7AC);color:var(--plum);box-shadow:0 0 30px 2px rgba(202,147,179,.6),0 8px 20px -6px rgba(42,24,48,.35)}
+.deck-stage.ready .shuffle-btn .sb-icon{stroke:var(--plum)}
+.deck-stage.ready .shuffle-btn .sb-sp{display:block}
+.deck-stage.ready .shuffle-btn:hover{transform:translateY(-2px);box-shadow:0 0 40px 6px rgba(202,147,179,.7),0 10px 22px -6px rgba(42,24,48,.4)}
+.shuffle-btn:focus-visible{outline:2px solid #F3C9D9;outline-offset:3px}
+@media (max-width:600px){.deck{width:112px;height:179px}.deck i{border-radius:11px}.shuffle-btn{font-size:16px;padding:14px 24px 14px 20px}}
+@media (prefers-reduced-motion:reduce){.deck.nudge,.focus-chips.nudge .fchip{animation:none}}
 .pick-for{color:#F1D9D0}
 .fan{position:relative;width:100%;max-width:1060px;height:var(--fh,360px);margin-top:6px}
 .fcard{position:absolute;left:0;top:0;width:var(--cw);height:calc(var(--cw) * 1.6);padding:0;border-radius:calc(var(--cw) * .09);cursor:pointer;
@@ -661,7 +685,10 @@ dialog[open]{animation:pop .35s cubic-bezier(.2,1.1,.3,1)}
       <div class="dstep" id="step-focus">
         <h3 class="step-title">What’s on your heart today?</h3>
         <div class="focus-chips" role="group" aria-label="Choose a focus" id="focusChips"></div>
-        <button class="btn btn-light shuffle-btn" id="shuffleBtn" disabled>Shuffle the deck <svg class="sp"><use href="#sp"/></svg></button>
+        <div class="deck-stage">
+          <div class="deck" id="deck" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i><svg><use href="#sp"/></svg></i></div>
+          <button class="shuffle-btn" id="shuffleBtn" aria-disabled="true"><svg class="sb-icon" viewBox="0 0 20 20" aria-hidden="true"><rect x="3" y="5" width="9" height="13" rx="2" transform="rotate(-14 7.5 11.5)"/><rect x="8" y="3" width="9" height="13" rx="2" transform="rotate(8 12.5 9.5)"/></svg><span class="sb-label">Choose a focus to shuffle</span><svg class="sp sb-sp" aria-hidden="true"><use href="#sp"/></svg></button>
+        </div>
       </div>
       <div class="dstep" id="step-pick" hidden>
         <p class="eyebrow pick-for" id="pickFor"></p>
@@ -979,7 +1006,12 @@ const drawEl={focus:$('#step-focus'),pick:$('#step-pick'),read:$('#step-read'),f
 let drawFocus=null,deck=[],drawBusy=false;
 drawEl.chips.innerHTML=Object.entries(FOCI).map(([k,f])=>`<button class="fchip" data-f="${k}" aria-pressed="false"><svg><use href="#sp"/></svg>${f.label}</button>`).join('');
 drawEl.chips.addEventListener('click',e=>{const b=e.target.closest('.fchip');if(!b)return;drawFocus=b.dataset.f;
-  $$('.fchip',drawEl.chips).forEach(c=>c.setAttribute('aria-pressed',c===b));drawEl.shuffle.disabled=false;});
+  $$('.fchip',drawEl.chips).forEach(c=>c.setAttribute('aria-pressed',c===b));setShuffleReady();});
+// Shuffle button: Waiting (no focus yet) → Ready. A tap while waiting nudges the deck and the chips instead of doing nothing.
+function setShuffleReady(){drawEl.shuffle.closest('.deck-stage').classList.add('ready');drawEl.shuffle.setAttribute('aria-disabled','false');drawEl.shuffle.querySelector('.sb-label').textContent='Shuffle the deck';}
+function nudgeFocus(){const d=$('#deck');[d,drawEl.chips].forEach(el=>{el.classList.remove('nudge');void el.offsetWidth;el.classList.add('nudge');});drawEl.chips.querySelector('.fchip')?.focus({preventScroll:true});}
+function tryShuffle(){if(drawFocus)dealFan();else nudgeFocus();}
+$('#deck').addEventListener('click',tryShuffle);
 function showStep(name){['focus','pick','read'].forEach(k=>{const el=drawEl[k];const on=k===name;el.hidden=!on;el.classList.toggle('enter',on&&!reduce.matches);});}
 function layoutFan(){
   const fan=drawEl.fan,W=fan.clientWidth||900,n=deck.length;
@@ -998,7 +1030,7 @@ function dealFan(){
   if(!reduce.matches){drawEl.fan.classList.add('dealing');setTimeout(()=>drawEl.fan.classList.remove('dealing'),22*35+950);}
   drawBusy=false;
 }
-drawEl.shuffle.addEventListener('click',()=>{if(drawFocus)dealFan();});
+drawEl.shuffle.addEventListener('click',tryShuffle);
 drawEl.fan.addEventListener('click',async e=>{
   const c=e.target.closest('.fcard');if(!c||drawBusy||drawEl.fan.classList.contains('dealing'))return;drawBusy=true;
   c.classList.add('chosen');drawEl.fan.classList.add('picked');await wait(reduce.matches?0:650);
