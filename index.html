@@ -153,7 +153,10 @@ h1 em{font-style:italic;color:var(--rose-light)}
 .back .name{margin:0}
 .desc{font-size:14px;line-height:1.5;color:var(--ink-soft);margin:0}
 .btn-book{background:var(--deep-purple);color:#FFF6F3;padding:11px 18px;font-size:14px;margin-top:4px}
-.turn{font-size:12px;color:var(--ink-soft);opacity:.8}
+.turn{font:inherit;font-size:12px;color:var(--ink-soft);opacity:.85;background:none;border:0;padding:8px 12px;margin:-4px 0 -8px;cursor:pointer;text-decoration:underline;text-underline-offset:3px;border-radius:999px}
+.turn:hover{opacity:1}
+/* only the face you can see takes taps, so a tap never lands on the hidden side */
+.card:not(.flipped) .back,.card.flipped .front{pointer-events:none}
 .mini-draft{font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--mauve);opacity:.8}
 .cards .card:hover,.cards .card.flipped{translate:0 -28px;z-index:20}
 .cards .card:hover .tilt,.cards .card.flipped .tilt{rotate:calc(var(--r) * -1)}
@@ -833,7 +836,7 @@ function cardHTML(o,i){
   return `<article class="card" tabindex="0" aria-label="${o.n}, ${o.m}, ${o.p}. Press to see details.">
    <div class="tilt"><div class="flip">
     <div class="face front"><div class="inner"><span class="num">${ROMAN[i]}</span>${o.start?'<span class="start-tag">✦ Start here</span>':''}${artHTML(i,0,o)}<h3 class="name">${o.n}</h3><p class="meta">${o.m}</p><p class="price">${o.p}</p></div></div>
-    <div class="face back"><div class="inner">${backHTML(o)}<span class="turn">Tap to turn back</span></div></div>
+    <div class="face back"><div class="inner">${backHTML(o)}<button type="button" class="turn">↺ Turn card back</button></div></div>
    </div></div></article>`;
 }
 function setFinal(c,x,y,r){c.style.setProperty('--final',`translate(${x}px,${y}px) rotate(${r}deg)`);c.style.setProperty('--r',r+'deg');}
@@ -887,8 +890,16 @@ function nextCard(){
   flyOut(cardsEl.children[state.order[0]],-1,0);
 }
 $('#deck-next').addEventListener('click',nextCard);
-function toggleFlip(card){const was=card.classList.contains('flipped');$$('.card.flipped',cardsEl).forEach(c=>c.classList.remove('flipped'));if(!was)card.classList.add('flipped');}
-cardsEl.addEventListener('click',e=>{if(state.mode==='deck'||e.target.closest('a'))return;const c=e.target.closest('.card');if(c)toggleFlip(c);});
+function toggleFlip(card){const was=card.classList.contains('flipped');$$('.card.flipped',cardsEl).forEach(c=>c.classList.remove('flipped'));if(!was){card.classList.add('flipped');card._flipT=performance.now();}}
+// Tapping a turned-over card books it (anywhere on it); only the "Turn card back" button turns it back.
+// downT = what the finger/mouse actually went down on (pointer capture hides it from the click event).
+let downT=null;cardsEl.addEventListener('pointerdown',e=>{downT=e.target;},true);
+cardsEl.addEventListener('click',e=>{
+  const t=(downT&&downT.isConnected?downT:e.target);downT=null;
+  if(t.closest('a')||e.target.closest('a'))return;const c=t.closest('.card')||e.target.closest('.card');if(!c)return;
+  const now=performance.now();if(now-(c._dragT||0)<400)return;
+  if(c.classList.contains('flipped')&&!t.closest('.turn')){if(now-(c._flipT||0)>450)c.querySelector('.btn-book').click();return;}
+  if(state.mode==='deck')return;toggleFlip(c);});
 cardsEl.addEventListener('keydown',e=>{
   if((e.key==='Enter'||e.key===' ')&&e.target.classList.contains('card')){e.preventDefault();toggleFlip(e.target);}
   if(state.mode==='deck'&&e.key==='ArrowRight')nextCard();});
@@ -899,7 +910,7 @@ cardsEl.addEventListener('pointerdown',e=>{
   if(state.mode!=='deck'||state.busy||drag)return;
   const c=e.target.closest('.card.is-front');if(!c||e.target.closest('a'))return;
   const r=c.getBoundingClientRect(),now=performance.now();
-  drag={c,id:e.pointerId,x0:e.clientX,y0:e.clientY,dx:0,dy:0,vx:0,lx:e.clientX,lt:now,moved:false,pivot:e.clientY<r.top+r.height/2?1:-1};
+  drag={c,t:e.target,id:e.pointerId,x0:e.clientX,y0:e.clientY,dx:0,dy:0,vx:0,lx:e.clientX,lt:now,moved:false,pivot:e.clientY<r.top+r.height/2?1:-1};
   c.classList.add('dealt');c.setPointerCapture(e.pointerId);c.style.transition='scale .2s';c.style.scale='1.03';
 });
 cardsEl.addEventListener('pointermove',e=>{
@@ -911,7 +922,9 @@ cardsEl.addEventListener('pointermove',e=>{
 });
 function endDrag(e,cancelled){
   if(!drag||e.pointerId!==drag.id)return;const d=drag,c=d.c;drag=null;
-  if(!cancelled&&!d.moved){c.style.transition='';c.style.scale='';c.style.translate='';c.style.rotate='';toggleFlip(c);return;}
+  if(!cancelled&&!d.moved){c.style.transition='';c.style.scale='';c.style.translate='';c.style.rotate='';
+    if(!c.classList.contains('flipped')||(d.t&&d.t.closest('.turn')))toggleFlip(c);return;}
+  c._dragT=performance.now();
   const fling=Math.abs(d.dx)>90||(Math.abs(d.vx)>.45&&Math.abs(d.dx)>25);
   if(!cancelled&&fling&&cardsEl.children.length>1)return flyOut(c,Math.sign(d.dx||d.vx),d.dy);
   c.style.transition='translate .5s cubic-bezier(.2,1.5,.4,1),rotate .5s cubic-bezier(.2,1.5,.4,1),scale .25s';
