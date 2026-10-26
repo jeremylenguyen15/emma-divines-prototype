@@ -401,6 +401,22 @@ dialog[open]{animation:pop .35s cubic-bezier(.2,1.1,.3,1)}
 .in-person-note{margin:44px auto 0;max-width:680px;text-align:center;font-size:15px;line-height:1.6;color:var(--ink-soft);padding:14px 22px;border-radius:20px;background:rgba(255,255,255,.55);border:1px solid rgba(192,137,119,.35)}
 .in-person-note a,.cat-foot .in-person a{color:var(--deep-purple);font-weight:600}
 .in-person-note .sp{color:var(--mauve)}
+/* the phone line always gets its own line and never splits */
+.in-person-note .call-line{display:block;white-space:nowrap}
+.cat-foot .in-person a{white-space:nowrap}
+/* Hero trust row: reviews link (+ socials when the header icons are hidden) */
+.trust{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:2px}
+.rev-link{display:inline-flex;align-items:center;gap:7px;padding:8px 14px 8px 12px;border-radius:999px;border:1px solid rgba(243,201,217,.5);background:rgba(58,33,64,.32);color:#FFF6F3;font-size:14px;font-weight:600;text-decoration:none;transition:background .25s,border-color .25s,box-shadow .25s}
+.rev-link .sp{width:13px;height:13px;color:#DBB7AC}
+.rev-link .arr{color:#DBB7AC;transition:translate .25s}
+.rev-link:hover,.rev-link:focus-visible{background:rgba(58,33,64,.5);border-color:#CA93B3;box-shadow:0 0 18px rgba(202,147,179,.35)}
+.rev-link:hover .arr{translate:3px 0}
+.social-hero{margin:0;gap:4px}
+.social-hero a{width:32px;height:32px}
+.social-hero a svg:first-child{width:15px;height:15px}
+.social-hero a .tw{display:none}
+@media (min-width:1241px){.social-hero{display:none}}
+@media (max-width:380px){.trust{gap:8px}.rev-link{padding:8px 12px 8px 10px;gap:6px}.social-hero{gap:3px}.social-hero a{width:30px;height:30px}}
 .start-tag{display:inline-block;font:600 10px/1 var(--f-body);letter-spacing:.12em;text-transform:uppercase;color:#fff;background:var(--mauve);padding:5px 8px;border-radius:999px;margin:-2px 0 0}
 .start-tag.inline{margin:0 0 0 10px;vertical-align:3px}
 .cat-group{list-style:none;font:600 11px/1 var(--f-body);letter-spacing:.14em;text-transform:uppercase;color:var(--mauve);padding:18px 0 6px}
@@ -473,6 +489,7 @@ dialog[open]{animation:pop .35s cubic-bezier(.2,1.1,.3,1)}
   .hero{min-height:0;padding-bottom:40px}
   .hero-inner{display:block;padding-top:88px}
   .copy{gap:14px}
+  .trust{margin-bottom:12px}
   h1{font-size:34px}
   .avatar{width:96px;height:96px;border-width:3px;box-shadow:0 0 24px 2px rgba(202,147,179,.55)}.byline{gap:16px}.byline p{font-size:15px}
   .ctas{display:none}
@@ -603,6 +620,7 @@ dialog[open]{animation:pop .35s cubic-bezier(.2,1.1,.3,1)}
       <div class="byline"><img class="avatar" src="images/emma-avatar.jpg" alt="Emma Divines, smiling" width="140" height="140">
         <p>Hi, I’m Emma — honest, compassionate guidance by phone, video or email.</p></div>
       <p class="vibe">Want to feel my vibe before you book? <a href="tel:+19162486213">Call or text (916) 248-6213</a></p>
+      <div class="trust"><a class="rev-link" href="#reviews"><svg class="sp" aria-hidden="true"><use href="#sp"/></svg>Read client reviews <span class="arr" aria-hidden="true">→</span></a><div class="social social-hero" aria-label="Emma on social media"><a href="https://www.instagram.com/emmadivines/" target="_blank" rel="noopener" aria-label="Instagram (@emmadivines)" title="Instagram · @emmadivines"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r=".6" fill="currentColor"/></svg><svg class="tw" aria-hidden="true"><use href="#sp"/></svg></a><a href="https://www.tiktok.com/@emmadivines" target="_blank" rel="noopener" aria-label="TikTok (@emmadivines)" title="TikTok · @emmadivines"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3.5v11.2a3.6 3.6 0 1 1-3.6-3.6"/><path d="M14 3.5c.4 2.6 2.2 4.4 5 4.7"/></svg><svg class="tw" aria-hidden="true"><use href="#sp"/></svg></a><a href="https://www.youtube.com/@emmadivines" target="_blank" rel="noopener" aria-label="YouTube (@emmadivines)" title="YouTube · @emmadivines"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2.8" y="5.8" width="18.4" height="12.4" rx="4"/><path d="M10.4 9.3v5.4l4.6-2.7z"/></svg><svg class="tw" aria-hidden="true"><use href="#sp"/></svg></a><a href="https://www.facebook.com/diviningsoul" target="_blank" rel="noopener" aria-label="Facebook (Divining Soul)" title="Facebook · Divining Soul"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.6 20.5v-7.3h2.6l.4-3h-3V8.4c0-.9.3-1.5 1.6-1.5h1.5V4.2a20 20 0 0 0-2.3-.1c-2.3 0-3.8 1.4-3.8 3.9v2.2H9v3h2.6v7.3"/></svg><svg class="tw" aria-hidden="true"><use href="#sp"/></svg></a></div></div>
       <div class="ctas">
         <a class="btn btn-plum" href="https://calendly.com/emmadivinesbook" target="_blank" rel="noopener">Book a Reading <span class="arr">→</span></a>
         <a class="btn btn-outline" href="#draw">Not sure? Draw a card <svg class="sp"><use href="#sp"/></svg></a>
@@ -629,7 +647,7 @@ dialog[open]{animation:pop .35s cubic-bezier(.2,1.1,.3,1)}
       <li class="step" data-reveal data-stagger><span class="n">II</span><h3>Pick a time</h3><p>Book and pay securely without leaving the site.</p></li>
       <li class="step" data-reveal data-stagger><span class="n">III</span><h3>Talk by phone or video</h3><p>Join from anywhere, no app needed. Email readings arrive within 1 business day.</p></li>
     </ol>
-    <p class="in-person-note" data-reveal><svg class="sp"><use href="#sp"/></svg> In the Sacramento area? In-person sessions are available in special circumstances. <a href="tel:+19162486213">Call (916) 248-6213</a> to discuss.</p>
+    <p class="in-person-note" data-reveal><svg class="sp"><use href="#sp"/></svg> In the Sacramento area? In-person sessions are available in special circumstances. <span class="call-line"><a href="tel:+19162486213">Call (916) 248-6213</a> to discuss.</span></p>
   </div>
 </section>
 
