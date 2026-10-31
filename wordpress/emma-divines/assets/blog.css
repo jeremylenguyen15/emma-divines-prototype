@@ -140,8 +140,10 @@
 .copied{font-size:13px;color:var(--mauve);min-width:0}
 .empty-note{margin:24px 0 0;color:var(--ink-soft)}
 .post .ph:empty::after{content:"";display:block;height:100%}
-.art-body .wp-block-columns{display:flex;gap:32px;align-items:flex-start;margin:0 0 20px}
-.art-body .wp-block-column{flex:1 1 0;min-width:0}
-.art-body .wp-block-column > :last-child{margin-bottom:0}
 .art-body .wp-block-image{margin:0 0 20px}
-@media (max-width:767px){.art-body .wp-block-columns{flex-direction:column;gap:0}}
+.art-body .ed-float{width:44%;margin:8px 0 20px 36px;float:right}
+.art-body .ed-float-left{float:left;margin:8px 36px 20px 0}
+.art-body .ed-float img{width:100%;border-radius:18px;box-shadow:0 24px 48px -28px rgba(58,33,64,.45)}
+.art-body h2,.art-body h3,.art-end{clear:both}
+@media (max-width:767px){.art-body .ed-float,.art-body .ed-float-left{float:none;width:100%;margin:28px 0}}
+.art-body{display:flow-root}

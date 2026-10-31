@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Emma Divines
  * Description: Emma's homepage (tarot-card sessions, Draw a card, reviews, FAQs) and blog with everything editable from the dashboard: Sessions, Reviews, FAQs and Emma Divines → Site Content.
- * Version: 1.4.0
+ * Version: 1.4.1
  * Author: Jeremy Le Nguyen
  * Requires at least: 6.2
  * Requires PHP: 7.4
@@ -13,7 +13,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'ED_VERSION', '1.4.0' );
+define( 'ED_VERSION', '1.4.1' );
 define( 'ED_FILE', __FILE__ );
 define( 'ED_DIR', plugin_dir_path( __FILE__ ) );
 define( 'ED_URL', plugin_dir_url( __FILE__ ) );

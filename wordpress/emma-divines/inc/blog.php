@@ -139,7 +139,73 @@ function ed_post_body( $post ) {
 	$html = preg_replace( '/<noscript>\s*<img[^>]*>\s*<\/noscript>/i', '', $html );
 	$html = preg_replace( '/\ssrc="data:image\/[^"]*"(.*?)\sdata-src="([^"]+)"/i', ' src="$2"$1 loading="lazy"', $html );
 	$html = preg_replace( '/\sdata-srcset="/i', ' srcset="', $html );
+	$html = ed_flatten_columns( $html );
 	return preg_replace( array( '/<h1(\s[^>]*)?>/i', '/<\/h1>/i' ), array( '<h2$1>', '</h2>' ), $html );
+}
+
+/**
+ * Articles read as one column: WordPress "Columns" blocks are unwrapped. A column holding only a picture
+ * becomes a picture floated beside the text that was next to it, so the words wrap round it instead of
+ * running on in a narrow strip after the picture ends.
+ */
+function ed_flatten_columns( $html ) {
+	if ( false === stripos( $html, 'wp-block-columns' ) || ! class_exists( 'DOMDocument' ) ) {
+		return $html;
+	}
+	$doc  = new DOMDocument();
+	$prev = libxml_use_internal_errors( true );
+	$ok   = $doc->loadHTML( '<?xml encoding="utf-8"?><div id="ed-root">' . $html . '</div>', LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD );
+	libxml_clear_errors();
+	libxml_use_internal_errors( $prev );
+	if ( ! $ok ) {
+		return $html;
+	}
+	$xp   = new DOMXPath( $doc );
+	$has  = function ( $class ) {
+		return "contains(concat(' ', normalize-space(@class), ' '), ' $class ')";
+	};
+	$side = 0;
+	foreach ( iterator_to_array( $xp->query( '//div[' . $has( 'wp-block-columns' ) . ']' ) ) as $group ) {
+		$cols = array();
+		foreach ( iterator_to_array( $group->childNodes ) as $c ) {
+			if ( XML_ELEMENT_NODE === $c->nodeType ) {
+				$cols[] = $c;
+			}
+		}
+		$pictures = array();
+		$texts    = array();
+		foreach ( $cols as $c ) {
+			$kids = array();
+			foreach ( $c->childNodes as $k ) {
+				if ( XML_ELEMENT_NODE === $k->nodeType ) {
+					$kids[] = $k;
+				}
+			}
+			$is_picture = 1 === count( $kids ) && ( 'figure' === $kids[0]->nodeName || 'img' === $kids[0]->nodeName ) && '' === trim( $c->textContent );
+			if ( $is_picture ) {
+				$pictures[] = $kids[0];
+			} else {
+				$texts[] = $c;
+			}
+		}
+		$parent = $group->parentNode;
+		// Pictures first, floated (alternating sides when a post has several), then the text columns' contents
+		foreach ( $pictures as $pic ) {
+			$pic->setAttribute( 'class', trim( $pic->getAttribute( 'class' ) . ' ed-float ' . ( $side++ % 2 ? 'ed-float-left' : 'ed-float-right' ) ) );
+			$parent->insertBefore( $pic, $group );
+		}
+		foreach ( $texts as $c ) {
+			while ( $c->firstChild ) {
+				$parent->insertBefore( $c->firstChild, $group );
+			}
+		}
+		$parent->removeChild( $group );
+	}
+	$out = '';
+	foreach ( $doc->getElementById( 'ed-root' )->childNodes as $n ) {
+		$out .= $doc->saveHTML( $n );
+	}
+	return $out;
 }
 
 /** Address of a homepage section from another page, e.g. /#readings (the homepage opens it). */
