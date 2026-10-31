@@ -1,0 +1,988 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>How to Choose Your First Tarot Deck: A Beginner’s Guide · Emma Divines</title>
+<meta name="description" content="Honest, compassionate psychic readings, mediumship and Reiki with Emma, by phone, video or email. See every session and price, or draw a card for a little guidance.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Emma Divines">
+<meta property="og:title" content="Emma Divines · Readings, mediumship &amp; Reiki">
+<meta property="og:description" content="Honest, compassionate guidance from wherever you are. Draw a card for a little guidance, or book a session.">
+
+<meta property="og:image" content="https://emma-divines-prototype.vercel.app/images/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Emma Divines homepage: tarot cards with prices and a photo of Emma">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://emma-divines-prototype.vercel.app/images/og-image.jpg">
+<link rel="icon" type="image/png" href="logo_color.png">
+<link rel="apple-touch-icon" href="images/emma-avatar.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Philosopher:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+/* Velvet Dusk: one visual world (dusk → daylight → dusk → night), so colours are set explicitly rather than per OS theme. */
+:root{
+  color-scheme:light;
+  /* brand palette (Emma's guide) */
+  --deep-purple:#693F6A; --mauve:#A8638C; --terracotta:#C08977; --muted-purple:#936A94; --soft-rose:#CA93B3; --warm-blush:#DBB7AC;
+  /* extensions: darker / lighter steps of the palette */
+  --night:#2A1830; --plum:#3A2140; --cream:#FBF4F1; --blush-tint:#F8EFEC; --rose-light:#F3C9D9; --ink-soft:#7A6478; --on-dark:#F6E4EC;
+  --f-display:Philosopher,Georgia,serif; --f-body:Inter,system-ui,-apple-system,sans-serif;
+  --cw:200px; --ch:340px;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth;scroll-padding-top:80px;overflow-x:clip}
+html,body{margin:0}
+body{font-family:var(--f-body);-webkit-font-smoothing:antialiased;overflow-x:hidden;background:var(--cream);color:var(--plum)}
+button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--soft-rose);outline-offset:3px;border-radius:6px}
+.wrap{max-width:1240px;margin-inline:auto;padding-inline:20px}
+.sp{display:inline-block;width:12px;height:12px;vertical-align:-1px}
+.eyebrow{display:flex;align-items:center;gap:10px;margin:0;font:600 12px/1 var(--f-body);letter-spacing:.18em;text-transform:uppercase;color:var(--mauve)}
+.eyebrow svg{width:12px;height:12px}
+h1,h2,h3{text-wrap:balance}
+h2{font:400 44px/1.1 var(--f-display);margin:0;color:var(--plum)}
+h2 em{font-style:italic;color:var(--mauve)}
+.lede{font-size:17px;line-height:1.55;color:var(--ink-soft);max-width:560px;margin:0}
+.draft-tag{display:inline-block;font:600 10px/1 var(--f-body);letter-spacing:.12em;text-transform:uppercase;padding:5px 8px;border-radius:999px;background:rgba(168,99,140,.12);color:var(--mauve)}
+
+/* ---------- Buttons & links ---------- */
+.btn{display:inline-flex;align-items:center;gap:8px;border-radius:999px;padding:14px 24px;font:600 15px/1.2 var(--f-body);text-decoration:none;border:1px solid transparent;white-space:nowrap;transition:transform .2s,background-color .2s,box-shadow .25s}
+.btn:hover{transform:translateY(-1px)}
+.btn .arr,.link .arr{transition:translate .2s}
+.btn:hover .arr,.link:hover .arr{translate:3px 0}
+.btn-plum{background:var(--plum);color:#FFF6F3}
+.btn-purple{background:var(--deep-purple);color:#FFF6F3}
+.btn-light{background:var(--on-dark);color:var(--plum)}
+.btn-outline{border-color:rgba(58,33,64,.5);color:var(--plum)}
+.btn-outline-light{border-color:rgba(246,228,236,.55);color:var(--on-dark)}
+.link{display:inline-flex;align-items:center;gap:8px;font:600 14px/1.2 var(--f-body);color:var(--plum);text-decoration:none}
+
+/* ---------- Header ---------- */
+.site-header{position:fixed;inset:0 0 auto 0;z-index:40;padding-top:env(safe-area-inset-top,0px);transition:background-color .35s,box-shadow .35s,backdrop-filter .35s}
+.site-header .wrap{height:88px;display:flex;align-items:center;justify-content:space-between;transition:height .35s}
+.site-header.scrolled{background:rgba(42,24,48,.8);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);box-shadow:0 1px 0 rgba(246,228,236,.08)}
+.site-header.scrolled .wrap{height:68px}
+.logo img{height:68px;display:block;transition:height .35s}
+.scrolled .logo img{height:54px}
+.nav{display:flex;align-items:center;gap:34px}
+.nav a:not(.btn){text-decoration:none;font-weight:500;font-size:15px;color:var(--on-dark)}
+.nav a:not(.btn):hover{text-decoration:underline;text-underline-offset:6px;text-decoration-color:var(--soft-rose)}
+.nav .btn{padding:12px 22px}
+.mobile-actions{display:none;align-items:center;gap:10px}
+.menu-btn{display:flex;flex-direction:column;gap:5px;padding:13px 9px}
+.menu-btn i{display:block;width:20px;height:1.6px;border-radius:1px;background:var(--on-dark)}
+.mobile-menu{position:fixed;inset:0;z-index:60;background:linear-gradient(#2A1830,#693F6A);color:var(--on-dark);padding:calc(20px + env(safe-area-inset-top,0px)) 24px 32px;display:flex;flex-direction:column;gap:28px}
+.mobile-menu[hidden]{display:none}
+.mobile-menu .top{display:flex;justify-content:space-between;align-items:center}
+.mobile-menu .top img{height:52px}
+.mobile-menu nav{display:flex;flex-direction:column;gap:6px}
+.mobile-menu nav a{font:400 34px/1.3 var(--f-display);text-decoration:none}
+.close-btn{width:44px;height:44px;border-radius:50%;font-size:22px}
+
+/* ---------- Hero ---------- */
+.hero{position:relative;isolation:isolate;min-height:900px;padding-bottom:56px}
+.hero-bg{position:absolute;inset:0;z-index:-1;overflow:hidden;background:linear-gradient(#2A1830,#693F6A 38%,#A8638C 75%,#DBB7AC)}
+#aurora{position:absolute;inset:0;width:100%;height:100%;display:block}
+.stars{position:absolute;inset:0;pointer-events:none}
+.layer{position:absolute;left:0;right:0;will-change:transform}
+.star,.dot{position:absolute;opacity:var(--o);animation:twinkle var(--t) ease-in-out var(--d) infinite}
+.star{color:#fff}
+.dot{border-radius:50%;background:#fff;box-shadow:0 0 6px rgba(255,240,246,.7)}
+.layer:last-child .star{filter:drop-shadow(0 0 4px rgba(255,228,240,.75))}
+/* a slow, shallow breathe rather than a blink */
+@keyframes twinkle{0%,100%{opacity:var(--o)}50%{opacity:calc(var(--o) * .45)}}
+.hero-inner{display:grid;grid-template-columns:470px minmax(0,1fr);column-gap:20px;align-items:start;padding-top:200px}
+.copy{display:flex;flex-direction:column;gap:24px}
+.hero .eyebrow{color:#F1D9D0}
+h1{font:400 54px/1.06 var(--f-display);margin:0;color:#FFF6F3;letter-spacing:-.005em;text-shadow:0 2px 28px rgba(42,24,48,.35)}
+h1 em{font-style:italic;color:var(--rose-light)}
+.byline{display:flex;align-items:center;gap:22px}
+.byline p{margin:0;font-size:17px;line-height:1.45;color:var(--on-dark);max-width:420px}
+.avatar{flex:none;width:140px;height:140px;border-radius:50%;object-fit:cover;display:block;background:linear-gradient(135deg,#DBB7AC,#693F6A);border:4px solid #fff;box-shadow:0 0 36px 2px rgba(202,147,179,.55)}
+.ctas{display:flex;gap:12px;flex-wrap:wrap}
+.hero .btn-outline{border-color:rgba(58,33,64,.5)}
+.offerings{display:flex;flex-direction:column;align-items:center;margin-top:-20px;min-width:0}
+.tabs{display:flex;gap:8px;margin-top:18px}
+.tab{padding:10px 20px;border-radius:999px;font:500 14px/1.2 var(--f-body);border:1px solid rgba(58,33,64,.35);color:var(--plum);white-space:nowrap;transition:background-color .25s,color .25s}
+.tab[aria-selected=true]{background:var(--plum);color:var(--on-dark);border-color:var(--plum);font-weight:600}
+.tab .short{display:none}
+.pager{display:flex;align-items:center;gap:14px;font:500 13px/1 var(--f-body);color:var(--plum);margin-top:6px}
+.pager[hidden]{display:none}
+.pager .dots{display:flex;gap:6px}.pager .dots i{width:6px;height:6px;border-radius:50%;background:rgba(58,33,64,.3)}.pager .dots i.on{background:var(--plum)}
+.pager button{font-weight:600;display:inline-flex;gap:6px;align-items:center}
+.after-cards{display:flex;flex-direction:column;align-items:center;gap:10px;margin-top:18px}
+.policy{font-size:13px;color:var(--plum);opacity:.8;margin:0;text-align:center}
+.deck-hint{display:none}
+
+/* ---------- Tarot cards ---------- */
+.cards{position:relative;width:100%;height:calc(var(--ch) + 90px)}
+.card{position:absolute;left:calc(50% - var(--cw) / 2);top:24px;width:var(--cw);height:var(--ch);perspective:1100px;cursor:pointer;
+  transform:var(--final,none);transition:translate .35s cubic-bezier(.2,.8,.2,1),transform .55s cubic-bezier(.2,.8,.2,1),opacity .35s;
+  animation:deal .8s cubic-bezier(.2,1.15,.35,1) calc(var(--i) * 85ms + 150ms) backwards}
+.card.dealt{animation:none}
+@keyframes deal{from{transform:translate(var(--dx),var(--dy)) rotate(var(--dr)) scale(.9);opacity:0}35%{opacity:1}to{transform:var(--final,none);opacity:1}}
+.tilt,.flip{position:absolute;inset:0;transform-style:preserve-3d}
+.tilt{transform:rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));transition:transform .25s ease-out,translate .35s cubic-bezier(.2,.8,.2,1),rotate .35s cubic-bezier(.2,.8,.2,1)}
+.flip{transition:transform .75s cubic-bezier(.3,1.25,.4,1)}
+.flipped .flip{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:16px;padding:10px;background:var(--cream);border:1px solid #fff;box-shadow:0 18px 40px -8px rgba(58,33,64,.42);overflow:hidden;transition:box-shadow .3s}
+.back{transform:rotateY(180deg)}
+.inner{height:100%;border:1px solid rgba(192,137,119,.7);border-radius:10px;padding:12px 12px 14px;display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center}
+.num{font:400 16px/1 var(--f-display);letter-spacing:.2em;color:var(--mauve);padding-left:.2em}
+.art{flex:1;width:100%;border-radius:6px;position:relative;overflow:hidden;min-height:0}
+.art svg{position:absolute;inset:0;width:100%;height:100%}
+/* Emma's illustrated card art: arched window like her card frames, thin gold keyline */
+.art-img{border-radius:999px 999px 6px 6px;background:#3A2140;box-shadow:inset 0 0 0 1px rgba(192,137,119,.55)}
+.art-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 18%}
+.rcard .art-img img{object-position:50% 26%}
+.art-img::after{content:"";position:absolute;inset:0;border-radius:inherit;box-shadow:inset 0 0 0 1px rgba(219,183,172,.6),inset 0 -24px 30px -20px rgba(42,24,48,.35);pointer-events:none}
+.name{font:700 20px/1.15 var(--f-display);color:var(--plum);margin:4px 0 0}
+.meta{font-size:13px;color:var(--ink-soft);margin:0}
+.price{font:600 21px/1.1 var(--f-body);color:var(--deep-purple);margin:2px 0 0;font-variant-numeric:tabular-nums}
+.front::before{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;opacity:0;transition:opacity .3s;z-index:2;
+  background:radial-gradient(circle at var(--gx,50%) var(--gy,30%),rgba(255,255,255,.45),transparent 55%)}
+.front::after{content:"";position:absolute;inset:-20%;pointer-events:none;z-index:3;background:linear-gradient(105deg,transparent 40%,rgba(255,255,255,.5) 50%,transparent 60%);
+  transform:translateX(-120%);animation:shimmer 1.1s ease-out calc(var(--i) * 85ms + 900ms) 1 both}
+@keyframes shimmer{to{transform:translateX(120%)}}
+.back .inner{justify-content:center;gap:10px;padding:14px}
+.back .name{margin:0}
+.desc{font-size:14px;line-height:1.5;color:var(--ink-soft);margin:0}
+.btn-book{background:var(--deep-purple);color:#FFF6F3;padding:11px 18px;font-size:14px;margin-top:4px}
+.turn{font:inherit;font-size:12px;color:var(--ink-soft);opacity:.85;background:none;border:0;padding:8px 12px;margin:-4px 0 -8px;cursor:pointer;text-decoration:underline;text-underline-offset:3px;border-radius:999px}
+.turn:hover{opacity:1}
+/* only the face you can see takes taps, so a tap never lands on the hidden side */
+.card:not(.flipped) .back,.card.flipped .front{pointer-events:none}
+.mini-draft{font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--mauve);opacity:.8}
+.cards .card:hover,.cards .card.flipped{translate:0 -28px;z-index:20}
+.cards .card:hover .tilt,.cards .card.flipped .tilt{rotate:calc(var(--r) * -1)}
+@media (hover:hover) and (pointer:fine){.card:hover .front::before{opacity:1}.card:hover .face{box-shadow:0 30px 60px -12px rgba(58,33,64,.5)}}
+.card.toss{animation:toss .38s cubic-bezier(.5,0,.75,0) forwards}
+@keyframes toss{to{transform:translate(-135%,-14px) rotate(-20deg);opacity:0}}
+
+/* ---------- Sections ---------- */
+section.band{padding-block:112px}
+.how{background:linear-gradient(#DBB7AC,#F8EFEC 220px)}
+.sec-head{display:flex;flex-direction:column;align-items:center;gap:16px;text-align:center}
+.steps{list-style:none;margin:64px 0 0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:48px;position:relative}
+.steps::before{content:"";position:absolute;top:36px;left:16%;right:16%;border-top:1px dashed rgba(105,63,106,.35)}
+.step{display:flex;flex-direction:column;align-items:center;text-align:center;gap:12px;position:relative}
+.step .n{width:72px;height:72px;border-radius:50%;display:grid;place-items:center;background:var(--cream);border:1px solid rgba(192,137,119,.7);box-shadow:0 0 0 6px var(--blush-tint);font:400 24px/1 var(--f-display);color:var(--deep-purple);letter-spacing:.06em}
+.step h3{font:700 24px/1.2 var(--f-display);margin:8px 0 0;color:var(--plum)}
+.step p{margin:0;font-size:15px;line-height:1.55;color:var(--ink-soft);max-width:280px}
+
+.draw{position:relative;isolation:isolate;overflow:hidden;color:var(--on-dark);background:linear-gradient(#2A1830,#693F6A 60%,#A8638C)}
+.draw::before{content:"";position:absolute;inset:-20% -10%;z-index:-1;pointer-events:none;
+  background:radial-gradient(42% 24% at 28% 26%,rgba(243,201,217,.2),transparent 70%),radial-gradient(36% 20% at 74% 18%,rgba(202,147,179,.18),transparent 70%);
+  animation:drift 28s ease-in-out infinite alternate}
+@keyframes drift{to{transform:translate3d(4%,3%,0) scale(1.08)}}
+.draw .eyebrow{color:#F1D9D0}
+.draw h2{color:#FFF6F3}.draw h2 em{color:var(--rose-light)}
+.draw .lede{color:var(--on-dark);opacity:.85}
+.draw-stage{position:relative;margin-top:56px;min-height:460px;display:flex;flex-direction:column;align-items:center}
+.backs{display:flex;gap:28px;justify-content:center;transition:opacity .35s;perspective:1200px}
+/* the cards fall from the sky flipping side over side (back ⇄ face), then settle into the spread */
+.backs.await .cback{opacity:0}
+/* no opacity animation on .cback itself: it would flatten the 3D and show the back face mirrored */
+.cback{width:200px;height:330px;position:relative;cursor:pointer;transform-style:preserve-3d;transition:transform .35s cubic-bezier(.2,.8,.2,1),opacity .35s}
+.cback:nth-child(1){rotate:-6deg;translate:0 14px}.cback:nth-child(3){rotate:6deg;translate:0 14px}
+.cb-face{position:absolute;inset:0;display:block;border-radius:16px;padding:10px;backface-visibility:hidden;-webkit-backface-visibility:hidden;
+  box-shadow:0 22px 50px -12px rgba(0,0,0,.5);transition:box-shadow .5s}
+.cb-back{background:radial-gradient(circle at 50% 45%,#7E4C80,#3A2140 70%);border:1px solid rgba(219,183,172,.6)}
+.cb-front{transform:rotateY(180deg);background:var(--cream);border:1px solid #fff}
+.cb-back .inner{border-color:rgba(219,183,172,.45);padding:0;position:relative}
+.cb-front .inner{border-color:rgba(192,137,119,.7);padding:0;position:relative}
+.cb-label{position:absolute;top:8%;left:0;right:0;text-align:center;font:400 11px/1 var(--f-display);letter-spacing:.3em;text-transform:uppercase;color:#DBB7AC;padding-left:.3em}
+.cb-front .cb-label{color:var(--mauve)}
+.cback:hover,.cback:focus-visible{transform:translateY(-16px)}
+.cback:hover .cb-face,.cback:focus-visible .cb-face{box-shadow:0 0 0 1px var(--soft-rose),0 0 48px 6px rgba(202,147,179,.45),0 22px 50px -12px rgba(0,0,0,.5)}
+.cback svg,.rv-back svg{width:100%;height:100%;display:block}
+.cback.dropping{pointer-events:none;animation:cardDrop 1.9s cubic-bezier(.25,.75,.3,1) calc(var(--i) * 230ms) both}
+.cback.dropping .cb-face{box-shadow:0 0 50px 14px rgba(243,201,217,.42)}
+@keyframes cardDrop{
+  0%{transform:translateY(-600px) rotateY(var(--flips)) rotateZ(var(--tilt)) scale(.7)}
+  72%{transform:translateY(14px) rotateY(-14deg) rotateZ(0deg) scale(1.02)}
+  86%{transform:translateY(-5px) rotateY(5deg) scale(1)}
+  100%{transform:none}}
+.cback.landed .cb-face{animation:landGlow 1.3s ease-out}
+@keyframes landGlow{
+  0%{box-shadow:0 0 0 1px #CA93B3,0 0 70px 18px rgba(202,147,179,.65),0 22px 50px -12px rgba(0,0,0,.5)}
+  100%{box-shadow:0 0 0 1px rgba(202,147,179,0),0 0 0 0 rgba(202,147,179,0),0 22px 50px -12px rgba(0,0,0,.5)}}
+.burst{position:absolute;width:var(--bs);height:var(--bs);color:#F6E4EC;pointer-events:none;z-index:2;animation:burst .95s ease-out forwards}
+@keyframes burst{from{opacity:1;transform:translate(0,0) scale(1)}to{opacity:0;transform:translate(var(--bx),var(--by)) scale(.3) rotate(120deg)}}
+.backs.picking .cback:not(.picked){opacity:0;transform:translateY(40px)}
+.backs.picking .cback.picked{transform:translateY(-30px) scale(1.05)}
+.reveal{display:flex;flex-direction:column;align-items:center;gap:20px}
+.reveal[hidden]{display:none}
+.rcard{width:280px;height:440px;position:relative;perspective:1200px}
+.rcard .face{box-shadow:0 0 0 1px var(--soft-rose),0 0 60px 10px rgba(202,147,179,.4),0 30px 60px -12px rgba(0,0,0,.5)}
+.rcard .rv-back{background:radial-gradient(circle at 50% 45%,#7E4C80,#3A2140 70%);border-color:rgba(219,183,172,.6)}
+.rcard .front .inner{gap:9px;justify-content:center}
+.chosen-tag{font:600 11px/1 var(--f-body);letter-spacing:.14em;text-transform:uppercase;color:var(--mauve)}
+.rcard .art{flex:0 0 120px;width:100%}
+.again{color:var(--on-dark)}
+
+.emma{background:var(--cream)}
+.emma-grid{display:grid;grid-template-columns:420px minmax(0,1fr);gap:80px;align-items:center}
+.arch{aspect-ratio:420/520;max-width:100%;border-radius:999px 999px 24px 24px;position:relative;overflow:hidden;
+  background:radial-gradient(circle at 50% 30%,#CA93B3,#693F6A 75%);box-shadow:0 30px 60px -20px rgba(58,33,64,.45);border:8px solid #fff;outline:1px solid rgba(192,137,119,.5)}
+.arch img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 30%}
+.arch svg{position:absolute;inset:0;width:100%;height:100%}
+.emma-copy{display:flex;flex-direction:column;gap:20px;min-width:0}
+.roles{display:flex;flex-wrap:wrap;gap:8px;padding:0;margin:0;list-style:none}
+.roles li{padding:8px 14px;border-radius:999px;border:1px solid rgba(105,63,106,.25);font-size:14px;color:var(--deep-purple)}
+
+.life{background:linear-gradient(var(--cream),#F5E8E3)}
+.life-top{display:flex;justify-content:space-between;align-items:flex-end;gap:32px;flex-wrap:wrap}
+.life-head{display:flex;flex-direction:column;gap:14px;max-width:560px}
+.life-ctas{display:flex;gap:20px;align-items:center;flex-wrap:wrap}
+.life-grid{list-style:none;margin:48px 0 0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px}
+.life-grid figure{margin:0;display:flex;flex-direction:column;gap:12px}
+.life-grid img{width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;border-radius:16px;display:block;box-shadow:0 18px 40px -18px rgba(58,33,64,.35);transition:transform .4s cubic-bezier(.2,.8,.2,1)}
+.life-grid li:hover img{transform:translateY(-4px)}
+.life-grid figcaption{font:400 18px/1.2 var(--f-display);color:var(--plum)}
+.reviews{background:var(--blush-tint)}
+.rev-wrap{margin-top:48px}
+.rev-grid{display:flex;gap:24px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;padding:4px 2px 16px;scrollbar-width:none}
+.rev-grid::-webkit-scrollbar{display:none}
+.rev-controls{display:flex;gap:10px;justify-content:flex-end;margin-top:8px}
+.rev-btn{width:48px;height:48px;border-radius:50%;border:1px solid rgba(58,33,64,.3);font-size:18px;color:var(--plum);transition:background-color .2s,opacity .2s}
+.rev-btn:hover{background:rgba(105,63,106,.08)}
+.rev-btn:disabled{opacity:.35;cursor:default}
+.rev{flex:0 0 calc((100% - 48px) / 3);scroll-snap-align:start;background:var(--cream);border:1px solid rgba(192,137,119,.35);border-radius:20px;padding:28px;display:flex;flex-direction:column;gap:14px;min-width:0}
+.rev .stars-row{color:var(--mauve);letter-spacing:3px;font-size:15px}
+.rev blockquote{margin:0;font-size:16px;line-height:1.6;color:var(--plum);display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:6;overflow:hidden}
+.rev.open blockquote{-webkit-line-clamp:unset;display:block}
+.rev .more{align-self:flex-start;font:600 13px/1 var(--f-body);color:var(--mauve)}
+.rev .more[hidden]{display:none}
+.rev .who{display:flex;align-items:center;gap:12px;margin-top:auto;padding-top:8px;font-size:13px;color:var(--ink-soft)}
+.rev .who b{display:block;font:700 16px/1.2 var(--f-display);color:var(--plum)}
+.rev .who i{flex:none;width:40px;height:40px;border-radius:50%;display:grid;place-items:center;font:600 14px/1 var(--f-body);font-style:normal;color:#fff;background:linear-gradient(135deg,#CA93B3,#693F6A)}
+.rev-note{text-align:center;margin:20px 0 0;font-size:13px;color:var(--ink-soft)}
+/* after the proof, the next step: Book a Reading + the quieter Google link */
+.rev-cta{display:flex;justify-content:center;align-items:center;flex-wrap:wrap;gap:28px;margin-top:36px}
+.rev-cta .link{font-size:14px}
+@media (max-width:600px){.rev-cta{flex-direction:column;gap:18px;margin-top:28px}}
+.g-chip{display:inline-flex;gap:8px;align-items:center;padding:8px 14px;border-radius:999px;background:var(--cream);border:1px solid rgba(192,137,119,.35);font:600 13px/1 var(--f-body);color:var(--plum)}
+.g-chip b{color:var(--mauve);letter-spacing:2px}
+
+.faq{background:var(--cream)}
+.faq-grid{display:grid;grid-template-columns:360px minmax(0,1fr);gap:80px;align-items:start}
+.faq-side{display:flex;flex-direction:column;gap:18px;position:sticky;top:110px}
+details{border-bottom:1px solid rgba(105,63,106,.15)}
+details:first-child{border-top:1px solid rgba(105,63,106,.15)}
+summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:20px;padding:24px 0;font:700 21px/1.3 var(--f-display);color:var(--plum)}
+summary::-webkit-details-marker{display:none}
+summary .pm{flex:none;width:32px;height:32px;border-radius:50%;border:1px solid rgba(105,63,106,.3);position:relative;transition:transform .3s,background-color .3s}
+summary .pm::before,summary .pm::after{content:"";position:absolute;left:50%;top:50%;width:12px;height:1.5px;background:var(--deep-purple);translate:-50% -50%}
+summary .pm::after{rotate:90deg;transition:rotate .3s}
+details[open] summary .pm{background:var(--deep-purple)}
+details[open] summary .pm::before,details[open] summary .pm::after{background:#fff}
+details[open] summary .pm::after{rotate:0deg}
+details p{margin:0 0 24px;font-size:16px;line-height:1.6;color:var(--ink-soft);max-width:620px}
+details p a{color:var(--deep-purple);font-weight:600}
+
+.footer{background:var(--night);color:var(--on-dark);padding-block:96px calc(40px + env(safe-area-inset-bottom,0px));position:relative;overflow:hidden}
+.foot-grid{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.6fr) minmax(0,.8fr);gap:64px}
+.footer h2{color:#FFF6F3}
+.form{display:flex;flex-direction:column;gap:12px;margin-top:24px;max-width:440px}
+.form label{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+.form input,.form textarea{width:100%;font:15px/1.4 var(--f-body);color:var(--on-dark);background:rgba(246,228,236,.07);border:1px solid rgba(246,228,236,.18);border-radius:12px;padding:14px 16px}
+.form input::placeholder,.form textarea::placeholder{color:rgba(246,228,236,.55)}
+.form textarea{min-height:110px;resize:vertical}
+.form .btn{align-self:flex-start;margin-top:4px}
+.form-note{font-size:13px;color:var(--rose-light);min-height:1em;margin:0}
+.foot-links{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:14px}
+.foot-links a{text-decoration:none;font-size:15px;opacity:.88}.foot-links a:hover{opacity:1;text-decoration:underline;text-underline-offset:5px}
+.social{display:flex;gap:12px;margin-top:22px}
+.social a{position:relative;width:48px;height:48px;border-radius:50%;display:grid;place-items:center;color:#F6E4EC;text-decoration:none;
+  border:1px solid rgba(219,183,172,.35);background:radial-gradient(circle at 50% 30%,rgba(202,147,179,.14),transparent 70%);
+  transition:transform .35s cubic-bezier(.2,.8,.2,1),border-color .3s,box-shadow .3s,color .3s}
+.social a svg:first-child{width:21px;height:21px;fill:none;stroke:currentColor;stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round}
+.social a .tw{position:absolute;top:-3px;right:-3px;width:11px;height:11px;color:#DBB7AC;opacity:0;transform:scale(.3) rotate(-45deg);transition:opacity .3s,transform .45s cubic-bezier(.2,1.4,.4,1)}
+.social a:hover,.social a:focus-visible{transform:translateY(-3px);color:#fff;border-color:#CA93B3;box-shadow:0 0 22px 2px rgba(202,147,179,.45)}
+.social a:hover .tw,.social a:focus-visible .tw{opacity:1;transform:scale(1) rotate(0deg)}
+.foot-brand img{height:84px;display:block}
+.copyright{margin-top:72px;padding-top:24px;border-top:1px solid rgba(246,228,236,.12);font-size:13px;opacity:.7;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+
+/* capture mode: no entrance animations, so the snapshot shows the finished state */
+html.capture .card,html.capture .front::after{animation:none!important}
+/* Figma's capture ignores backface-visibility and can't snapshot the WebGL sky cleanly:
+   hide the reverse sides and show the static gradient that sits behind the shader */
+html.capture .face.back,html.capture .cb-front,html.capture #aurora{display:none!important}
+
+/* ---------- Shooting stars ---------- */
+.shoots{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.shoot{position:absolute;height:1.6px;width:var(--len);border-radius:2px;background:linear-gradient(90deg,rgba(255,246,243,0),rgba(255,246,243,.95));
+  transform-origin:100% 50%;rotate:var(--a);opacity:0;animation:shoot var(--dur) cubic-bezier(.3,.1,.4,1) forwards}
+.shoot::after{content:"";position:absolute;right:-2px;top:50%;width:4px;height:4px;margin-top:-2px;border-radius:50%;background:#fff;box-shadow:0 0 8px 2px rgba(255,236,244,.8)}
+@keyframes shoot{0%{opacity:0;translate:0 0}12%{opacity:1}70%{opacity:.9}100%{opacity:0;translate:var(--dx) var(--dy)}}
+
+/* ---------- Scroll reveals (only armed when JS + IntersectionObserver run and motion is allowed) ---------- */
+.js-reveal [data-reveal]{transition:opacity .9s ease,translate .9s cubic-bezier(.2,.8,.2,1),scale .9s cubic-bezier(.2,.8,.2,1);transition-delay:var(--rd,0ms)}
+.js-reveal [data-reveal].pre{opacity:0;translate:0 32px}
+.js-reveal [data-reveal=left].pre{translate:-40px 0}
+.js-reveal [data-reveal=right].pre{translate:40px 0}
+.js-reveal [data-reveal=scale].pre{translate:0 24px;scale:.94}
+@media (max-width:1024px){.js-reveal [data-reveal=left].pre,.js-reveal [data-reveal=right].pre{translate:0 32px}}
+
+/* ---------- Prices dialog ---------- */
+dialog{border:0;border-radius:20px;padding:0;width:min(720px,calc(100% - 32px));max-height:85vh;background:var(--cream);color:var(--plum);box-shadow:0 30px 80px -20px rgba(28,16,32,.6)}
+dialog::backdrop{background:rgba(28,16,32,.55);backdrop-filter:blur(4px)}
+dialog[open]{animation:pop .35s cubic-bezier(.2,1.1,.3,1)}
+@keyframes pop{from{opacity:0;transform:translateY(16px) scale(.98)}}
+.dlg-head{position:sticky;top:0;background:var(--cream);display:flex;justify-content:space-between;align-items:center;padding:22px 28px 14px;border-bottom:1px solid rgba(105,63,106,.12)}
+.dlg-head h2{font:700 28px/1.1 var(--f-display);color:var(--deep-purple)}
+.dlg-body{padding:8px 28px 24px}
+.grp h3{font:600 12px/1 var(--f-body);letter-spacing:.16em;color:var(--mauve);margin:22px 0 6px}
+.row{display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:16px;align-items:center;padding:12px 0;border-bottom:1px solid rgba(105,63,106,.1)}
+.row b{font:700 18px/1.2 var(--f-display)}.row small{display:block;font-size:13px;color:var(--ink-soft);margin-top:2px}
+.row .p{font-weight:600;font-size:16px;font-variant-numeric:tabular-nums}
+.row a{font:600 13px/1 var(--f-body);padding:9px 14px;border-radius:999px;background:var(--deep-purple);color:#fff;text-decoration:none}
+.dlg-policy{font-size:13px;color:var(--ink-soft);margin:18px 0 0}
+
+/* ---------- Draw a card: Ask the cards (focus → fan of 22 Major Arcana → reading) ---------- */
+.dstep{display:flex;flex-direction:column;align-items:center;gap:22px;width:100%}
+.dstep[hidden]{display:none}
+.dstep.enter{animation:stepIn .6s cubic-bezier(.2,.8,.2,1) both}
+@keyframes stepIn{from{opacity:0;transform:translateY(18px)}}
+.step-title{font:400 32px/1.15 var(--f-display);color:#FFF6F3;margin:0;text-align:center;text-wrap:balance}
+.step-sub{margin:-10px 0 0;font-size:16px;color:var(--on-dark);opacity:.85;text-align:center}
+.focus-chips{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;max-width:780px}
+.fchip{display:inline-flex;align-items:center;gap:10px;padding:14px 22px;border-radius:999px;border:1px solid rgba(243,201,217,.55);color:#F6E4EC;font:500 16px/1 var(--f-body);transition:background-color .25s,color .25s,box-shadow .3s,transform .2s}
+.fchip svg{width:11px;height:11px;color:#F3C9D9}
+.fchip:hover{transform:translateY(-2px);border-color:#F3C9D9}
+.fchip[aria-pressed=true]{background:var(--cream);color:var(--plum);border-color:var(--cream);box-shadow:0 0 26px 2px rgba(202,147,179,.6)}
+.fchip[aria-pressed=true] svg{color:var(--mauve)}
+.deck-stage{position:relative;display:flex;flex-direction:column;align-items:center;margin-top:18px}
+/* the face-down deck: same card-back art as the 22-card fan */
+.deck{position:relative;width:150px;height:240px;cursor:pointer;filter:drop-shadow(0 0 44px rgba(202,147,179,.35))}
+.deck i{position:absolute;inset:0;border-radius:14px;background:radial-gradient(circle at 50% 45%,#7E4C80,#3A2140 75%);border:1px solid rgba(219,183,172,.65);box-shadow:0 8px 18px -6px rgba(0,0,0,.45);transform:translate(var(--dx),var(--dy)) rotate(var(--dr));transition:transform .35s cubic-bezier(.2,.8,.2,1)}
+.deck i::before{content:"";position:absolute;inset:6%;border:1px solid rgba(219,183,172,.4);border-radius:9px}
+.deck i::after{content:"";position:absolute;left:31%;right:31%;top:50%;aspect-ratio:1;translate:0 -50%;border:1px solid rgba(219,183,172,.55);border-radius:50%}
+.deck i svg{position:absolute;left:50%;top:50%;width:16%;height:16%;translate:-50% -50%;color:#F6E4EC}
+.deck i:nth-child(1){--dx:-8px;--dy:7px;--dr:-9deg}.deck i:nth-child(2){--dx:7px;--dy:4px;--dr:8deg}.deck i:nth-child(3){--dx:-4px;--dy:2px;--dr:-4deg}
+.deck i:nth-child(4){--dx:4px;--dy:-1px;--dr:4deg}.deck i:nth-child(5){--dx:-1px;--dy:-3px;--dr:-1.5deg}.deck i:nth-child(6){--dx:0px;--dy:-6px;--dr:0deg}
+.deck-stage.ready .deck:hover i:nth-child(6){transform:translate(0,-12px) rotate(0deg)}
+.deck.nudge{animation:deckNudge .55s ease-in-out}
+@keyframes deckNudge{20%{rotate:-4deg}45%{rotate:3.5deg}70%{rotate:-2deg}100%{rotate:0deg}}
+.focus-chips.nudge .fchip{animation:chipGlow 1s ease-out}
+@keyframes chipGlow{30%{border-color:#F3C9D9;box-shadow:0 0 22px 2px rgba(243,201,217,.55)}}
+/* Shuffle the deck: sits on the deck. Waiting = dashed hint, Ready = the one glowing "magic" button */
+.shuffle-btn{position:relative;z-index:2;margin-top:-30px;display:inline-flex;align-items:center;gap:10px;padding:15px 28px 15px 24px;border-radius:999px;font:600 17px/1 var(--f-body);cursor:pointer;
+  border:1.2px dashed rgba(243,201,217,.6);background:rgba(42,24,48,.72);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);color:rgba(246,228,236,.88);transition:background .35s,color .35s,box-shadow .35s,border-color .35s,transform .2s}
+.shuffle-btn .sb-icon{width:20px;height:20px;fill:none;stroke:#F3C9D9;stroke-width:1.5}
+.shuffle-btn .sb-sp{display:none;width:13px;height:13px;color:var(--mauve)}
+.deck-stage.ready .shuffle-btn{border:1.2px solid transparent;background:linear-gradient(90deg,#FBF4F1,#F3C9D9 55%,#DBB7AC);color:var(--plum);box-shadow:0 0 30px 2px rgba(202,147,179,.6),0 8px 20px -6px rgba(42,24,48,.35)}
+.deck-stage.ready .shuffle-btn .sb-icon{stroke:var(--plum)}
+.deck-stage.ready .shuffle-btn .sb-sp{display:block}
+.deck-stage.ready .shuffle-btn:hover{transform:translateY(-2px);box-shadow:0 0 40px 6px rgba(202,147,179,.7),0 10px 22px -6px rgba(42,24,48,.4)}
+.shuffle-btn:focus-visible{outline:2px solid #F3C9D9;outline-offset:3px}
+@media (max-width:600px){.deck{width:112px;height:179px}.deck i{border-radius:11px}.shuffle-btn{font-size:16px;padding:14px 24px 14px 20px}}
+@media (prefers-reduced-motion:reduce){.deck.nudge,.focus-chips.nudge .fchip{animation:none}}
+.pick-for{color:#F1D9D0}
+.fan{position:relative;width:100%;max-width:1060px;height:var(--fh,360px);margin-top:6px}
+.fcard{position:absolute;left:0;top:0;width:var(--cw);height:calc(var(--cw) * 1.6);padding:0;border-radius:calc(var(--cw) * .09);cursor:pointer;
+  background:radial-gradient(circle at 50% 45%,#7E4C80,#3A2140 75%);border:1px solid rgba(219,183,172,.65);box-shadow:0 8px 18px -6px rgba(0,0,0,.45);
+  transform:translate(var(--x),var(--y)) rotate(var(--r)) rotateY(0deg);transition:translate .3s cubic-bezier(.2,.8,.2,1),box-shadow .3s,opacity .45s}
+.fcard::before{content:"";position:absolute;inset:6%;border:1px solid rgba(219,183,172,.4);border-radius:calc(var(--cw) * .06)}
+.fcard::after{content:"";position:absolute;left:22%;right:22%;top:50%;aspect-ratio:1;translate:0 -50%;border:1px solid rgba(219,183,172,.55);border-radius:50%}
+.fcard svg{position:absolute;left:50%;top:50%;width:26%;height:26%;translate:-50% -50%;color:#F6E4EC}
+.fan.dealing .fcard{animation:fanIn .9s cubic-bezier(.2,.9,.3,1) calc(var(--i) * 35ms) both;pointer-events:none}
+@keyframes fanIn{from{transform:translate(var(--x0),-180px) rotate(0deg) rotateY(540deg);opacity:0}35%{opacity:1}to{transform:translate(var(--x),var(--y)) rotate(var(--r)) rotateY(0deg)}}
+@media (hover:hover) and (pointer:fine){.fcard:hover,.fcard:focus-visible{translate:0 -22px;box-shadow:0 0 0 1px #F3C9D9,0 0 30px 4px rgba(243,201,217,.6)}}
+.fcard:focus-visible{translate:0 -22px;outline:none;box-shadow:0 0 0 2px #F3C9D9,0 0 30px 4px rgba(243,201,217,.6)}
+.fan.picked .fcard:not(.chosen){opacity:0;translate:0 30px;pointer-events:none}
+.fan .fcard.chosen{translate:0 -48px;box-shadow:0 0 0 1px #F3C9D9,0 0 40px 8px rgba(243,201,217,.7)}
+.pick-meta{display:flex;gap:28px;align-items:center;font:500 14px/1 var(--f-body);color:var(--on-dark);opacity:.9}
+.link.light{color:#FFF6F3}
+.read-step{flex-direction:row;justify-content:center;align-items:center;gap:64px}
+.read-step .rcard{flex:none}
+.arc-face .inner{gap:10px;justify-content:center}
+.arc-num{font:400 18px/1 var(--f-display);letter-spacing:.2em;color:var(--mauve);padding-left:.2em}
+.arc-art{flex:1;width:100%;display:grid;place-items:center;border-radius:999px 999px 6px 6px;border:1px solid rgba(219,183,172,.6)}
+.arc-art svg{width:62%;height:auto;overflow:visible}
+.arc-art{position:relative;overflow:hidden}
+.arc-art img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 20%}
+.arc-name{font:700 24px/1.1 var(--f-display);color:var(--plum);margin:0}
+.reading{max-width:520px;display:flex;flex-direction:column;gap:16px;text-align:left}
+.for-chip{align-self:flex-start;padding:7px 14px;border-radius:999px;background:rgba(251,244,241,.15);font:500 13px/1 var(--f-body);color:#F6E4EC}
+.reading h3{font:400 52px/1.05 var(--f-display);color:#FFF6F3;margin:0}
+.reading .msg{font:italic 400 26px/1.35 var(--f-display);color:#FFF6F3;margin:0}
+.reading .kw{font-size:14px;color:#F3C9D9;margin:0}
+.reading hr{border:0;border-top:1px solid rgba(246,228,236,.25);margin:4px 0;width:100%}
+.reading .go{font:500 14px/1.3 var(--f-body);color:#F6E4EC;opacity:.9;margin:0}
+.sess{display:flex;align-items:center;gap:16px;padding:16px 16px 16px 20px;border-radius:18px;background:var(--cream)}
+.sess div{flex:1;min-width:0}.sess b{display:block;font:700 20px/1.2 var(--f-display);color:var(--plum)}.sess span{font-size:13px;color:var(--ink-soft)}
+.sess .btn{padding:11px 18px;font-size:14px;flex:none}
+.read-links{display:flex;gap:28px;flex-wrap:wrap}
+.draft-note{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#F3C9D9;opacity:.75;margin:0}
+
+/* ---------- Emma's feedback round ---------- */
+.vibe{margin:-6px 0 0;font-size:15px;color:var(--on-dark);display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.vibe a{color:#FFF6F3;font-weight:600;text-underline-offset:4px}
+.vibe .draft-tag{background:rgba(246,228,236,.15);color:#F6E4EC}
+.in-person-note{margin:44px auto 0;max-width:680px;text-align:center;font-size:15px;line-height:1.6;color:var(--ink-soft);padding:14px 22px;border-radius:20px;background:rgba(255,255,255,.55);border:1px solid rgba(192,137,119,.35)}
+.in-person-note a,.cat-foot .in-person a{color:var(--deep-purple);font-weight:600}
+.in-person-note .sp{color:var(--mauve)}
+/* the phone line always gets its own line and never splits */
+.in-person-note .call-line{display:block;white-space:nowrap}
+.cat-foot .in-person a{white-space:nowrap}
+/* Hero trust row: reviews link (+ socials when the header icons are hidden) */
+.trust{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:2px}
+.rev-link{display:inline-flex;align-items:center;gap:7px;padding:8px 14px 8px 12px;border-radius:999px;border:1px solid rgba(243,201,217,.5);background:rgba(58,33,64,.32);color:#FFF6F3;font-size:14px;font-weight:600;text-decoration:none;transition:background .25s,border-color .25s,box-shadow .25s}
+.rev-link .sp{width:13px;height:13px;color:#DBB7AC}
+.rev-link .arr{color:#DBB7AC;transition:translate .25s}
+.rev-link:hover,.rev-link:focus-visible{background:rgba(58,33,64,.5);border-color:#CA93B3;box-shadow:0 0 18px rgba(202,147,179,.35)}
+.rev-link:hover .arr{translate:3px 0}
+.social-hero{margin:0;gap:4px}
+.social-hero a{width:32px;height:32px}
+.social-hero a svg:first-child{width:15px;height:15px}
+.social-hero a .tw{display:none}
+@media (min-width:1241px){.social-hero{display:none}}
+@media (max-width:380px){.trust{gap:8px}.rev-link{padding:8px 12px 8px 10px;gap:6px}.social-hero{gap:3px}.social-hero a{width:30px;height:30px}}
+.start-tag{display:inline-block;font:600 10px/1 var(--f-body);letter-spacing:.12em;text-transform:uppercase;color:#fff;background:var(--mauve);padding:5px 8px;border-radius:999px;margin:-2px 0 0}
+.start-tag.inline{margin:0 0 0 10px;vertical-align:3px}
+.cat-group{list-style:none;font:600 11px/1 var(--f-body);letter-spacing:.14em;text-transform:uppercase;color:var(--mauve);padding:18px 0 6px}
+.cat-group+.cat-row{border-top:1px solid rgba(105,63,106,.12)}
+.cat-gallery{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:6px;padding:6px;background:#3A2140}
+.cg-tile{position:relative;margin:0;border-radius:10px;overflow:hidden;background:radial-gradient(circle at 50% 35%,#CA93B3,#693F6A 80%)}
+.cg-tile:nth-child(2){background:radial-gradient(circle at 50% 35%,#C08977,#3A2140 80%)}.cg-tile:nth-child(3){background:radial-gradient(circle at 50% 35%,#936A94,#2A1830 80%)}.cg-tile:nth-child(4){background:radial-gradient(circle at 50% 35%,#F3C9D9,#A8638C 80%)}
+.cg-tile img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 22%}
+.cg-note{position:absolute;left:50%;bottom:14px;translate:-50% 0;font:600 10px/1 var(--f-body);letter-spacing:.12em;text-transform:uppercase;color:#FFF6F3;background:rgba(42,24,48,.55);padding:6px 10px;border-radius:999px;white-space:nowrap}
+.social-mini{margin:0;gap:6px}
+.social-mini a{width:34px;height:34px}
+.social-mini a svg:first-child{width:16px;height:16px}
+.social-mini a .tw{display:none}
+@media (max-width:1240px){.social-mini{display:none}}
+.social-menu{margin-top:4px}
+.menu-phone,.foot-phone{color:#F6E4EC;font:600 15px/1 var(--f-body);text-underline-offset:4px}
+.foot-phone{display:inline-block;margin-bottom:22px}
+
+/* ---------- Category sheet (opened from the nav: one category's sessions + a photo of Emma at work) ---------- */
+#cat{width:min(1000px,calc(100% - 32px));max-height:88vh;overflow:hidden}
+.cat-grid{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);height:min(88vh,720px)}
+.cat-photo{position:relative;overflow:hidden;background:radial-gradient(circle at 50% 35%,#CA93B3,#693F6A 75%)}
+.cat-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 20%}
+.cat-ph{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;color:#FFF6F3;text-align:center;padding:24px}
+.cat-ph svg{width:34px;height:34px;opacity:.75}
+.cat-ph span{font:500 14px/1.4 var(--f-body);opacity:.9;max-width:220px}
+.cat-ph small{font:600 10px/1 var(--f-body);letter-spacing:.12em;text-transform:uppercase;opacity:.7}
+.cat-body{overflow-y:auto;padding:40px 40px 28px;display:flex;flex-direction:column;gap:20px;position:relative}
+.cat-close{position:absolute;top:16px;right:16px}
+.cat-head{display:flex;flex-direction:column;gap:12px;padding-right:40px}
+.cat-head h2{font-size:38px}
+.cat-head p{margin:0;font-size:16px;line-height:1.55;color:var(--ink-soft)}
+.cat-list{list-style:none;margin:0;padding:0}
+.cat-row{display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:6px 18px;align-items:center;padding:18px 0;border-bottom:1px solid rgba(105,63,106,.12)}
+.cat-row:first-child{border-top:1px solid rgba(105,63,106,.12)}
+.cat-row b{font:700 20px/1.2 var(--f-display);color:var(--plum)}
+.cat-row .m{display:block;font-size:13px;color:var(--ink-soft);margin-top:3px}
+.cat-row .t{grid-column:1/-1;margin:0;font-size:14px;line-height:1.5;color:var(--ink-soft);max-width:520px}
+.cat-row .p{font:600 18px/1 var(--f-body);color:var(--deep-purple);font-variant-numeric:tabular-nums}
+.cat-row a.btn{padding:10px 18px;font-size:14px}
+.cat-foot{display:flex;flex-direction:column;gap:12px;margin-top:auto;padding-top:8px}
+.cat-foot .policy{text-align:left}
+.cat-links{display:flex;gap:24px;flex-wrap:wrap}
+@media (max-width:767px){
+  dialog{width:100%;max-width:none;margin:auto 0 0;border-radius:20px 20px 0 0;max-height:90vh}
+  dialog[open]{animation:sheetUp .4s cubic-bezier(.2,.9,.3,1)}
+  @keyframes sheetUp{from{transform:translateY(40px);opacity:0}}
+  #cat{overflow-y:auto;width:100%;max-width:none;margin:auto 0 0;max-height:92vh}
+  .cat-grid{display:block;height:auto}
+  .cat-photo{height:210px}
+  .cat-gallery{width:100%;height:330px;gap:4px;padding:4px}
+  .cat-photo{border-radius:20px 20px 0 0}
+  .cat-row .p{align-self:start;padding-top:2px}
+  .cat-body{overflow:visible;padding:24px 20px calc(24px + env(safe-area-inset-bottom,0px))}
+  .cat-close{position:absolute;top:12px;right:12px;z-index:2;background:rgba(251,244,241,.9)}
+  .cat-head{padding-right:52px}.cat-head h2{font-size:30px}
+  .cat-row{grid-template-columns:minmax(0,1fr) auto;gap:6px 14px}
+  .cat-row .p{grid-row:1;grid-column:2;justify-self:end}
+  .cat-row a.btn{grid-column:1/-1;justify-self:start}
+  .cat-row .t{grid-row:2}
+}
+
+/* ---------- Tablet + mobile (Elementor breakpoints) ---------- */
+@media (max-width:1024px){
+  :root{--cw:224px;--ch:360px}
+  .site-header .wrap{height:64px;padding-inline:16px}.site-header.scrolled .wrap{height:60px}
+  .logo img{height:52px}.scrolled .logo img{height:46px}
+  .nav{display:none}.mobile-actions{display:flex}
+  .mobile-actions .btn{padding:9px 16px;font-size:14px}
+  .hero{min-height:0;padding-bottom:40px}
+  .hero-inner{display:block;padding-top:88px}
+  .copy{gap:14px}
+  .trust{margin-bottom:12px}
+  h1{font-size:34px}
+  .avatar{width:96px;height:96px;border-width:3px;box-shadow:0 0 24px 2px rgba(202,147,179,.55)}.byline{gap:16px}.byline p{font-size:15px}
+  .ctas{display:none}
+  .hero .eyebrow{font-size:11px}
+  .offerings{margin-top:0;align-items:stretch}
+  .tabs{order:-1;margin:24px -20px 0;padding-inline:20px;overflow-x:auto;scrollbar-width:none}
+  .tabs::-webkit-scrollbar{display:none}
+  .tab{padding:9px 16px;color:#F6E4EC;border-color:rgba(246,228,236,.5)}
+  .tab[aria-selected=true]{color:var(--on-dark)}
+  .tab .long{display:none}.tab .short{display:inline}
+  .cards{height:calc(var(--ch) + 44px);margin-top:30px;touch-action:pan-y}
+  .card{top:0}
+  .cards .card:hover,.cards .card.flipped{translate:none}
+  .cards .card:hover .tilt,.cards .card.flipped .tilt{rotate:none}
+  .card:not(.is-front){pointer-events:none}
+  .card.is-front{cursor:grab;touch-action:pan-y;user-select:none;-webkit-user-select:none}
+  .card img{-webkit-user-drag:none;user-drag:none;-webkit-touch-callout:none;pointer-events:none}
+  .card.is-front:active{cursor:grabbing}
+  .card.is-hidden{opacity:0}
+  .deck-hint{display:flex;align-self:center;gap:8px;font:500 13px/1 var(--f-body);color:var(--plum);margin-top:4px}
+  .pager{display:none!important}
+  section.band{padding-block:80px}
+  h2{font-size:34px}
+  .steps{grid-template-columns:minmax(0,1fr);gap:36px;margin-top:44px}
+  .steps::before{top:36px;bottom:36px;left:36px;right:auto;border-top:0;border-left:1px dashed rgba(105,63,106,.35)}
+  .step{display:grid;grid-template-columns:72px minmax(0,1fr);column-gap:20px;align-items:start;text-align:left}
+  .step .n{grid-row:span 2}
+  .step h3{margin:6px 0 0}
+  .backs{gap:12px}
+  .cback{width:min(30vw,150px);height:auto;aspect-ratio:200/330}
+  .cback .cb-label{font-size:8px;letter-spacing:.22em}
+  .draw-stage{min-height:400px;margin-top:40px}
+  .step-title{font-size:26px}
+  .fchip{padding:12px 18px;font-size:15px}
+  .read-step{flex-direction:column;gap:28px}
+  .read-step .rcard{width:220px;height:346px}
+  .arc-name{font-size:20px}
+  .reading{gap:14px}
+  .reading h3{font-size:38px}
+  .reading .msg{font-size:21px}
+  .pick-meta{flex-direction:column;gap:14px}
+  .emma-grid,.faq-grid{grid-template-columns:minmax(0,1fr);gap:40px}
+  .arch{width:min(100%,360px);margin-inline:auto}
+  .faq-side{position:static}
+  .life .wrap{display:flex;flex-direction:column}
+  .life-top{display:contents}
+  .life-head{order:1}
+  .life-grid{order:2;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px 16px;margin-top:32px}
+  .life-grid figcaption{font-size:16px}
+  .life-ctas{order:3;margin-top:32px;flex-direction:column;align-items:flex-start;gap:14px}
+  .rev-grid{margin-inline:-20px;padding:4px 20px 12px;scroll-padding-inline:20px}
+  .rev-controls{display:none}
+  .rev{flex:0 0 82%;scroll-snap-align:center}
+  .foot-grid{grid-template-columns:minmax(0,1fr);gap:48px}
+}
+@media (max-width:1024px) and (min-width:768px){h1{font-size:44px}.byline p{max-width:520px}}
+
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .card{animation:fade .4s ease both}@keyframes fade{from{opacity:0}}
+  .front::after,.star,.dot,.draw::before{animation:none}
+  .shoot{display:none}
+  .backs.await .cback{opacity:1}
+  .flip{transition-duration:.35s}
+}
+</style>
+<style>
+/* Emma Divines blog: the article list (Emma Divines Blog template) and the article page. Loads after emma.css. */
+/* ---------- Blog ---------- */
+.site-header .nav a[aria-current=page]{text-decoration:underline;text-underline-offset:6px;text-decoration-color:var(--soft-rose);text-decoration-thickness:2px}
+.mobile-menu nav a[aria-current=page]{color:var(--rose-light);font-style:italic}
+.foot-links a[aria-current=page]{opacity:1}
+.blog-hero{position:relative;isolation:isolate;padding:184px 0 152px}
+.blog-hero .hero-bg{background:linear-gradient(#2A1830,#693F6A 42%,#A8638C 74%,#DBB7AC 90%,#FBF4F1)}
+.bh-inner{max-width:780px;margin-inline:auto;display:flex;flex-direction:column;align-items:center;gap:20px;text-align:center}
+.blog-hero .eyebrow{color:#F1D9D0}
+.blog-hero .lede{color:var(--on-dark);max-width:520px}
+.cat-chips{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-top:12px}
+.chip{display:inline-flex;align-items:center;gap:8px;padding:10px 18px;border-radius:999px;border:1px solid rgba(246,228,236,.5);color:#F6E4EC;font:500 14px/1.2 var(--f-body);white-space:nowrap;transition:background-color .25s}
+.chip .ct{font-size:12px;opacity:.65}
+.chip[aria-pressed=true]{background:var(--plum);border-color:var(--plum);font-weight:600}
+.featured{position:relative;margin-top:-88px}
+.feat-card{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);background:#FFFCFA;border-radius:28px;overflow:hidden;box-shadow:0 40px 80px -40px rgba(58,33,64,.45),0 0 0 1px rgba(192,137,119,.18)}
+.feat-img{display:block;min-height:440px;background:linear-gradient(135deg,#DBB7AC,#693F6A)}
+.feat-img img{width:100%;height:100%;object-fit:cover;display:block}
+.feat-body{padding:56px 56px 52px;display:flex;flex-direction:column;align-items:flex-start;gap:18px;justify-content:center}
+.feat-body h2{font-size:40px}.feat-body h2 a{text-decoration:none}
+.tagrow{display:flex;gap:8px}
+.ptag{align-self:flex-start;font:600 11px/1 var(--f-body);letter-spacing:.14em;text-transform:uppercase;padding:7px 10px;border-radius:999px;background:rgba(168,99,140,.12);color:var(--mauve)}
+.ptag.new{background:var(--plum);color:#FFF6F3}
+.excerpt{font-size:16px;line-height:1.6;color:var(--ink-soft);margin:0}
+.meta{display:flex;align-items:center;gap:10px;margin:0;font:500 13px/1 var(--f-body);color:var(--ink-soft)}
+.meta .sp{width:8px;height:8px;color:var(--soft-rose)}
+.feat-body .btn{margin-top:6px}
+.journal{padding:104px 0 120px}
+.j-head{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;margin-bottom:44px}
+.j-head > div{display:flex;flex-direction:column;gap:14px}
+.j-count{font:500 14px/1 var(--f-body);color:var(--ink-soft);margin:0}
+.post-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:56px 28px}
+.post a{display:flex;flex-direction:column;gap:14px;text-decoration:none;height:100%}
+.ph{aspect-ratio:3/2;border-radius:20px;overflow:hidden;background:linear-gradient(135deg,#DBB7AC,#693F6A);margin-bottom:6px}
+.ph img{width:100%;height:100%;object-fit:cover;display:block;transition:scale .5s cubic-bezier(.2,.8,.2,1)}
+.post a:hover .ph img{scale:1.04}
+.post h3{font:400 25px/1.2 var(--f-display);margin:0;color:var(--plum)}
+.post a:hover h3{text-decoration:underline;text-underline-offset:5px;text-decoration-color:var(--soft-rose)}
+.post .excerpt{font-size:15px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.post .meta{margin-top:auto;padding-top:4px}
+.post-cta{position:relative;isolation:isolate;overflow:hidden;border-radius:20px;background:linear-gradient(160deg,#2A1830,#693F6A 62%,#A8638C);color:var(--on-dark);padding:40px 36px;display:flex;flex-direction:column;justify-content:flex-end;gap:16px;min-height:100%}
+.post-cta .stars{z-index:-1}
+.post-cta .eyebrow{color:#F1D9D0}
+.post-cta h3{font:400 32px/1.15 var(--f-display);margin:0;color:#FFF6F3}
+.post-cta h3 em{color:var(--rose-light)}
+.post-cta p:not(.eyebrow){margin:0;font-size:15px;line-height:1.55}
+.cta-acts{display:flex;flex-wrap:wrap;align-items:center;gap:20px;margin-top:10px}
+.post-cta .link{color:var(--on-dark)}
+@media (max-width:1024px){
+  .blog-hero{padding:120px 0 112px}
+  .cat-chips{flex-wrap:nowrap;justify-content:flex-start;align-self:stretch;overflow-x:auto;margin:8px -20px 0;padding-inline:20px;scrollbar-width:none}
+  .cat-chips::-webkit-scrollbar{display:none}
+  .chip{padding:9px 16px}
+  .featured{margin-top:-72px}
+  .feat-card{grid-template-columns:minmax(0,1fr);border-radius:24px}
+  .feat-img{min-height:0;aspect-ratio:3/2}
+  .feat-body{padding:28px 24px 30px;gap:14px}
+  .feat-body h2{font-size:28px}
+  .journal{padding:72px 0 88px}
+  .j-head{margin-bottom:32px}
+  .post-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:44px 20px}
+  .post h3{font-size:23px}
+  .post-cta{padding:32px 26px}
+  .post-cta h3{font-size:28px}
+}
+@media (max-width:767px){.post-grid{grid-template-columns:minmax(0,1fr)}.j-head{flex-direction:column;align-items:flex-start}}
+
+/* ---------- Article ---------- */
+.art-hero{position:relative;isolation:isolate;padding:168px 0 200px}
+.art-hero .hero-bg{background:linear-gradient(#2A1830,#693F6A 48%,#A8638C 80%,#DBB7AC 94%,#FBF4F1)}
+.ah-inner{max-width:860px;margin-inline:auto;display:flex;flex-direction:column;align-items:center;gap:22px;text-align:center}
+.crumbs{display:flex;align-items:center;gap:10px;margin:0;font:600 12px/1 var(--f-body);letter-spacing:.16em;text-transform:uppercase;color:#F1D9D0}
+.crumbs a{text-decoration:none;opacity:.85}.crumbs a:hover{opacity:1;text-decoration:underline;text-underline-offset:4px}
+.crumbs .sp{width:8px;height:8px;color:var(--soft-rose)}
+.art-hero h1{font-size:56px}
+.byline-row{display:flex;align-items:center;gap:12px;color:var(--on-dark);font:500 14px/1.3 var(--f-body)}
+.byline-row img{width:44px;height:44px;border-radius:50%;object-fit:cover;border:2px solid #fff;box-shadow:0 0 18px rgba(202,147,179,.55)}
+.byline-row b{font-weight:600}
+.byline-row .dot-sep{opacity:.6}
+.art-cover{position:relative;margin-top:-150px}
+.art-cover .frame{max-width:1040px;margin-inline:auto;aspect-ratio:16/8;border-radius:28px;overflow:hidden;box-shadow:0 40px 80px -40px rgba(58,33,64,.5);background:linear-gradient(135deg,#DBB7AC,#693F6A)}
+.art-cover img{width:100%;height:100%;object-fit:cover;display:block}
+.art-body{max-width:700px;margin:72px auto 0;font-size:18px;line-height:1.75;color:#4A3550}
+.art-body > :first-child{margin-top:0}
+.art-body h2{font:400 36px/1.15 var(--f-display);color:var(--plum);margin:56px 0 16px}
+.art-body h3{font:400 25px/1.25 var(--f-display);color:var(--deep-purple);margin:36px 0 10px}
+.art-body p{margin:0 0 20px}
+.art-body strong{font-weight:600;color:var(--plum)}
+.art-body ul{list-style:none;padding:0;margin:0 0 24px;display:flex;flex-direction:column;gap:10px}
+.art-body li{position:relative;padding-left:26px}
+.art-body li::before{content:"";position:absolute;left:2px;top:.62em;width:10px;height:10px;background:var(--mauve);clip-path:polygon(50% 0,61% 39%,100% 50%,61% 61%,50% 100%,39% 61%,0 50%,39% 39%)}
+.art-body > p:first-of-type{font-size:21px;line-height:1.6;color:var(--plum)}
+.art-end{max-width:700px;margin:56px auto 0;display:flex;flex-direction:column;gap:28px}
+.art-cta{position:relative;isolation:isolate;overflow:hidden;border-radius:24px;background:linear-gradient(150deg,#2A1830,#693F6A 60%,#A8638C);color:var(--on-dark);padding:40px 44px;display:flex;flex-direction:column;gap:14px}
+.art-cta .stars{z-index:-1}
+.art-cta .eyebrow{color:#F1D9D0}
+.art-cta h2{color:#FFF6F3;font-size:34px}.art-cta h2 em{color:var(--rose-light)}
+.art-cta p:not(.eyebrow){margin:0;font-size:16px;line-height:1.55;max-width:500px}
+.art-cta .cta-acts{margin-top:8px}.art-cta .link{color:var(--on-dark)}
+.author{display:flex;gap:20px;align-items:center;padding:28px;border-radius:20px;background:var(--blush-tint);border:1px solid rgba(192,137,119,.3)}
+.author img{width:84px;height:84px;border-radius:50%;object-fit:cover;flex:none;border:3px solid #fff}
+.author h3{font:400 22px/1.2 var(--f-display);margin:0 0 6px;color:var(--plum)}
+.author p{margin:0 0 10px;font-size:15px;line-height:1.55;color:var(--ink-soft)}
+.art-foot{display:flex;justify-content:space-between;align-items:center;gap:16px;padding-top:24px;border-top:1px solid rgba(58,33,64,.14)}
+.share{display:flex;align-items:center;gap:10px;font:500 14px/1 var(--f-body);color:var(--ink-soft)}
+.share a{width:38px;height:38px;border-radius:50%;border:1px solid rgba(58,33,64,.25);display:grid;place-items:center;color:var(--plum)}
+.share svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:1.6}
+.related{padding:104px 0 120px;margin-top:104px;background:var(--blush-tint)}
+.related .post-grid .post .ph{margin-bottom:4px}
+@media (max-width:1024px){
+  .art-hero{padding:112px 0 150px}
+  .art-hero h1{font-size:36px}
+  .crumbs{font-size:11px}
+  .byline-row{font-size:13px;flex-wrap:wrap;justify-content:center}
+  .byline-row img{width:36px;height:36px}
+  .art-cover{margin-top:-112px}
+  .art-cover .frame{aspect-ratio:3/2;border-radius:20px}
+  .art-body{margin-top:44px;font-size:17px;line-height:1.7}
+  .art-body > p:first-of-type{font-size:19px}
+  .art-body h2{font-size:29px;margin-top:44px}
+  .art-body h3{font-size:22px;margin-top:30px}
+  .art-cta{padding:32px 26px}.art-cta h2{font-size:28px}
+  .author{flex-direction:column;align-items:flex-start;padding:24px}
+  .author img{width:64px;height:64px}
+  .art-foot{flex-direction:column-reverse;align-items:flex-start}
+  .related{padding:72px 0 88px;margin-top:72px}
+}
+
+/* ---------- Real-post extras ---------- */
+.art-body a{color:var(--deep-purple);text-decoration-color:var(--soft-rose);text-underline-offset:3px}
+.art-body img{max-width:100%;height:auto;border-radius:16px;display:block}
+.art-body figure{margin:32px 0}
+.art-body figcaption{font-size:14px;color:var(--ink-soft);margin-top:10px;text-align:center}
+.art-body ol{padding-left:22px;margin:0 0 24px}
+.art-body ol li{padding-left:4px}.art-body ol li::before{display:none}
+.art-body blockquote{margin:32px 0;padding:4px 0 4px 24px;border-left:3px solid var(--soft-rose);font:italic 400 22px/1.5 var(--f-display);color:var(--plum)}
+.no-cover .art-body{margin-top:0}
+.ed-article .art-hero:has(+ article){padding-bottom:96px}
+.share button{width:38px;height:38px;border-radius:50%;border:1px solid rgba(58,33,64,.25);display:grid;place-items:center;color:var(--plum)}
+.copied{font-size:13px;color:var(--mauve);min-width:0}
+.empty-note{margin:24px 0 0;color:var(--ink-soft)}
+.post .ph:empty::after{content:"";display:block;height:100%}
+.art-body .wp-block-columns{display:flex;gap:32px;align-items:flex-start;margin:0 0 20px}
+.art-body .wp-block-column{flex:1 1 0;min-width:0}
+.art-body .wp-block-column > :last-child{margin-bottom:0}
+.art-body .wp-block-image{margin:0 0 20px}
+@media (max-width:767px){.art-body .wp-block-columns{flex-direction:column;gap:0}}
+</style>
+</head>
+<body class="ed-article">
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+  <symbol id="sp" viewBox="0 0 100 100"><path fill="currentColor" d="M50 0C52.6 37 63 47.4 100 50 63 52.6 52.6 63 50 100 47.4 63 37 52.6 0 50 37 47.4 47.4 37 50 0Z"/></symbol>
+  <symbol id="cardfront" viewBox="0 0 180 310">
+    <circle cx="90" cy="155" r="60" fill="none" stroke="#C08977" stroke-width=".8" opacity=".75"/>
+    <circle cx="90" cy="155" r="70" fill="none" stroke="#C08977" stroke-width=".5" stroke-dasharray="2 5" opacity=".6"/>
+    <path d="M100 117 A40 40 0 1 0 100 193 A32 32 0 1 1 100 117Z" fill="#693F6A" opacity=".88"/>
+    <use href="#sp" x="102" y="128" width="22" height="22" style="color:#A8638C"/>
+    <use href="#sp" x="84" y="74" width="12" height="12" style="color:#C08977"/>
+    <use href="#sp" x="84" y="224" width="12" height="12" style="color:#C08977"/>
+    <use href="#sp" x="9" y="149" width="12" height="12" style="color:#C08977"/>
+    <use href="#sp" x="159" y="149" width="12" height="12" style="color:#C08977"/>
+  </symbol>
+  <symbol id="cardback" viewBox="0 0 180 310">
+    <circle cx="90" cy="155" r="62" fill="none" stroke="#DBB7AC" stroke-width=".8" opacity=".7"/>
+    <circle cx="90" cy="155" r="48" fill="none" stroke="#DBB7AC" stroke-width=".6" stroke-dasharray="2 5" opacity=".6"/>
+    <path d="M90 60 A95 95 0 0 1 90 250" fill="none" stroke="#F6E4EC" stroke-width=".8" opacity=".5"/>
+    <use href="#sp" x="72" y="137" width="36" height="36" style="color:#F6E4EC"/>
+    <use href="#sp" x="84" y="82" width="12" height="12" style="color:#DBB7AC"/>
+    <use href="#sp" x="84" y="216" width="12" height="12" style="color:#DBB7AC"/>
+    <use href="#sp" x="17" y="149" width="12" height="12" style="color:#DBB7AC"/>
+    <use href="#sp" x="151" y="149" width="12" height="12" style="color:#DBB7AC"/>
+    <use href="#sp" x="36" y="100" width="7" height="7" style="color:#F6E4EC" opacity=".7"/>
+    <use href="#sp" x="137" y="100" width="7" height="7" style="color:#F6E4EC" opacity=".7"/>
+    <use href="#sp" x="36" y="203" width="7" height="7" style="color:#F6E4EC" opacity=".7"/>
+    <use href="#sp" x="137" y="203" width="7" height="7" style="color:#F6E4EC" opacity=".7"/>
+  </symbol>
+</defs></svg>
+<header class="site-header" id="hdr">
+  <div class="wrap">
+    <a class="logo" href="index.html" aria-label="Emma Divines home"><img src="data:image/png;base64,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" alt="Emma Divines"></a>
+    <nav class="nav" aria-label="Main">
+      <a href="index.html#top" data-tab="Psychic Readings">Readings</a><a href="index.html#top" data-tab="Mediumship">Mediumship</a><a href="index.html#top" data-tab="Reiki">Reiki</a><a href="index.html#top" data-tab="Classes">Classes</a><a href="index.html#top" data-sheet="Events">Events</a><a href="index.html#emma">About</a><a href="blog.html" aria-current="page">Blog</a><a href="index.html#faq">FAQs</a>
+      <div class="social social-mini" aria-label="Emma on social media (header)"><a href="https://www.instagram.com/emmadivines/" target="_blank" rel="noopener" aria-label="Instagram (@emmadivines)" title="Instagram · @emmadivines"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r=".6" fill="currentColor"/></svg><svg class="tw" aria-hidden="true"><use href="#sp"/></svg></a><a href="https://www.tiktok.com/@emmadivines" target="_blank" rel="noopener" aria-label="TikTok (@emmadivines)" title="TikTok · @emmadivines"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3.5v11.2a3.6 3.6 0 1 1-3.6-3.6"/><path d="M14 3.5c.4 2.6 2.2 4.4 5 4.7"/></svg><svg class="tw" aria-hidden="true"><use href="#sp"/></svg></a><a href="https://www.youtube.com/@emmadivines" target="_blank" rel="noopener" aria-label="YouTube (@emmadivines)" title="YouTube · @emmadivines"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2.8" y="5.8" width="18.4" height="12.4" rx="4"/><path d="M10.4 9.3v5.4l4.6-2.7z"/></svg><svg class="tw" aria-hidden="true"><use href="#sp"/></svg></a><a href="https://www.facebook.com/diviningsoul" target="_blank" rel="noopener" aria-label="Facebook (Divining Soul)" title="Facebook · Divining Soul"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.6 20.5v-7.3h2.6l.4-3h-3V8.4c0-.9.3-1.5 1.6-1.5h1.5V4.2a20 20 0 0 0-2.3-.1c-2.3 0-3.8 1.4-3.8 3.9v2.2H9v3h2.6v7.3"/></svg><svg class="tw" aria-hidden="true"><use href="#sp"/></svg></a></div>
+      <a class="btn btn-light" href="https://calendly.com/emmadivinesbook" target="_blank" rel="noopener">Book a Reading <span class="arr">→</span></a>
+    </nav>
+    <div class="mobile-actions">
+      <a class="btn btn-light" href="https://calendly.com/emmadivinesbook" target="_blank" rel="noopener">Book <span class="arr">→</span></a>
+      <button class="menu-btn" id="menu-open" aria-label="Open menu" aria-controls="mmenu" aria-expanded="false"><i></i><i></i><i></i></button>
+    </div>
+  </div>
+</header>
+<div class="mobile-menu" id="mmenu" hidden>
+  <div class="top"><img src="data:image/png;base64,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" alt="Emma Divines"><button class="close-btn" id="menu-close" aria-label="Close menu">✕</button></div>
+  <nav aria-label="Mobile">
+    <a href="index.html#top" data-tab="Psychic Readings">Readings</a><a href="index.html#top" data-tab="Mediumship">Mediumship</a><a href="index.html#top" data-tab="Reiki">Reiki</a><a href="index.html#top" data-tab="Classes">Classes</a><a href="index.html#top" data-sheet="Events">Events</a><a href="index.html#draw">Draw a card</a><a href="index.html#emma">About Emma</a><a href="blog.html" aria-current="page">Blog</a><a href="index.html#faq">FAQs</a>
+  </nav>
+  <a class="btn btn-light" href="https://calendly.com/emmadivinesbook" target="_blank" rel="noopener" style="align-self:flex-start">Book a Reading <span class="arr">→</span></a>
+  <div class="social social-menu" aria-label="Emma on social media (menu)"><a href="https://www.instagram.com/emmadivines/" target="_blank" rel="noopener" aria-label="Instagram (@emmadivines)" title="Instagram · @emmadivines"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r=".6" fill="currentColor"/></svg><svg class="tw" aria-hidden="true"><use href="#sp"/></svg></a><a href="https://www.tiktok.com/@emmadivines" target="_blank" rel="noopener" aria-label="TikTok (@emmadivines)" title="TikTok · @emmadivines"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3.5v11.2a3.6 3.6 0 1 1-3.6-3.6"/><path d="M14 3.5c.4 2.6 2.2 4.4 5 4.7"/></svg><svg class="tw" aria-hidden="true"><use href="#sp"/></svg></a><a href="https://www.youtube.com/@emmadivines" target="_blank" rel="noopener" aria-label="YouTube (@emmadivines)" title="YouTube · @emmadivines"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2.8" y="5.8" width="18.4" height="12.4" rx="4"/><path d="M10.4 9.3v5.4l4.6-2.7z"/></svg><svg class="tw" aria-hidden="true"><use href="#sp"/></svg></a><a href="https://www.facebook.com/diviningsoul" target="_blank" rel="noopener" aria-label="Facebook (Divining Soul)" title="Facebook · Divining Soul"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.6 20.5v-7.3h2.6l.4-3h-3V8.4c0-.9.3-1.5 1.6-1.5h1.5V4.2a20 20 0 0 0-2.3-.1c-2.3 0-3.8 1.4-3.8 3.9v2.2H9v3h2.6v7.3"/></svg><svg class="tw" aria-hidden="true"><use href="#sp"/></svg></a></div>
+  <a class="menu-phone" href="tel:+19162486213">Call or text (916) 248-6213</a>
+</div>
+<main>
+<section class="art-hero">
+  <div class="hero-bg" aria-hidden="true"><div class="stars" data-stars="40,22" data-top="1" data-span="62"></div></div>
+  <div class="wrap ah-inner">
+    <p class="crumbs"><a href="blog.html">Blog</a><svg class="sp" aria-hidden="true"><use href="#sp"/></svg><a href="blog.html#tarot">Tarot</a></p>
+    <h1>How to Choose Your First Tarot Deck: A <em>Beginner’s</em> Guide</h1>
+    <div class="byline-row"><img src="images/emma-avatar.jpg" alt=""><span><b>By Emma</b></span><span class="dot-sep">·</span><span>April 15, 2025</span><span class="dot-sep">·</span><span>4 min read</span></div>
+  </div>
+</section>
+<section class="art-cover"><div class="wrap"><div class="frame"><img src="images/blog/tarot-deck.jpg" alt=""></div></div></section>
+<article class="wrap"><div class="art-body">
+<h2>Introduction</h2>
+<p>Choosing your <strong>first tarot deck</strong> is an exciting and personal experience, but with so many options available, it can also feel overwhelming. Whether you&#8217;re drawn to tarot for self-reflection, spiritual growth, or divination, finding the right deck is key to developing a strong connection with your readings. In this guide, we’ll walk you through the process of selecting your <strong>first tarot deck</strong>, what to consider, and how to begin your journey with confidence.</p>
+<h2>Understanding Tarot Decks</h2>
+<h3>What is a Tarot Deck?</h3>
+<p>A tarot deck is a collection of 78 cards divided into the Major Arcana (22 cards) and the Minor Arcana (56 cards). Each card carries symbolic imagery and meanings that can be interpreted intuitively or studied in depth.</p>
+<h3>Different Types of Tarot Decks</h3>
+<p>While the Rider-Waite-Smith (RWS) deck is the most well-known and widely used, there are many other types of tarot decks available, such as:</p>
+<ul>
+<li><strong>Thoth Tarot</strong> – Rich in esoteric symbolism, ideal for deep spiritual exploration.</li>
+<li><strong>Marseille Tarot</strong> – A historical deck with traditional imagery, often used for classical interpretations.</li>
+<li><strong>Modern &amp; Themed Decks</strong> – These include decks based on pop culture, animals, mythology, and more, offering a fresh take on traditional tarot.</li>
+</ul>
+<h2>Factors to Consider When Choosing Your First Tarot Deck</h2>
+<h3>1. Go with Your Intuition</h3>
+<p>The most important factor in choosing a <strong>first tarot deck</strong> is how it makes you feel. Look at different decks and pay attention to which ones you feel drawn to—your intuition will guide you to the right choice.</p>
+<h3>2. Consider the Artwork</h3>
+<p>Tarot is a visual tool, so the imagery of your deck should resonate with you. Ask yourself:</p>
+<ul>
+<li>Do I connect with the colors, illustrations, and symbols?</li>
+<li>Does the artwork inspire my intuition?</li>
+</ul>
+<h3>3. Begin with a Beginner-Friendly Deck</h3>
+<p>Some decks are more suited for beginners due to their clear symbolism and easy-to-understand imagery. The Rider-Waite-Smith deck is highly recommended because:</p>
+<ul>
+<li>It has rich yet straightforward symbolism.</li>
+<li>Many tarot books and <strong>tarot tips</strong> are based on it.</li>
+<li>It’s widely available and easy to learn from.</li>
+</ul>
+<h3>4. Look at the Guidebook</h3>
+<p>A well-written guidebook can be invaluable for beginners. Some decks come with detailed books that provide card meanings, spreads, and interpretations, making them easier to learn.</p>
+<h3>5. Size and Feel of the Cards</h3>
+<p>Tarot decks come in different sizes—some are large with intricate details, while others are compact and easy to shuffle. If you have smaller hands, a standard or mini deck might be more comfortable to use.</p>
+<h3>6. Traditional vs. Themed Decks</h3>
+<p>If you’re a beginner, a traditional tarot deck might be easier to learn from before exploring more artistic or themed variations. However, if a specific theme deeply resonates with you (e.g., astrology, animals, or fantasy), it can enhance your personal connection with the deck.</p>
+<h2>Where to Buy Your First Tarot Deck</h2>
+<p>You can purchase tarot decks online, in metaphysical stores, or at bookstores. Some things to keep in mind:</p>
+<ul>
+<li><strong>Buying in Person:</strong> This allows you to feel the deck in your hands and see the artwork up close.</li>
+<li><strong>Online Shopping:</strong> Read reviews and look at sample images of the cards before purchasing.</li>
+<li><strong>Gift vs. Self-Purchase:</strong> There’s a myth that your <strong>first tarot deck</strong> must be gifted, but this isn’t true—you can absolutely buy your own!</li>
+</ul>
+<h2>Bonding with Your Tarot Deck</h2>
+<p>Once you have your deck, spend some time getting to know it:</p>
+<ul>
+<li>Flip through the cards to familiarize yourself with the imagery.</li>
+<li>Shuffle and handle them to create a personal energetic connection.</li>
+<li>Do a simple one-card pull each day to start learning meanings intuitively.</li>
+<li>Use a tarot journal to document your readings and insights.</li>
+</ul>
+<h2>Tricks for Learning Tarot</h2>
+<p>Learning tarot takes time, patience, and practice. Here are a few <strong>tricks for learning tarot</strong> that can help you build confidence:</p>
+<ul>
+<li>Pull a daily card and reflect on its meaning.</li>
+<li>Practice with simple spreads (like a three-card spread).</li>
+<li>Use flashcards or apps to memorize card meanings.</li>
+<li>Join tarot communities online or take a beginner class to <strong>learn tarot</strong> in a group setting.</li>
+</ul>
+<h2>Conclusion</h2>
+<p>Choosing your <strong>first tarot deck</strong> is a deeply personal and exciting journey. By trusting your intuition, considering the artwork, and starting with a beginner-friendly deck, you’ll set yourself up for a rewarding tarot practice. No matter which deck you choose, remember that the best tarot deck for you is the one that feels right in your hands and heart. Happy reading!</p>
+</div>
+<div class="art-end">
+  <aside class="art-cta"><div class="stars" data-stars="16,10" data-top="2" data-span="96" aria-hidden="true"></div>
+    <p class="eyebrow"><svg><use href="#sp"/></svg>Ready when you are</p>
+    <h2>Want a reading that’s about <em>you</em>?</h2>
+    <p>Readings by phone, video or email. Or draw a card for a little guidance first.</p>
+    <div class="cta-acts"><a class="btn btn-light" href="https://calendly.com/emmadivinesbook" target="_blank" rel="noopener">Book a Reading <span class="arr">→</span></a><a class="link" href="index.html#draw">Draw a card <span class="arr">→</span></a></div>
+  </aside>
+  <div class="author"><img src="images/emma-avatar.jpg" alt=""><div><h3>Written by Emma</h3><p>Emma is a psychic, medium and Reiki practitioner offering honest, compassionate readings by phone, video and email.</p><a class="link" href="index.html#emma">More about Emma <span class="arr">→</span></a></div></div>
+  <div class="art-foot"><a class="link" href="blog.html">← All articles</a><div class="share">Share
+    <a href="https://www.facebook.com/sharer/sharer.php?u=https://emmadivines.com/uncategorized/how-to-choose-your-first-tarot-deck-a-beginners-guide/" target="_blank" rel="noopener" aria-label="Share on Facebook"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 8h3V4.5h-3c-2.2 0-3.8 1.7-3.8 3.9V11H8v3.5h2.2V20h3.6v-5.5H17l.5-3.5h-3.7V8.6c0-.4.2-.6.6-.6Z"/></svg></a>
+    <a href="https://www.pinterest.com/pin/create/button/?url=https://emmadivines.com/uncategorized/how-to-choose-your-first-tarot-deck-a-beginners-guide/" target="_blank" rel="noopener" aria-label="Save to Pinterest"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M11 9.5 9 18m2.6-9.1c2.4-.6 4.4.8 4 3-.3 1.9-2 3-3.6 2.4"/></svg></a>
+    <button type="button" class="copy-link" data-url="https://emmadivines.com/uncategorized/how-to-choose-your-first-tarot-deck-a-beginners-guide/" aria-label="Copy link"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/></svg></button><span class="copied" aria-live="polite"></span></div></div>
+</div></article>
+<section class="related"><div class="wrap">
+  <div class="j-head"><div><p class="eyebrow"><svg><use href="#sp"/></svg>Keep reading</p><h2>You might also <em>like</em></h2></div><a class="link" href="blog.html">All articles <span class="arr">→</span></a></div>
+  <div class="post-grid"><article class="post" data-cat="psychic-readings"><a href="article-online-reading.html">
+  <div class="ph"><img src="images/blog/online-reading.jpg" alt="" loading="lazy"></div>
+  <span class="ptag">Psychic Readings</span><h3>Online Psychic Reading: How It Works</h3>
+  
+  <p class="meta">Apr 9, 2025 <svg class="sp" aria-hidden="true"><use href="#sp"/></svg> 5 min read</p></a></article><article class="post" data-cat="mediumship"><a href="article-spirit-signs.html">
+  <div class="ph"><img src="images/blog/spirit-signs.jpg" alt="" loading="lazy"></div>
+  <span class="ptag">Mediumship</span><h3>How to Recognize Signs from the Spirit World in Your Daily Life</h3>
+  
+  <p class="meta">Apr 9, 2025 <svg class="sp" aria-hidden="true"><use href="#sp"/></svg> 5 min read</p></a></article><article class="post" data-cat="intuitive-development"><a href="article-psychic-children.html">
+  <div class="ph"><img src="images/blog/psychic-children.jpg" alt="" loading="lazy"></div>
+  <span class="ptag">Intuitive Development</span><h3>Psychic Abilities in Children: Fostering Intuition from a Young Age</h3>
+  
+  <p class="meta">Apr 9, 2025 <svg class="sp" aria-hidden="true"><use href="#sp"/></svg> 4 min read</p></a></article></div>
+</div></section>
+</main>
+<footer class="footer">
+  <div class="stars" data-stars="30,16" data-top="2" data-span="40" aria-hidden="true"></div>
+  <div class="wrap foot-grid">
+    <div data-reveal data-stagger>
+      <h2>Let’s get connected</h2>
+      <form class="form" id="contact" novalidate>
+        <label for="f-name">Name</label><input id="f-name" name="name" placeholder="Name" autocomplete="name">
+        <label for="f-email">Email</label><input id="f-email" name="email" type="email" placeholder="Email" autocomplete="email">
+        <label for="f-msg">What drew you here today?</label><textarea id="f-msg" name="msg" placeholder="What drew you here today?"></textarea>
+        <button class="btn btn-light" type="submit">Send <span class="arr">→</span></button>
+        <p class="form-note" id="form-note" aria-live="polite"></p>
+      </form>
+    </div>
+    <ul class="foot-links" data-reveal data-stagger aria-label="Site">
+      <li><a href="https://calendly.com/emmadivinesbook" target="_blank" rel="noopener">Book a session</a></li><li><a href="index.html#top" data-tab="Psychic Readings">Psychic Readings</a></li><li><a href="index.html#top" data-tab="Mediumship">Mediumship</a></li><li><a href="index.html#top" data-tab="Reiki">Reiki</a></li><li><a href="index.html#top" data-tab="Classes">Classes</a></li><li><a href="index.html#top" data-sheet="Events">Events</a></li><li><a href="index.html#emma">About</a></li><li><a href="blog.html" aria-current="page">Blog</a></li><li><a href="index.html#faq">FAQs</a></li>
+    </ul>
+    <div class="foot-brand" data-reveal data-stagger><a class="foot-phone" href="tel:+19162486213">Call or text (916) 248-6213</a><img src="data:image/png;base64,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" alt="Emma Divines">
+      <div class="social" aria-label="Emma on social media"><a href="https://www.instagram.com/emmadivines/" target="_blank" rel="noopener" aria-label="Instagram (@emmadivines)" title="Instagram · @emmadivines"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r=".6" fill="currentColor"/></svg><svg class="tw" aria-hidden="true"><use href="#sp"/></svg></a><a href="https://www.tiktok.com/@emmadivines" target="_blank" rel="noopener" aria-label="TikTok (@emmadivines)" title="TikTok · @emmadivines"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3.5v11.2a3.6 3.6 0 1 1-3.6-3.6"/><path d="M14 3.5c.4 2.6 2.2 4.4 5 4.7"/></svg><svg class="tw" aria-hidden="true"><use href="#sp"/></svg></a><a href="https://www.youtube.com/@emmadivines" target="_blank" rel="noopener" aria-label="YouTube (@emmadivines)" title="YouTube · @emmadivines"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2.8" y="5.8" width="18.4" height="12.4" rx="4"/><path d="M10.4 9.3v5.4l4.6-2.7z"/></svg><svg class="tw" aria-hidden="true"><use href="#sp"/></svg></a><a href="https://www.facebook.com/diviningsoul" target="_blank" rel="noopener" aria-label="Facebook (Divining Soul)" title="Facebook · Divining Soul"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.6 20.5v-7.3h2.6l.4-3h-3V8.4c0-.9.3-1.5 1.6-1.5h1.5V4.2a20 20 0 0 0-2.3-.1c-2.3 0-3.8 1.4-3.8 3.9v2.2H9v3h2.6v7.3"/></svg><svg class="tw" aria-hidden="true"><use href="#sp"/></svg></a></div></div>
+  </div>
+  <div class="wrap"><div class="copyright"><span>© <span id="yr"></span> Emma Divines</span></div></div>
+</footer>
+<script>/* Emma Divines blog pages (article list + article). Settings come from window.ED (printed by the plugin). */
+(()=>{
+const ED=Object.assign({book:'https://calendly.com/emmadivinesbook',thanks:'Thank you! For the quickest reply, call or text Emma at (916) 248-6213.',view:location.pathname.includes('article')?'post':'blog'},window.ED||{});
+const $=(s,el=document)=>el.querySelector(s), $$=(s,el=document)=>[...el.querySelectorAll(s)];
+const desktopMQ=matchMedia('(min-width:1025px)');
+const track=(name,p={})=>{if(typeof window.gtag==='function')window.gtag('event',name,p);};
+
+/* ---------- Header + mobile menu ---------- */
+const hdr=$('#hdr');const onScroll=()=>hdr&&hdr.classList.toggle('scrolled',scrollY>40);addEventListener('scroll',onScroll,{passive:true});onScroll();
+const mm=$('#mmenu');
+function closeMenu(){if(!mm||mm.hidden)return;mm.hidden=true;$('#menu-open').setAttribute('aria-expanded','false');document.documentElement.style.overflow='';}
+if(mm){
+  $('#menu-open').addEventListener('click',()=>{mm.hidden=false;$('#menu-open').setAttribute('aria-expanded','true');document.documentElement.style.overflow='hidden';$('#menu-close').focus();});
+  $('#menu-close').addEventListener('click',closeMenu);
+  $$('#mmenu nav a').forEach(a=>a.addEventListener('click',closeMenu));
+  addEventListener('keydown',e=>{if(e.key==='Escape')closeMenu();});
+}
+
+/* ---------- Stars ---------- */
+const LAYERS=[{kind:'dot',share:.55,min:1.2,max:2.4,o:[.25,.6]},{kind:'star',share:.33,min:3,max:5.5,o:[.35,.7]},{kind:'star',share:.12,min:6,max:9,o:[.55,.85]}];
+$$('[data-stars]').forEach((el,si)=>{
+  const [dn,mn]=el.dataset.stars.split(',').map(Number), top=+el.dataset.top, span=+el.dataset.span;
+  let seed=11+si*7;const rnd=()=>{seed=(seed*9301+49297)%233280;return seed/233280;};
+  const n=(desktopMQ.matches?dn:mn)*2;
+  el.innerHTML=LAYERS.map(L=>{const cnt=Math.round(n*L.share);let h='';
+    for(let i=0;i<cnt;i++){const sz=L.min+rnd()*(L.max-L.min);
+      const st=`left:${(rnd()*100).toFixed(2)}%;top:${(top+rnd()*span).toFixed(2)}%;width:${sz.toFixed(1)}px;height:${sz.toFixed(1)}px;--o:${(L.o[0]+rnd()*(L.o[1]-L.o[0])).toFixed(2)};--t:${(5+rnd()*6).toFixed(2)}s;--d:${(-rnd()*10).toFixed(2)}s`;
+      h+=L.kind==='dot'?`<i class="dot" style="${st}"></i>`:`<svg class="star" style="${st}"><use href="#sp"/></svg>`;}
+    return `<div class="layer" style="top:0;height:100%">${h}</div>`;}).join('');
+});
+
+/* ---------- Topic chips (article list); /blog/#tarot opens on that topic ---------- */
+const chips=$$('.chip');
+function filter(cat){
+  const chip=chips.find(c=>c.dataset.cat===cat)||chips[0];if(!chip)return;
+  cat=chip.dataset.cat;
+  chips.forEach(c=>c.setAttribute('aria-pressed',String(c===chip)));
+  let shown=0;
+  $$('.feat-card,.post-grid .post').forEach(p=>{const on=!cat||p.dataset.cat===cat;p.hidden=!on;if(on)shown++;});
+  const empty=$('.empty-note');if(empty)empty.hidden=shown>0;
+}
+chips.forEach(c=>c.addEventListener('click',()=>{filter(c.dataset.cat);track('blog_filter',{topic:c.dataset.cat||'all'});
+  history.replaceState(null,'',location.pathname+location.search+(c.dataset.cat?'#'+c.dataset.cat:''));}));
+if(chips.length&&location.hash)filter(decodeURIComponent(location.hash.slice(1)));
+
+/* ---------- Copy link (article) ---------- */
+$$('.copy-link').forEach(b=>b.addEventListener('click',async()=>{
+  const note=b.parentElement.querySelector('.copied');
+  try{await navigator.clipboard.writeText(b.dataset.url);if(note)note.textContent='Link copied';}
+  catch(_){if(note)note.textContent=b.dataset.url;}
+  track('share',{method:'copy_link'});
+}));
+
+/* ---------- Contact form (footer) ---------- */
+const form=$('#contact');
+if(form)form.addEventListener('submit',async e=>{e.preventDefault();const f=e.target,note=$('#form-note'),btn=f.querySelector('button[type=submit]');
+  if(!f.email.value.trim()||!f.msg.value.trim()){note.textContent='Please add your email and a short message.';return;}
+  btn.disabled=true;note.textContent='Sending…';
+  try{const d={success:true};
+    if(d&&d.success){f.reset();note.textContent=ED.thanks;track('generate_lead',{form:'contact',placement:ED.view});}else{note.textContent=(d&&d.data)||ED.formError;}}
+  catch(_){note.textContent=ED.formError;}
+  btn.disabled=false;});
+
+/* ---------- Analytics: booking, phone, social and article clicks ---------- */
+document.addEventListener('click',e=>{
+  const a=e.target.closest('a[href]');if(!a)return;
+  const href=a.getAttribute('href')||'';
+  const where=a.closest('#hdr,#mmenu')?'header':a.closest('footer')?'footer':a.closest('.art-cta,.post-cta')?'book_card':a.closest('.share')?'share':'page';
+  const placement=(ED.view==='post'?'article_':'blog_')+where;
+  if(/^(tel|sms):/.test(href)){track('phone_click',{placement});return;}
+  if(/calendly\.com/i.test(href)||href===ED.book){track('book_click',{session:'General booking',placement,link_url:href});return;}
+  if(a.closest('.social')){track('social_click',{network:a.getAttribute('aria-label')||href,placement});return;}
+  if(a.closest('.share')){track('share',{method:a.getAttribute('aria-label')||href});return;}
+  if(a.closest('.post,.feat-card'))track('select_content',{content_type:'article',item_id:href,placement});
+},true);
+})();
+</script>
+</body>
+</html>
