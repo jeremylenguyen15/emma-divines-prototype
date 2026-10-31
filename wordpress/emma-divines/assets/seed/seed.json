@@ -1,0 +1,297 @@
+{
+ "categories": [
+  {
+   "name": "Psychic Readings",
+   "tab_label": "Readings",
+   "eyebrow": "Readings",
+   "intro": "Honest, compassionate guidance on love, career, and life’s crossroads, by phone, video or email, from wherever you are.",
+   "photos": [
+    "classic-reading"
+   ],
+   "as_tab": "1",
+   "order": 1,
+   "sessions": [
+    {
+     "title": "Classic Reading",
+     "meta": "30 min · Phone or video",
+     "price": "$88",
+     "desc": "A full reading with time for clarity and depth. Where most people start.",
+     "link": "https://calendly.com/emmadivinesbook/classic",
+     "cta": "",
+     "tag": "start",
+     "art": "classic-reading"
+    },
+    {
+     "title": "Deep Dive",
+     "meta": "60 min · Phone or video",
+     "price": "$166",
+     "desc": "Longer discussions and complicated situations.",
+     "link": "https://calendly.com/emmadivinesbook/60min-deepdive",
+     "cta": "",
+     "tag": "start",
+     "art": "deep-dive"
+    },
+    {
+     "title": "Quickie Reading",
+     "meta": "10 min · Phone or video",
+     "price": "$33",
+     "desc": "For checking back in, or one simple question.",
+     "link": "https://calendly.com/emmadivinesbook/quickie-reading",
+     "cta": "",
+     "tag": "quick",
+     "art": "quickie-reading"
+    },
+    {
+     "title": "Email Reading",
+     "meta": "Reply in 1 business day",
+     "price": "$22",
+     "desc": "One focused question, answered by email. A gentle option on a smaller budget.",
+     "link": "https://calendly.com/emmadivinesbook/email-reading",
+     "cta": "",
+     "tag": "quick",
+     "art": "email-reading"
+    }
+   ]
+  },
+  {
+   "name": "Mediumship",
+   "tab_label": "",
+   "eyebrow": "Mediumship",
+   "intro": "A gentle space to connect with loved ones who have passed, through details you can recognise.",
+   "photos": [
+    "evidential-mediumship"
+   ],
+   "as_tab": "1",
+   "order": 2,
+   "sessions": [
+    {
+     "title": "Evidential Mediumship",
+     "meta": "45 min · Phone or video",
+     "price": "$133",
+     "desc": "Connect with a loved one who has passed, through details you can recognise.",
+     "link": "https://calendly.com/emmadivinesbook/mediumship-session",
+     "cta": "",
+     "tag": "",
+     "art": "evidential-mediumship"
+    }
+   ]
+  },
+  {
+   "name": "Reiki",
+   "tab_label": "",
+   "eyebrow": "Distance Reiki",
+   "intro": "Reiki from the comfort of home to rebalance, release what you’re carrying, and restore.",
+   "photos": [
+    "reiki-full-session"
+   ],
+   "as_tab": "1",
+   "order": 3,
+   "sessions": [
+    {
+     "title": "Reiki Tune-Up",
+     "meta": "30 min · Phone or video",
+     "price": "$99",
+     "desc": "A short distance session to rebalance and reset.",
+     "link": "https://calendly.com/emmadivinesbook/reiki-tune-up",
+     "cta": "",
+     "tag": "",
+     "art": "reiki-tune-up"
+    },
+    {
+     "title": "Reiki Full Session",
+     "meta": "60 min · Phone or video",
+     "price": "$188",
+     "desc": "A full distance session to release what you’re carrying.",
+     "link": "https://calendly.com/emmadivinesbook/reiki-full-session",
+     "cta": "",
+     "tag": "",
+     "art": "reiki-full-session"
+    },
+    {
+     "title": "Reiki Healing Package",
+     "meta": "3 × 60 min",
+     "price": "$555",
+     "desc": "Three full sessions for deeper, steadier change.",
+     "link": "https://calendly.com/emmadivinesbook/reiki-healing-package",
+     "cta": "",
+     "tag": "",
+     "art": "reiki-healing-package"
+    }
+   ]
+  },
+  {
+   "name": "Classes",
+   "tab_label": "",
+   "eyebrow": "Classes & mentorship",
+   "intro": "Learn to read the cards, deepen your intuition, or begin your own Reiki path.",
+   "photos": [
+    "tarot-boot-camp"
+   ],
+   "as_tab": "1",
+   "order": 4,
+   "sessions": [
+    {
+     "title": "Free Student Consult",
+     "meta": "Phone or video",
+     "price": "Free",
+     "desc": "Not sure where to start? Let’s talk about your path.",
+     "link": "https://calendly.com/emmadivinesbook/free-student-consultation",
+     "cta": "",
+     "tag": "",
+     "art": "free-student-consult"
+    },
+    {
+     "title": "Intuitive Tarot Workshop",
+     "meta": "60 min",
+     "price": "$33",
+     "desc": "Learn to read the cards with your own intuition.",
+     "link": "https://calendly.com/emmadivinesbook/read-tarot-intuitively-workshop",
+     "cta": "",
+     "tag": "",
+     "art": "intuitive-tarot-workshop"
+    },
+    {
+     "title": "Mentorship Session",
+     "meta": "60 min",
+     "price": "$60",
+     "desc": "One-on-one guidance for your own practice.",
+     "link": "https://calendly.com/emmadivinesbook/mentorship",
+     "cta": "",
+     "tag": "",
+     "art": "mentorship-session"
+    },
+    {
+     "title": "Tarot Boot Camp",
+     "meta": "4 weeks",
+     "price": "$333",
+     "desc": "Four weeks from curious to confident reader.",
+     "link": "https://calendly.com/emmadivinesbook/tarot-boot-camp",
+     "cta": "",
+     "tag": "",
+     "art": "tarot-boot-camp"
+    },
+    {
+     "title": "Reiki I",
+     "meta": "Course",
+     "price": "$333",
+     "desc": "Your Reiki I attunement and foundations.",
+     "link": "https://calendly.com/emmadivinesbook/reiki-1",
+     "cta": "",
+     "tag": "",
+     "art": "reiki-i"
+    },
+    {
+     "title": "Reiki II",
+     "meta": "Course",
+     "price": "$444",
+     "desc": "Deepen your practice and learn distance healing.",
+     "link": "https://calendly.com/emmadivinesbook/reiki-2",
+     "cta": "",
+     "tag": "",
+     "art": "reiki-ii"
+    },
+    {
+     "title": "Reiki I & II",
+     "meta": "Course",
+     "price": "$666",
+     "desc": "Both levels together.",
+     "link": "https://calendly.com/emmadivinesbook/reiki-1and2",
+     "cta": "",
+     "tag": "",
+     "art": "reiki-i-and-ii"
+    }
+   ]
+  },
+  {
+   "name": "Events",
+   "eyebrow": "Gather & create community",
+   "intro": "Mediumship evenings, sacred circles and ceremonies. I’ve been hosting and attending sacred circles since 2018, and it’s one of my greatest joys.",
+   "photos": [
+    "artistry-of-mediumship-tour",
+    "private-sacred-ceremony",
+    "reiki-i-and-ii",
+    "evidential-mediumship"
+   ],
+   "as_tab": "0",
+   "order": 5,
+   "note": "Private ceremonies are in person in the Sacramento area. Evenings and weekends.",
+   "sessions": [
+    {
+     "title": "Artistry of Mediumship Tour",
+     "meta": "Nationwide · live mediumship demonstrations",
+     "price": "",
+     "desc": "Emma is a featured psychic medium on this nationwide tour: evenings full of love, laughter and messages from loved ones who have passed.",
+     "link": "https://www.artistryofmediumship.com/north-california-tour",
+     "cta": "See dates",
+     "tag": "",
+     "art": "artistry-of-mediumship-tour"
+    },
+    {
+     "title": "Private Sacred Ceremony",
+     "meta": "90 min · In person, Sacramento area · you + 3 or more friends",
+     "price": "$99",
+     "desc": "Group readings with a shared theme, sound and energy healing, and more, built around your vision. Perfect for a birthday or a full or new moon. Design it with Emma first in a free consult.",
+     "link": "https://calendly.com/emmadivinesbook/private-sacred-ceremony",
+     "cta": "Book",
+     "tag": "",
+     "art": "private-sacred-ceremony"
+    }
+   ]
+  }
+ ],
+ "reviews": [
+  {
+   "n": "Terry Y.",
+   "d": "Aug 2026",
+   "t": "The session with Emma was truly a gift. I had a lot of anxiety prior to the session and Emma seemed to understand this. I loved her humor and genuine connection. One message, probably the most important one, has created a space for more healing from childhood trauma. My daughter and I were just astounded with the accuracy of our mutual connected loved ones on the other side. I can't wait to book again and share Emma's gift with my friends and family. Blessings, Emma"
+  },
+  {
+   "n": "Donna D.",
+   "d": "Jul 2026",
+   "t": "What a wonderful experience this was. Emma was so kind and wow spot on with everything!! I will definatly see her again. Thank you !!"
+  },
+  {
+   "n": "Sandy V.",
+   "d": "Jul 2026",
+   "t": "I really enjoyed my reading with Emma Divines. She was warm, kind, and made me feel comfortable from the start. Everything she shared felt thoughtful and personal, and she explained things in a way that was easy to understand. I left the reading feeling encouraged and with a lot to think about. It was a great experience overall, and I'd definitely recommend Emma Divines to anyone looking for an honest and meaningful reading."
+  },
+  {
+   "n": "Alisa G.",
+   "d": "Jun 2026",
+   "t": "Just had another guidance/psychic reading with Emma and the information she brought through was unbelievable!  It was an email reading and she replied within a couple hours!   She was spot on!  I would highly recommend and will be booking another session soon!!!!"
+  },
+  {
+   "n": "Kathleen S.",
+   "d": "Jun 2026",
+   "t": "Just had a deep dive session and it provided the clarity I needed! Emma is great at sharing what is being said on the other side and making those connections in my reading. Would absolutely recommend and will be booking with her agin in the future."
+  },
+  {
+   "n": "Margot P.",
+   "d": "Jun 2026",
+   "t": "Emma did a reiki session and a house cleanse for me. I felt so clear and renewed afterwards. She made the whole experience so comfortable and explained everything so well!! 10/10 would recommend! Looking forward to working with her again"
+  },
+  {
+   "n": "Linda E.",
+   "d": "May 2026",
+   "t": "Phenomenal experience. THANK YOU!!!"
+  }
+ ],
+ "faqs": [
+  {
+   "q": "What happens in a reading?",
+   "a": "Book a time and jot down what’s on your mind. During the session, Emma shares what comes through and you can ask questions as you go. You leave with clarity, and a next step if you want one."
+  },
+  {
+   "q": "Can we talk by phone, or does it have to be video?",
+   "a": "Either works. You can join by phone or by video call from anywhere, and you don’t need any special app. Email readings arrive by email within 1 business day."
+  },
+  {
+   "q": "Can I reschedule or cancel?",
+   "a": "Rescheduling is free with 24 hours’ notice or more. Later changes may carry a fee; the cancellation policy has the details."
+  },
+  {
+   "q": "Which session should I start with?",
+   "a": "With one focused question, an Email or Quickie Reading is a gentle start. For more time and depth, try a Classic Reading. Still unsure? <a href=\"#draw\">Draw a card</a>."
+  }
+ ]
+}
